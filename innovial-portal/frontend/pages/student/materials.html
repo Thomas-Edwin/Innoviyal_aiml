@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Study Materials — Innoviyal | MCET</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../css/variables.css"><link rel="stylesheet" href="../../css/style.css"><link rel="stylesheet" href="../../css/components.css">
+</head>
+<body>
+  <nav class="navbar scrolled"><div class="container flex-between" style="height:var(--navbar-height)"><a href="../../index.html" class="navbar-brand flex-center" style="gap:var(--space-3)"><img src="../../assets/logo/innoviyal-logo.png" alt="" style="height:36px" onerror="this.style.display='none'"><span style="font-weight:var(--fw-bold);color:var(--white)">Innoviyal</span></a>
+    <ul class="navbar-menu"><li><a href="dashboard.html" class="navbar-link">Dashboard</a></li><li><a href="materials.html" class="navbar-link active">Materials</a></li><li><a href="timetable.html" class="navbar-link">Timetable</a></li><li><a href="#" class="navbar-link" onclick="Auth.logout()">Logout</a></li></ul></div>
+  </nav>
+
+  <main style="padding-top:calc(var(--navbar-height) + var(--space-8));padding-bottom:var(--space-8)">
+    <div class="container">
+      <h1 style="font-size:var(--fs-2xl);margin-bottom:var(--space-2)">📚 Study Materials</h1>
+      <p style="color:var(--gray-500);margin-bottom:var(--space-6)">Access course notes, references, and question banks by semester</p>
+
+      <div class="student-table-controls">
+        <select id="semester-filter" style="padding:var(--space-2) var(--space-4);border:1px solid var(--gray-200);border-radius:var(--radius-md);font-size:var(--fs-sm)">
+          <option value="1">Semester 1</option><option value="2">Semester 2</option>
+          <option value="3">Semester 3</option><option value="4">Semester 4</option>
+          <option value="5">Semester 5</option><option value="6">Semester 6</option>
+          <option value="7">Semester 7</option><option value="8">Semester 8</option>
+        </select>
+        <select id="type-filter" style="padding:var(--space-2) var(--space-4);border:1px solid var(--gray-200);border-radius:var(--radius-md);font-size:var(--fs-sm)">
+          <option value="ALL">All Types</option><option value="NOTES">Notes</option>
+          <option value="SYLLABUS">Syllabus</option><option value="TIMETABLE">Timetable</option>
+          <option value="EXAM_DATES">Exam Dates</option>
+        </select>
+      </div>
+
+      <div class="admin-table-wrapper">
+        <table class="admin-table">
+          <thead><tr><th>Subject</th><th>Type</th><th>Semester</th><th>Action</th></tr></thead>
+          <tbody id="materials-list">
+            <tr><td>Mathematics for AI</td><td><span class="status-badge status-active">Notes</span></td><td>1</td><td><a href="#" class="btn btn-sm btn-primary">Download</a></td></tr>
+            <tr><td>Python Programming</td><td><span class="status-badge status-active">Notes</span></td><td>1</td><td><a href="#" class="btn btn-sm btn-primary">Download</a></td></tr>
+            <tr><td>Data Structures</td><td><span class="status-badge status-pending">Syllabus</span></td><td>2</td><td><a href="#" class="btn btn-sm btn-primary">Download</a></td></tr>
+            <tr><td>Machine Learning Fundamentals</td><td><span class="status-badge status-active">Notes</span></td><td>3</td><td><a href="#" class="btn btn-sm btn-primary">Download</a></td></tr>
+            <tr><td>DBMS</td><td><span class="status-badge status-active">Notes</span></td><td>4</td><td><a href="#" class="btn btn-sm btn-primary">Download</a></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </main>
+
+  <script src="../../js/api.js"></script><script src="../../js/utils.js"></script><script src="../../js/auth.js"></script>
+</body>
+</html>

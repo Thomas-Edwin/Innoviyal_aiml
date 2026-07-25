@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Events — CSE (AI & ML) | MCET</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="../css/variables.css">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/glass-card.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <style>
+    .top-info-bar{background:var(--secondary-dark);color:var(--gray-300);font-size:13px;border-bottom:1px solid rgba(255,255,255,0.06);position:relative;z-index:502}
+    .top-info-bar .container{display:flex;align-items:center;justify-content:space-between;height:56px;gap:var(--space-4)}
+    .top-info-bar-left{display:flex;align-items:center;gap:var(--space-4);flex:1;min-width:0}
+    .top-info-bar-left .top-bar-logo{height:46px;width:auto;flex-shrink:0;transition:all var(--transition-base)}
+    .top-info-bar-left .top-bar-logo:hover{transform:scale(1.05)}
+    .top-bar-text{line-height:1.25;min-width:0}
+    .top-bar-text .college-name{font-size:14px;font-weight:var(--fw-bold);color:var(--white);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;letter-spacing:0.3px}
+    .top-bar-text .dept-subtitle{font-size:12px;color:var(--primary-light);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-weight:var(--fw-medium)}
+    .top-info-bar-right{display:flex;align-items:center;gap:var(--space-6);flex-shrink:0}
+    .counselling-code{display:flex;align-items:center;gap:var(--space-1);font-size:12px;color:var(--gray-300);padding:4px 12px;background:rgba(255,255,255,0.05);border-radius:var(--radius-md);border:1px solid rgba(255,255,255,0.06)}
+    .counselling-code .code-label{font-weight:var(--fw-medium);color:var(--gray-400)}
+    .counselling-code .code-value{font-weight:var(--fw-bold);color:var(--primary);letter-spacing:.5px}
+    .top-social-icons{display:flex;align-items:center;gap:8px}
+    .top-social-icons a{display:flex;align-items:center;justify-content:center;width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,0.08);color:var(--gray-300);text-decoration:none;transition:all var(--transition-fast);font-size:14px}
+    .top-social-icons a:hover{background:var(--primary);color:var(--white);transform:translateY(-2px);box-shadow:0 4px 12px rgba(249,115,22,0.3)}
+    .aiml-navbar{position:sticky;top:0;left:0;right:0;z-index:501;background:#0b1120;border-bottom:1px solid rgba(255,255,255,0.06);transition:all var(--transition-base)}
+    .aiml-navbar.scrolled{background:rgba(11,17,32,0.98);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);box-shadow:0 4px 30px rgba(0,0,0,0.3)}
+    .aiml-navbar .container{display:flex;align-items:center;justify-content:space-between;height:64px}
+    .aiml-navbar-brand{font-family:var(--font-heading);font-size:var(--fs-xl);font-weight:var(--fw-bold);color:var(--white);text-decoration:none;display:flex;align-items:center;gap:var(--space-2);flex-shrink:0}
+    .aiml-navbar-brand .brand-accent{color:var(--primary)}
+    .aiml-navbar-menu{display:flex;align-items:center;gap:4px;list-style:none}
+    .aiml-navbar-link{padding:8px 16px;color:rgba(255,255,255,0.75);font-size:13.5px;font-weight:var(--fw-medium);text-decoration:none;border-radius:var(--radius-md);transition:all var(--transition-fast);white-space:nowrap;letter-spacing:.3px;position:relative}
+    .aiml-navbar-link:hover{color:var(--white);background:rgba(255,255,255,0.07)}
+    .aiml-navbar-link::after{content:'';position:absolute;bottom:2px;left:50%;transform:translateX(-50%) scaleX(0);width:20px;height:2px;background:var(--primary);border-radius:var(--radius-full);transition:transform var(--transition-base)}
+    .aiml-navbar-link:hover::after{transform:translateX(-50%) scaleX(1)}
+    .aiml-navbar-link.active{color:var(--primary-light);background:rgba(249,115,22,0.1)}
+    .aiml-navbar-link.active::after{transform:translateX(-50%) scaleX(1)}
+    .aiml-navbar-toggle{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:var(--space-2)}
+    .aiml-navbar-toggle span{display:block;width:22px;height:2px;background:var(--white);border-radius:2px;transition:all var(--transition-base)}
+    .aiml-navbar-toggle.active span:nth-child(1){transform:rotate(45deg) translate(5px,5px)}
+    .aiml-navbar-toggle.active span:nth-child(2){opacity:0}
+    .aiml-navbar-toggle.active span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px)}
+    @media(max-width:768px){.top-info-bar .container{height:auto;flex-wrap:wrap;padding:8px var(--space-4);gap:6px}
+    .top-bar-text .college-name{font-size:12px}
+    .top-bar-text .dept-subtitle{font-size:11px}
+    .top-info-bar-left .top-bar-logo{height:36px}
+    .counselling-code{font-size:10px;padding:2px 8px}
+    .top-social-icons a{width:28px;height:28px;font-size:12px}
+    .aiml-navbar .container{height:56px}
+    .aiml-navbar-menu{display:none}
+    .aiml-navbar-toggle{display:flex}
+    .aiml-navbar-menu.open{display:flex;position:fixed;top:0;right:0;width:280px;height:100vh;background:#0b1120;flex-direction:column;padding:80px var(--space-6) var(--space-6);gap:var(--space-1);box-shadow:-10px 0 30px rgba(0,0,0,0.4);z-index:500}
+    .aiml-navbar-menu.open .aiml-navbar-link{width:100%;padding:12px 16px;font-size:14px}
+    .aiml-navbar-menu.open .aiml-navbar-link::after{display:none}}
+    .aiml-navbar-link.innoviyal-nav-highlight,.aiml-navbar-link.innoviyal-nav-highlight:hover,.aiml-navbar-link.innoviyal-nav-highlight.active{background:rgba(249,115,22,0.1);color:#3B82F6;border-radius:var(--radius-md)}
+  </style>
+</head>
+<body>
+  <!-- ===== TOP INFO BAR ===== -->
+  <div class="top-info-bar"><div class="container">
+    <div class="top-info-bar-left">
+      <img src="../assets/logo/mcet-logo.png" alt="MCET" class="top-bar-logo" onerror="this.style.display='none'">
+      <div class="top-bar-text">
+        <div class="college-name">Dr. Mahalingam College of Engineering and Technology</div>
+        <div class="dept-subtitle">Department of CSE (AI & ML)</div>
+      </div>
+    </div>
+    <div class="top-info-bar-right">
+      <div class="counselling-code"><span class="code-label">TNEA Counselling Code: </span><span class="code-value">2706</span></div>
+      <div class="top-social-icons">
+        <a href="https://facebook.com" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+        <a href="https://instagram.com" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+        <a href="https://linkedin.com" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+        <a href="https://youtube.com" target="_blank" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+      </div>
+    </div>
+  </div></div>
+
+  <!-- ===== MAIN NAVBAR ===== -->
+  <nav class="aiml-navbar" role="navigation">
+    <div class="container">
+      <a href="../index.html" class="aiml-navbar-brand"><span class="brand-accent">AI</span><span style="color:var(--gray-300)">&amp;</span><span style="color:var(--white)">ML</span></a>
+      <button class="aiml-navbar-toggle" aria-label="Toggle menu" aria-expanded="false"><span></span><span></span><span></span></button>
+      <ul class="aiml-navbar-menu">
+        <li><a href="../index.html" class="aiml-navbar-link">Home</a></li>
+        <li class="navbar-dropdown">
+          <a href="aiml-about.html" class="aiml-navbar-link">About <span class="arrow">▼</span></a>
+          <ul class="navbar-dropdown-menu">
+            <li><a href="aiml-about.html#what-we-offer" class="navbar-dropdown-link"><span class="dd-icon">📚</span><span class="dd-text"><span class="dd-label">What We Offer</span><span class="dd-desc">Four pillars of AIML education</span></span></a></li>
+            <li><a href="aiml-about.html#peos" class="navbar-dropdown-link"><span class="dd-icon">🎯</span><span class="dd-text"><span class="dd-label">Program Educational Objectives</span><span class="dd-desc">Career &amp; professional accomplishments</span></span></a></li>
+            <li><a href="aiml-about.html#psos" class="navbar-dropdown-link"><span class="dd-icon">⚡</span><span class="dd-text"><span class="dd-label">Program Specific Outcomes</span><span class="dd-desc">Specific outcomes for AIML program</span></span></a></li>
+          </ul>
+        </li>
+        <li><a href="team.html" class="aiml-navbar-link">Team</a></li>
+        <li><a href="events.html" class="aiml-navbar-link active">Events</a></li>
+        <li><a href="gallery.html" class="aiml-navbar-link">Rank Holders</a></li>
+        <li><a href="placement.html" class="aiml-navbar-link">Placements</a></li>
+        <li><a href="innovial.html" class="aiml-navbar-link innoviyal-nav-highlight">Innoviyal</a></li>
+        <li><a href="contact.html" class="aiml-navbar-link">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <section class="page-hero">
+    <div class="container">
+      <div class="breadcrumb"><a href="../index.html">Home</a> / <span>Events</span></div>
+      <h1><span style="color:var(--primary)">Events & Announcements</span></h1>
+      <p>Department-wide events, Innoviyal association events, and important announcements</p>
+    </div>
+  </section>
+
+  <main class="section">
+    <div class="container">
+      <!-- Filter by type -->
+      <div class="section-header">
+        <h2>Completed Events</h2>
+        <p>Events conducted by the department and Innoviyal association</p>
+      </div>
+      <div class="team-filters" id="event-filters" style="margin-top:var(--space-4);margin-bottom:var(--space-8)">
+        <button class="team-filter-btn active" data-filter="ALL">All</button>
+        <button class="team-filter-btn" data-filter="WORKSHOP">Workshops</button>
+        <button class="team-filter-btn" data-filter="GUEST_LECTURE">Guest Lectures</button>
+        <button class="team-filter-btn" data-filter="HACKATHON">Hackathons</button>
+        <button class="team-filter-btn" data-filter="SYMPOSIUM">Symposium</button>
+        <button class="team-filter-btn" data-filter="SEMINAR">Seminars</button>
+      </div>
+
+      <div id="completed">
+        <div class="grid grid-3" id="events-grid">
+          <!-- Events loaded from CSV -->
+        </div>
+      </div>
+
+      <!-- ===== EVENT WINNERS SECTION ===== -->
+      <div class="section-header" style="margin-top:var(--space-12)">
+        <h2>Event <span style="color:var(--primary)">Winners</span></h2>
+        <p>Congratulations to all winners and participants!</p>
+      </div>
+      <div id="winners-container">
+        <div class="grid grid-3" id="winners-grid">
+          <!-- Winners loaded from CSV -->
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer style="background:var(--secondary-dark);color:var(--gray-300);padding:var(--space-8) 0">
+    <div class="container text-center">
+      <p>© 2026 CSE (AI & ML) — MCET. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="../js/api.js"></script>
+  <script src="../js/utils.js"></script>
+  <script src="../js/main.js"></script>
+  <script>
+    // Navbar scroll effect + Mobile menu toggle
+    document.addEventListener('DOMContentLoaded', () => {
+      const navbar = document.querySelector('.aiml-navbar');
+      if (navbar) {
+        window.addEventListener('scroll', () => {
+          navbar.classList.toggle('scrolled', window.scrollY > 80);
+        }, { passive: true });
+      }
+      const toggle = document.querySelector('.aiml-navbar-toggle');
+      const menu = document.querySelector('.aiml-navbar-menu');
+      if(toggle&&menu){toggle.addEventListener('click',()=>{const isOpen=menu.classList.toggle('open');toggle.classList.toggle('active');toggle.setAttribute('aria-expanded',isOpen);document.body.style.overflow=isOpen?'hidden':''});menu.querySelectorAll('a').forEach(link=>{link.addEventListener('click',()=>{menu.classList.remove('open');toggle.classList.remove('active');toggle.setAttribute('aria-expanded','false');document.body.style.overflow=''})})}
+
+      // Load events and winners from CSV
+      loadEventsFromCSV();
+      loadWinnersFromCSV();
+    });
+
+    // Parse CSV text into array of objects (handles quoted newlines)
+    function parseCSV(text) {
+      // Split into lines while respecting quoted newlines
+      const rawLines = [];
+      let currentLine = '';
+      let inQuotes = false;
+      for (let i = 0; i < text.length; i++) {
+        const ch = text[i];
+        if (ch === '"') {
+          inQuotes = !inQuotes;
+          currentLine += ch;
+        } else if (ch === '\n' && !inQuotes) {
+          rawLines.push(currentLine);
+          currentLine = '';
+        } else {
+          currentLine += ch;
+        }
+      }
+      if (currentLine.trim()) rawLines.push(currentLine);
+      
+      if (rawLines.length < 2) return [];
+      
+      // Parse a single line into fields
+      function parseLine(line) {
+        const result = [];
+        let current = '';
+        let inQ = false;
+        for (let i = 0; i < line.length; i++) {
+          const ch = line[i];
+          if (ch === '"') {
+            inQ = !inQ;
+          } else if (ch === ',' && !inQ) {
+            result.push(current.replace(/^"|"$/g, '').trim());
+            current = '';
+          } else {
+            current += ch;
+          }
+        }
+        result.push(current.replace(/^"|"$/g, '').trim());
+        return result;
+      }
+
+      const headers = parseLine(rawLines[0]);
+      const data = [];
+      
+      for (let i = 1; i < rawLines.length; i++) {
+        const values = parseLine(rawLines[i]);
+        if (values.every(v => !v)) continue;
+        
+        const row = {};
+        headers.forEach((h, idx) => {
+          row[h] = values[idx] || '';
+        });
+        data.push(row);
+      }
+      return data;
+    }
+
+    // Determine event type from description
+    function categorizeEvent(title, type) {
+      const t = (title + ' ' + type).toLowerCase();
+      if (t.includes('hackathon') || t.includes('hack')) return 'HACKATHON';
+      if (t.includes('workshop') || t.includes('bootcamp')) return 'WORKSHOP';
+      if (t.includes('symposium') || t.includes('sympo')) return 'SYMPOSIUM';
+      if (t.includes('seminar')) return 'SEMINAR';
+      if (t.includes('guest lecture') || t.includes('lecture')) return 'GUEST_LECTURE';
+      return 'WORKSHOP';
+    }
+
+    // Format date from DD-MM-YYYY or DD.MM.YYYY to readable
+    function formatEventDate(dateStr) {
+      if (!dateStr) return '';
+      // Try DD-MM-YYYY format
+      let parts = dateStr.split('-');
+      if (parts.length !== 3) parts = dateStr.split('.');
+      if (parts.length !== 3) parts = dateStr.split('/');
+      
+      const day = parts[0]?.trim();
+      const month = parts[1]?.trim();
+      let year = parts[2]?.trim();
+      
+      if (year && year.includes(' to ')) {
+        year = year.split(' to ')[0].trim();
+      }
+      
+      if (day && month && year) {
+        const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+        const mIdx = parseInt(month) - 1;
+        if (mIdx >= 0 && mIdx <= 11) {
+          return `${months[mIdx]} ${parseInt(day)}, ${year}`;
+        }
+      }
+      return dateStr;
+    }
+
+    function getEventTypeFromText(typeText) {
+      const t = (typeText || '').toLowerCase();
+      if (t.includes('workshop') || t.includes('days workshop')) return 'WORKSHOP';
+      if (t.includes('hackathon') || t.includes('hack')) return 'HACKATHON';
+      if (t.includes('symposium') || t.includes('sympo')) return 'SYMPOSIUM';
+      if (t.includes('seminar')) return 'SEMINAR';
+      if (t.includes('guest lecture') || t.includes('lecture')) return 'GUEST_LECTURE';
+      return 'WORKSHOP';
+    }
+
+    // Load completed events from CSV
+    async function loadEventsFromCSV() {
+      const grid = document.getElementById('events-grid');
+      if (!grid) return;
+      
+      try {
+        const response = await fetch('../assets/data/events-list.csv');
+        const text = await response.text();
+        const data = parseCSV(text);
+        
+        if (data.length > 0) {
+          grid.innerHTML = data.map(ev => {
+            const title = ev['Title of the programme'] || 'Event';
+            const type = ev['Workshops/Seminars/Guest Lecture/Entrepreneurship and Skill Development/ Soft skills/ Language and communication skills/ Life skills (Yoga, physical fitness, health and hygiene)/Awareness of trends in technology & Sports and culturals'] || '';
+            const date = ev['DD-MM-YYYY (From - To)'] || '';
+            const level = ev['Level (National/International)'] || '';
+            const resourcePerson = ev['Name of the Resourse Person/agencies/consultants involved  for content deilvery with contact details, if any'] || '';
+            const eventType = getEventTypeFromText(type);
+            const formattedDate = formatEventDate(date);
+            
+            // Build description
+            let desc = type;
+            if (level) desc += ` (${level})`;
+            if (resourcePerson) desc += `. Resource: ${resourcePerson.substring(0, 80)}`;
+            
+            return `
+              <div class="event-card" data-type="${eventType}">
+                <div class="event-card-banner">
+                  <div style="width:100%;height:100%;background:linear-gradient(135deg,var(--primary),var(--primary-dark));display:flex;align-items:center;justify-content:center;font-size:48px">
+                    📅
+                  </div>
+                  ${formattedDate ? `<div class="event-card-date"><span class="day">${formattedDate.split(',')[0] || ''}</span></div>` : ''}
+                </div>
+                <div class="event-card-body">
+                  <h4>${title}</h4>
+                  <div class="event-meta"><span>📋 ${type.substring(0, 50)}</span><span>✅ Completed</span></div>
+                  <p>${desc.substring(0, 120)}${desc.length > 120 ? '...' : ''}</p>
+                  <span class="badge badge-innovial">✨ ${level || 'Department'} Event</span>
+                </div>
+              </div>
+            `;
+          }).join('');
+        } else {
+          grid.innerHTML = '<div class="glass-card glass-card-dark text-center" style="grid-column:1/-1"><div style="font-size:48px;margin-bottom:var(--space-3)">📅</div><h4>No completed events yet</h4><p style="color:var(--gray-500);font-size:var(--fs-sm)">Events will appear here after they conclude.</p></div>';
+        }
+      } catch(e) {
+        grid.innerHTML = '<div class="glass-card glass-card-dark text-center" style="grid-column:1/-1"><div style="font-size:48px;margin-bottom:var(--space-3)">📅</div><h4>Events coming soon</h4><p style="color:var(--gray-500);font-size:var(--fs-sm)">Stay tuned!</p></div>';
+      }
+      initEventFilters();
+    }
+
+    // Load event winners from CSV
+    async function loadWinnersFromCSV() {
+      const grid = document.getElementById('winners-grid');
+      if (!grid) return;
+      
+      try {
+        const response = await fetch('../assets/data/winners-list.csv');
+        const text = await response.text();
+        const data = parseCSV(text);
+        
+        if (data.length > 0) {
+          // Group winners by event
+          const eventGroups = {};
+          data.forEach(w => {
+            const eventName = w['Name of the event'] || 'Event';
+            if (!eventGroups[eventName]) eventGroups[eventName] = [];
+            eventGroups[eventName].push(w);
+          });
+
+          grid.innerHTML = Object.entries(eventGroups).map(([eventName, winners]) => {
+            const prize = winners[0]['Name of the award/ medal'] || 'Winner';
+            const level = winners[0]['Inter-university / State / National / International'] || '';
+            const org = winners[0]['Name of the organising institute/ College'] || '';
+            
+            // Collect all team member names
+            const memberNames = winners.map(w => {
+              const name = w['Name of the student']?.replace(/^\d+\.\s*/, '').replace(/^[\s,]+|[\s,]+$/g, '').trim() || '';
+              return name;
+            }).filter(n => n.length > 0);
+            
+            // Remove duplicates (some rows may repeat a name)
+            const uniqueNames = [...new Set(memberNames)];
+            const firstWinner = uniqueNames[0] || '';
+            const otherMembers = uniqueNames.slice(1);
+            
+            return `
+              <div class="glass-card glass-card-dark text-center">
+                <div style="font-size:48px;margin-bottom:var(--space-3)">🏅</div>
+                <h4 style="color:var(--secondary);font-size:var(--fs-lg)">${firstWinner}</h4>
+                <p style="color:var(--primary-dark);font-weight:var(--fw-bold);font-size:var(--fs-md);margin-top:var(--space-1)">${prize}</p>
+                <p style="font-size:var(--fs-sm);color:var(--gray-600);margin-top:var(--space-2)">${eventName}</p>
+                ${otherMembers.length > 0 ? `<div style="font-size:var(--fs-xs);color:var(--gray-500);margin-top:var(--space-2);border-top:1px solid var(--gray-200);padding-top:var(--space-2)"><strong>Team Members:</strong><br>${otherMembers.join('<br>')}</div>` : ''}
+                <p style="font-size:var(--fs-xs);color:var(--gray-500);margin-top:var(--space-1)">${level}${org ? ' • ' + org.substring(0, 40) : ''}</p>
+              </div>
+            `;
+          }).join('');
+        } else {
+          grid.innerHTML = '<div class="glass-card glass-card-dark text-center"><div style="font-size:48px;margin-bottom:var(--space-3)">🏅</div><h4>No winners yet</h4><p style="color:var(--gray-500);font-size:var(--fs-sm)">Winners will appear here after events conclude.</p></div>';
+        }
+      } catch(e) {
+        grid.innerHTML = '<div class="glass-card glass-card-dark text-center"><div style="font-size:48px;margin-bottom:var(--space-3)">🏅</div><h4>Winners</h4><p style="color:var(--gray-500);font-size:var(--fs-sm)">Coming soon!</p></div>';
+      }
+    }
+
+    // Init filter
+    function initEventFilters() {
+      document.querySelectorAll('#event-filters .team-filter-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+          document.querySelectorAll('#event-filters .team-filter-btn').forEach(b => b.classList.remove('active'));
+          this.classList.add('active');
+          const filter = this.dataset.filter;
+          document.querySelectorAll('.event-card').forEach(card => {
+            card.style.display = (filter === 'ALL' || card.dataset.type === filter) ? 'block' : 'none';
+          });
+        });
+      });
+    }
+  </script>
+</body>
+</html>

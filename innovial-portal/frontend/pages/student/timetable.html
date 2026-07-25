@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Timetable — Innoviyal | MCET</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../css/variables.css"><link rel="stylesheet" href="../../css/style.css"><link rel="stylesheet" href="../../css/components.css">
+</head>
+<body>
+  <nav class="navbar scrolled"><div class="container flex-between" style="height:var(--navbar-height)"><a href="../../index.html" class="navbar-brand flex-center" style="gap:var(--space-3)"><img src="../../assets/logo/innoviyal-logo.png" alt="" style="height:36px" onerror="this.style.display='none'"><span style="font-weight:var(--fw-bold);color:var(--white)">Innoviyal</span></a>
+    <ul class="navbar-menu"><li><a href="dashboard.html" class="navbar-link">Dashboard</a></li><li><a href="materials.html" class="navbar-link">Materials</a></li><li><a href="timetable.html" class="navbar-link active">Timetable</a></li><li><a href="#" class="navbar-link" onclick="Auth.logout()">Logout</a></li></ul></div>
+  </nav>
+
+  <main style="padding-top:calc(var(--navbar-height) + var(--space-8));padding-bottom:var(--space-8)">
+    <div class="container">
+      <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;margin-bottom:var(--space-6)">
+        <div><h1 style="font-size:var(--fs-2xl)">⏰ Class Timetable</h1><p style="color:var(--gray-500)">Academic Year 2025-2026</p></div>
+        <select style="padding:var(--space-2) var(--space-4);border:1px solid var(--gray-200);border-radius:var(--radius-md);font-size:var(--fs-sm)" onchange="switchTimetable(this.value)">
+          <option value="3">Semester 3</option><option value="4">Semester 4</option>
+          <option value="5">Semester 5</option><option value="6">Semester 6</option>
+        </select>
+      </div>
+
+      <div class="admin-table-wrapper">
+        <table class="admin-table">
+          <thead><tr><th>Day</th><th>8:30 - 9:30</th><th>9:30 - 10:30</th><th>10:45 - 11:45</th><th>11:45 - 12:45</th><th>1:30 - 2:30</th><th>2:30 - 3:30</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Monday</strong></td><td>ML Theory</td><td>Python Lab</td><td>Maths</td><td>Lunch</td><td>DBMS</td><td>NLP</td></tr>
+            <tr><td><strong>Tuesday</strong></td><td>DBMS</td><td>ML Theory</td><td>NLP</td><td>Lunch</td><td>Python Lab</td><td>Maths</td></tr>
+            <tr><td><strong>Wednesday</strong></td><td>Maths</td><td>DBMS</td><td>ML Theory</td><td>Lunch</td><td>NLP Lab</td><td>-</td></tr>
+            <tr><td><strong>Thursday</strong></td><td>NLP</td><td>Maths</td><td>Python Lab</td><td>Lunch</td><td>DBMS</td><td>ML Theory</td></tr>
+            <tr><td><strong>Friday</strong></td><td>ML Lab</td><td>NLP</td><td>DBMS</td><td>Lunch</td><td>Maths</td><td>-</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </main>
+
+  <script src="../../js/api.js"></script>
+  <script src="../../js/utils.js"></script>
+  <script src="../../js/auth.js"></script>
+  <script>
+    function switchTimetable(semester) {
+      Utils.showToast(`Switching to Semester ${semester} timetable`, 'info');
+    }
+  </script>
+</body>
+</html>

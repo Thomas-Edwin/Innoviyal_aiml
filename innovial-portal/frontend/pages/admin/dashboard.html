@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Admin Dashboard — Innoviyal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../css/variables.css"><link rel="stylesheet" href="../../css/style.css"><link rel="stylesheet" href="../../css/admin.css"><link rel="stylesheet" href="../../css/components.css">
+</head>
+<body class="admin-body" data-page="dashboard">
+  <div class="admin-wrapper">
+    <aside class="admin-sidebar">
+      <div class="admin-sidebar-header">
+        <img src="../../assets/logo/innoviyal-logo.png" alt="" class="logo" onerror="this.style.display='none'">
+        <div><h2>Innoviyal <small>Admin Panel</small></h2></div>
+      </div>
+      <nav class="admin-sidebar-nav">
+        <div class="admin-nav-section">Main</div>
+        <a href="dashboard.html" class="admin-nav-item active"><span class="nav-icon">📊</span>Dashboard</a>
+        <a href="manage-news.html" class="admin-nav-item"><span class="nav-icon">📰</span>News</a>
+        <a href="manage-events.html" class="admin-nav-item"><span class="nav-icon">📅</span>Events</a>
+        <a href="manage-people.html" class="admin-nav-item"><span class="nav-icon">👥</span>People</a>
+        <div class="admin-nav-section">Content</div>
+        <a href="manage-gallery.html" class="admin-nav-item"><span class="nav-icon">🖼️</span>Gallery</a>
+        <a href="manage-hero.html" class="admin-nav-item"><span class="nav-icon">🎬</span>Hero Media</a>
+        <a href="manage-testimonials.html" class="admin-nav-item"><span class="nav-icon">💬</span>Testimonials</a>
+      <a href="manage-magazine.html" class="admin-nav-item"><span class="nav-icon">📖</span>Magazine</a>
+      <a href="manage-newsletters.html" class="admin-nav-item"><span class="nav-icon">📬</span>Newsletters</a>
+      <a href="manage-event-winners.html" class="admin-nav-item"><span class="nav-icon">🏅</span>Event Winners</a>
+      <a href="manage-materials.html" class="admin-nav-item"><span class="nav-icon">📚</span>Materials</a>
+      <a href="manage-achievements.html" class="admin-nav-item"><span class="nav-icon">🏆</span>Achievements</a>
+      <a href="manage-partners.html" class="admin-nav-item"><span class="nav-icon">🤝</span>Partners</a>
+        <div class="admin-nav-section">System</div>
+        <a href="messages.html" class="admin-nav-item"><span class="nav-icon">✉️</span>Messages <span class="nav-badge">7</span></a>
+        <a href="backup.html" class="admin-nav-item"><span class="nav-icon">💾</span>Backup</a>
+        <div class="admin-nav-section"></div>
+        <a href="../../index.html" class="admin-nav-item"><span class="nav-icon">🏠</span>View Site</a>
+        <a href="#" class="admin-nav-item" onclick="Auth.logout()"><span class="nav-icon">🚪</span>Logout</a>
+      </nav>
+    </aside>
+
+    <main class="admin-main">
+      <header class="admin-header">
+        <div class="admin-header-left">
+          <button class="admin-menu-toggle">☰</button>
+          <div class="admin-header-search"><span>🔍</span><input type="text" placeholder="Search..."></div>
+        </div>
+        <div class="admin-header-right">
+          <div class="admin-notification"><span>🔔</span><div class="notif-dot"></div></div>
+          <div class="admin-profile"><img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&q=80" alt=""><div class="admin-profile-info"><div class="name">Admin</div><div class="role">Administrator</div></div></div>
+        </div>
+      </header>
+
+      <div class="admin-content">
+        <h2 style="font-size:var(--fs-xl);margin-bottom:var(--space-6)">Dashboard Overview</h2>
+        <div class="admin-stats">
+          <div class="admin-stat-card"><div class="admin-stat-icon stat-icon-orange">📰</div><div class="admin-stat-info"><h3 data-admin-count="news">12</h3><p>News Articles</p></div></div>
+          <div class="admin-stat-card"><div class="admin-stat-icon stat-icon-blue">📅</div><div class="admin-stat-info"><h3 data-admin-count="events">24</h3><p>Events</p></div></div>
+          <div class="admin-stat-card"><div class="admin-stat-icon stat-icon-green">👥</div><div class="admin-stat-info"><h3 data-admin-count="people">156</h3><p>People</p></div></div>
+          <div class="admin-stat-card"><div class="admin-stat-icon stat-icon-purple">🖼️</div><div class="admin-stat-info"><h3 data-admin-count="gallery">89</h3><p>Gallery Items</p></div></div>
+          <div class="admin-stat-card"><div class="admin-stat-icon stat-icon-orange">✉️</div><div class="admin-stat-info"><h3 data-admin-count="messages">7</h3><p>Messages</p></div></div>
+          <div class="admin-stat-card"><div class="admin-stat-icon stat-icon-blue">💬</div><div class="admin-stat-info"><h3 data-admin-count="testimonials">16</h3><p>Testimonials</p></div></div>
+        </div>
+
+        <div class="admin-table-wrapper">
+          <div class="admin-table-header"><h3>Recent Activity</h3></div>
+          <table class="admin-table"><tbody>
+            <tr><td>📰 News added: "AI Hackathon 2026"</td><td style="color:var(--gray-400)">2 hours ago</td></tr>
+            <tr><td>👥 New member added to 2nd Year</td><td style="color:var(--gray-400)">5 hours ago</td></tr>
+            <tr><td>📅 Event updated: "GenAI Workshop"</td><td style="color:var(--gray-400)">1 day ago</td></tr>
+            <tr><td>🖼️ 5 photos added to Gallery</td><td style="color:var(--gray-400)">2 days ago</td></tr>
+          </tbody></table>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="../../js/api.js"></script><script src="../../js/utils.js"></script><script src="../../js/auth.js"></script><script src="../../js/admin.js"></script>
+</body>
+</html>

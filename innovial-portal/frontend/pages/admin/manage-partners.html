@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Manage Partners — Innoviyal Admin</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../css/variables.css"><link rel="stylesheet" href="../../css/style.css"><link rel="stylesheet" href="../../css/admin.css">
+</head>
+<body class="admin-body" data-page="partners">
+<div class="admin-wrapper">
+  <aside class="admin-sidebar"><div class="admin-sidebar-header"><img src="../../assets/logo/innoviyal-logo.png" alt="" class="logo" onerror="this.style.display='none'"><div><h2>Innoviyal <small>Admin Panel</small></h2></div></div>
+    <nav class="admin-sidebar-nav">
+      <a href="dashboard.html" class="admin-nav-item"><span class="nav-icon">📊</span>Dashboard</a>
+      <a href="manage-news.html" class="admin-nav-item"><span class="nav-icon">📰</span>News</a>
+      <a href="manage-testimonials.html" class="admin-nav-item"><span class="nav-icon">💬</span>Testimonials</a>
+      <a href="manage-partners.html" class="admin-nav-item active"><span class="nav-icon">🤝</span>Partners</a>
+      <a href="manage-newsletters.html" class="admin-nav-item"><span class="nav-icon">📬</span>Newsletters</a>
+      <a href="manage-event-winners.html" class="admin-nav-item"><span class="nav-icon">🏅</span>Event Winners</a>
+      <a href="messages.html" class="admin-nav-item"><span class="nav-icon">✉️</span>Messages</a>
+      <a href="../../index.html" class="admin-nav-item"><span class="nav-icon">🏠</span>View Site</a>
+      <a href="#" class="admin-nav-item" onclick="Auth.logout()"><span class="nav-icon">🚪</span>Logout</a>
+    </nav>
+  </aside>
+  <main class="admin-main">
+    <header class="admin-header"><div class="admin-header-left"><button class="admin-menu-toggle">☰</button><h3>Manage Industry Partners</h3></div></header>
+    <div class="admin-content">
+      <div class="admin-form" style="max-width:100%">
+        <div class="form-row">
+          <div class="form-group"><label>Partner Name</label><input type="text" class="form-control" placeholder="e.g. IBM"></div>
+          <div class="form-group"><label>Display Order</label><input type="number" class="form-control" placeholder="1" value="1"></div>
+        </div>
+        <div class="form-group"><label>Website URL</label><input type="url" class="form-control" placeholder="https://www.ibm.com"></div>
+        <div class="form-group"><label>Logo</label><div class="file-upload-area"><div class="upload-icon">🏢</div><h4>Upload logo</h4><input type="file" accept="image/*" style="display:none"></div></div>
+        <div class="form-actions"><button class="btn btn-primary">Add Partner</button></div>
+      </div>
+      <div class="admin-table-wrapper" style="margin-top:var(--space-6)">
+        <div class="admin-table-header"><h3>Current Partners</h3></div>
+        <table class="admin-table" id="partners-table"><thead><tr><th>Logo</th><th>Name</th><th>Website</th><th>Order</th><th>Actions</th></tr></thead><tbody></tbody></table>
+      </div>
+    </div>
+  </main>
+</div>
+<script src="../../js/api.js"></script><script src="../../js/utils.js"></script><script src="../../js/auth.js"></script><script src="../../js/admin.js"></script>
+</body>
+</html>

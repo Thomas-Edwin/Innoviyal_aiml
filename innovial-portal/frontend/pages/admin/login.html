@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Admin Login — Innoviyal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../css/variables.css"><link rel="stylesheet" href="../../css/style.css">
+<style>.login-page{min-height:100vh;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,var(--secondary),var(--secondary-dark));padding:var(--space-6)}.login-card{background:var(--white);border-radius:var(--radius-2xl);padding:var(--space-10);width:100%;max-width:420px;box-shadow:var(--shadow-2xl)}.login-card .logo{text-align:center;margin-bottom:var(--space-8)}.login-card .logo img{height:64px;margin-bottom:var(--space-3)}.login-card .logo h2{font-size:var(--fs-xl)}.login-card .logo p{font-size:var(--fs-sm);color:var(--gray-500)}.login-error{background:#FEF2F2;color:#991B1B;padding:var(--space-3);border-radius:var(--radius-md);font-size:var(--fs-sm);margin-bottom:var(--space-4);display:none}</style>
+</head>
+<body>
+  <div class="login-page">
+    <div class="login-card">
+      <div class="logo">
+        <img src="../../assets/logo/innoviyal-logo.png" alt="Innoviyal" onerror="this.style.display='none'">
+        <h2>Admin Login</h2>
+        <p>Sign in to manage the Innoviyal portal</p>
+      </div>
+      <div class="login-error" id="login-error"></div>
+      <form id="login-form">
+        <div class="form-group"><label>Email</label><input type="email" class="form-control" id="login-email" required placeholder="admin@drmcet.ac.in"></div>
+        <div class="form-group"><label>Password</label><input type="password" class="form-control" id="login-password" required placeholder="Enter password"></div>
+        <button type="submit" class="btn btn-primary btn-lg btn-block" id="login-btn">Sign In</button>
+      </form>
+      <div style="text-align:center;margin-top:var(--space-4)"><a href="../../index.html" style="font-size:var(--fs-sm);color:var(--gray-500)">← Back to Home</a></div>
+    </div>
+  </div>
+  <script src="../../js/api.js"></script><script src="../../js/utils.js"></script><script src="../../js/auth.js"></script>
+  <script>
+    document.getElementById('login-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const btn = document.getElementById('login-btn');
+      const error = document.getElementById('login-error');
+      btn.disabled = true; btn.textContent = 'Signing in...'; error.style.display = 'none';
+      const result = await Auth.login(document.getElementById('login-email').value, document.getElementById('login-password').value);
+      if (result.success) {
+        const user = Auth.getUser();
+        window.location.href = user && user.role === 'ADMIN' ? 'dashboard.html' : '../student/dashboard.html';
+      } else {
+        error.textContent = result.message; error.style.display = 'block';
+        btn.disabled = false; btn.textContent = 'Sign In';
+      }
+    });
+  </script>
+</body>
+</html>

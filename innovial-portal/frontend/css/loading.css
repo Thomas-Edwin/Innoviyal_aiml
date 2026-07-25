@@ -1,0 +1,178 @@
+/* ============================================
+   INNOVIYAL — Loading Screen Styles
+   Animated intro with logo + tagline
+   ============================================ */
+
+.loading-screen {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-loading);
+  background: var(--secondary-dark);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.8s ease, visibility 0.8s ease;
+}
+
+.loading-screen.hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+/* --- Logo Animation --- */
+.loading-logo {
+  width: 120px;
+  height: 120px;
+  margin-bottom: var(--space-8);
+  position: relative;
+  animation: logoAppear 1.5s ease forwards;
+}
+
+.loading-logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.loading-logo-ring {
+  position: absolute;
+  inset: -15px;
+  border: 3px solid transparent;
+  border-top-color: var(--primary);
+  border-right-color: var(--primary-light);
+  border-radius: 50%;
+  animation: logoSpin 2s linear infinite;
+}
+
+.loading-logo-ring:nth-child(2) {
+  inset: -25px;
+  border-top-color: var(--white);
+  border-right-color: var(--primary);
+  animation-direction: reverse;
+  animation-duration: 3s;
+}
+
+@keyframes logoAppear {
+  0% {
+    opacity: 0;
+    transform: scale(0.5) rotate(-10deg);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.1) rotate(2deg);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+  }
+}
+
+@keyframes logoSpin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* --- Tagline Typing --- */
+.loading-tagline {
+  font-family: var(--font-heading);
+  font-size: clamp(var(--fs-xl), 3vw, var(--fs-2xl));
+  color: var(--white);
+  font-weight: var(--fw-semibold);
+  margin-bottom: var(--space-8);
+  min-height: 1.5em;
+  position: relative;
+}
+
+.loading-tagline::after {
+  content: '|';
+  animation: blink 0.8s step-end infinite;
+  color: var(--primary);
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+.loading-tagline.typing-done::after {
+  animation: blink 1.5s step-end infinite;
+}
+
+/* --- Progress Bar --- */
+.loading-progress {
+  width: 280px;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+}
+
+.loading-progress-bar {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, var(--primary), var(--primary-light));
+  border-radius: var(--radius-full);
+  transition: width 0.3s ease;
+}
+
+.loading-progress-text {
+  color: var(--gray-400);
+  font-size: var(--fs-xs);
+  margin-top: var(--space-3);
+  font-weight: var(--fw-medium);
+  letter-spacing: 1px;
+}
+
+/* --- Particle Background (dots) --- */
+.loading-particles {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.loading-particle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: var(--primary);
+  border-radius: 50%;
+  opacity: 0;
+  animation: particleFloat 3s ease infinite;
+}
+
+@keyframes particleFloat {
+  0% {
+    opacity: 0;
+    transform: translateY(0) scale(0);
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-100vh) scale(1);
+  }
+}
+
+/* --- Responsive --- */
+@media (max-width: 768px) {
+  .loading-logo {
+    width: 90px;
+    height: 90px;
+  }
+  
+  .loading-logo-ring {
+    inset: -10px;
+  }
+  
+  .loading-logo-ring:nth-child(2) {
+    inset: -18px;
+  }
+  
+  .loading-progress {
+    width: 200px;
+  }
+}

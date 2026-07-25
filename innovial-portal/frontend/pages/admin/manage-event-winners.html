@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Manage Event Winners — Innoviyal Admin</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../css/variables.css"><link rel="stylesheet" href="../../css/style.css"><link rel="stylesheet" href="../../css/admin.css"><link rel="stylesheet" href="../../css/components.css">
+</head>
+<body class="admin-body" data-page="custom-winners">
+<div class="admin-wrapper">
+  <aside class="admin-sidebar">
+    <div class="admin-sidebar-header"><img src="../../assets/logo/innoviyal-logo.png" alt="" class="logo" onerror="this.style.display='none'"><div><h2>Innoviyal <small>Admin Panel</small></h2></div></div>
+    <nav class="admin-sidebar-nav">
+      <div class="admin-nav-section">Main</div>
+      <a href="dashboard.html" class="admin-nav-item"><span class="nav-icon">📊</span>Dashboard</a>
+      <a href="manage-news.html" class="admin-nav-item"><span class="nav-icon">📰</span>News</a>
+      <a href="manage-events.html" class="admin-nav-item"><span class="nav-icon">📅</span>Events</a>
+      <a href="manage-people.html" class="admin-nav-item"><span class="nav-icon">👥</span>People</a>
+      <div class="admin-nav-section">Content</div>
+      <a href="manage-gallery.html" class="admin-nav-item"><span class="nav-icon">🖼️</span>Gallery</a>
+      <a href="manage-hero.html" class="admin-nav-item"><span class="nav-icon">🎬</span>Hero Media</a>
+      <a href="manage-testimonials.html" class="admin-nav-item"><span class="nav-icon">💬</span>Testimonials</a>
+      <a href="manage-magazine.html" class="admin-nav-item"><span class="nav-icon">📖</span>Magazine</a>
+      <a href="manage-newsletters.html" class="admin-nav-item"><span class="nav-icon">📬</span>Newsletters</a>
+      <a href="manage-event-winners.html" class="admin-nav-item active"><span class="nav-icon">🏅</span>Event Winners</a>
+      <a href="manage-materials.html" class="admin-nav-item"><span class="nav-icon">📚</span>Materials</a>
+      <a href="manage-achievements.html" class="admin-nav-item"><span class="nav-icon">🏆</span>Achievements</a>
+      <a href="manage-partners.html" class="admin-nav-item"><span class="nav-icon">🤝</span>Partners</a>
+      <div class="admin-nav-section">System</div>
+      <a href="messages.html" class="admin-nav-item"><span class="nav-icon">✉️</span>Messages</a>
+      <a href="backup.html" class="admin-nav-item"><span class="nav-icon">💾</span>Backup</a>
+      <a href="../../index.html" class="admin-nav-item"><span class="nav-icon">🏠</span>View Site</a>
+      <a href="#" class="admin-nav-item" onclick="Auth.logout()"><span class="nav-icon">🚪</span>Logout</a>
+    </nav>
+  </aside>
+  <main class="admin-main">
+    <header class="admin-header"><div class="admin-header-left"><button class="admin-menu-toggle">☰</button><h3>Manage Event Winners</h3></div></header>
+    <div class="admin-content">
+      <!-- Add/Edit Form -->
+      <div class="admin-table-wrapper">
+        <div class="admin-table-header"><h3>Add Winner</h3></div>
+        <div style="padding:var(--space-6)">
+          <div class="form-row">
+            <div class="form-group"><label>Winner Name</label><input type="text" id="ew-name" class="form-control" placeholder="Student/Faculty name"></div>
+            <div class="form-group"><label>Prize</label>
+              <select id="ew-prize" class="form-control">
+                <option value="1st Prize">1st Prize</option>
+                <option value="2nd Prize">2nd Prize</option>
+                <option value="3rd Prize">3rd Prize</option>
+                <option value="Special Mention">Special Mention</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group"><label>Event ID</label><input type="number" id="ew-event-id" class="form-control" placeholder="Event ID number"></div>
+            <div class="form-group"><label>Category</label><input type="text" id="ew-category" class="form-control" placeholder="e.g. Hackathon, Quiz, Project Expo"></div>
+          </div>
+          <div class="form-row">
+            <div class="form-group"><label>Photo URL</label><input type="text" id="ew-photo" class="form-control" placeholder="URL or upload path"></div>
+            <div class="form-group"><label>Description</label><input type="text" id="ew-desc" class="form-control" placeholder="Brief description"></div>
+          </div>
+          <div class="form-actions">
+            <button class="btn btn-primary" id="ew-save-btn">Save Winner</button>
+            <button class="btn btn-outline" id="ew-cancel-btn" style="display:none">Cancel</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- List -->
+      <div class="admin-table-wrapper" style="margin-top:var(--space-6)">
+        <div class="admin-table-header"><h3>All Winners</h3></div>
+        <table class="admin-table" id="winners-table">
+          <thead><tr><th>ID</th><th>Winner</th><th>Prize</th><th>Event ID</th><th>Actions</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+  </main>
+</div>
+<script src="../../js/api.js"></script><script src="../../js/utils.js"></script><script src="../../js/auth.js"></script><script src="../../js/admin.js"></script>
+<script>
+  let editingWinnerId = null;
+
+  document.addEventListener('DOMContentLoaded', () => {
+    loadWinners();
+
+    document.getElementById('ew-save-btn').addEventListener('click', async () => {
+      const data = {
+        winnerName: document.getElementById('ew-name').value,
+        prize: document.getElementById('ew-prize').value,
+        eventId: parseInt(document.getElementById('ew-event-id').value) || null,
+        category: document.getElementById('ew-category').value,
+        photoUrl: document.getElementById('ew-photo').value,
+        description: document.getElementById('ew-desc').value,
+      };
+
+      if (!data.winnerName) return Utils.showToast('Winner name is required', 'error');
+
+      try {
+        if (editingWinnerId) {
+          await API.admin.updateEventWinner(editingWinnerId, data);
+          Utils.showToast('Winner updated!', 'success');
+        } else {
+          await API.admin.createEventWinner(data);
+          Utils.showToast('Winner added!', 'success');
+        }
+        resetWinnerForm();
+        loadWinners();
+      } catch (e) {
+        Utils.showToast(e.message || 'Save failed', 'error');
+      }
+    });
+
+    document.getElementById('ew-cancel-btn').addEventListener('click', resetWinnerForm);
+  });
+
+  async function loadWinners() {
+    const tbody = document.querySelector('#winners-table tbody');
+    if (!tbody) return;
+    tbody.innerHTML = Utils.createSkeleton(3, 'table');
+    try {
+      const data = await API.getEventWinners();
+      const items = Array.isArray(data) ? data : [];
+      tbody.innerHTML = items.map(w => `<tr>
+        <td>${w.id}</td>
+        <td><strong>${w.winnerName}</strong></td>
+        <td><span class="status-badge status-active">${w.prize || '-'}</span></td>
+        <td>${w.eventId || '-'}</td>
+        <td>
+          <div class="table-actions">
+            <button class="btn-edit" onclick="editWinner(${w.id})">✏️ Edit</button>
+            <button class="btn-delete" onclick="deleteWinner(${w.id})">🗑️ Delete</button>
+          </div>
+        </td>
+      </tr>`).join('');
+    } catch {
+      tbody.innerHTML = '<tr><td colspan="5"><div class="empty-state">No winners found</div></td></tr>';
+    }
+  }
+
+  async function editWinner(id) {
+    try {
+      const w = await API.getEventWinnerById(id);
+      editingWinnerId = w.id;
+      document.getElementById('ew-name').value = w.winnerName || '';
+      document.getElementById('ew-prize').value = w.prize || '1st Prize';
+      document.getElementById('ew-event-id').value = w.eventId || '';
+      document.getElementById('ew-category').value = w.category || '';
+      document.getElementById('ew-photo').value = w.photoUrl || '';
+      document.getElementById('ew-desc').value = w.description || '';
+      document.getElementById('ew-cancel-btn').style.display = 'inline-flex';
+      document.getElementById('ew-save-btn').textContent = 'Update Winner';
+    } catch (e) {
+      Utils.showToast('Failed to load winner', 'error');
+    }
+  }
+
+  async function deleteWinner(id) {
+    if (!confirm('Delete this winner?')) return;
+    try {
+      await API.admin.deleteEventWinner(id);
+      Utils.showToast('Deleted!', 'success');
+      loadWinners();
+    } catch (e) {
+      Utils.showToast(e.message || 'Delete failed', 'error');
+    }
+  }
+
+  function resetWinnerForm() {
+    editingWinnerId = null;
+    ['ew-name','ew-event-id','ew-category','ew-photo','ew-desc'].forEach(id => document.getElementById(id).value = '');
+    document.getElementById('ew-prize').value = '1st Prize';
+    document.getElementById('ew-cancel-btn').style.display = 'none';
+    document.getElementById('ew-save-btn').textContent = 'Save Winner';
+  }
+</script>
+</body>
+</html>

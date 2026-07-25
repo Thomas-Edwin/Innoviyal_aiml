@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Magazine — Innoviyal | MCET</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="../css/variables.css">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/glass-card.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <style>
+    .top-info-bar{background:var(--secondary-dark);color:var(--gray-300);font-size:13px;border-bottom:1px solid rgba(255,255,255,0.06);position:relative;z-index:502}
+    .top-info-bar .container{display:flex;align-items:center;justify-content:space-between;height:56px;gap:var(--space-4)}
+    .top-info-bar-left{display:flex;align-items:center;gap:var(--space-4);flex:1;min-width:0}
+    .top-info-bar-left .top-bar-logo{height:46px;width:auto;flex-shrink:0;transition:all var(--transition-base)}
+    .top-info-bar-left .top-bar-logo:hover{transform:scale(1.05)}
+    .top-bar-text{line-height:1.25;min-width:0}
+    .top-bar-text .college-name{font-size:14px;font-weight:var(--fw-bold);color:var(--white);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;letter-spacing:0.3px}
+    .top-bar-text .dept-subtitle{font-size:12px;color:var(--primary-light);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-weight:var(--fw-medium)}
+    .top-info-bar-right{display:flex;align-items:center;gap:var(--space-6);flex-shrink:0}
+    .counselling-code{display:flex;align-items:center;gap:var(--space-1);font-size:12px;color:var(--gray-300);padding:4px 12px;background:rgba(255,255,255,0.05);border-radius:var(--radius-md);border:1px solid rgba(255,255,255,0.06)}
+    .counselling-code .code-label{font-weight:var(--fw-medium);color:var(--gray-400)}
+    .counselling-code .code-value{font-weight:var(--fw-bold);color:var(--primary);letter-spacing:.5px}
+    .top-social-icons{display:flex;align-items:center;gap:8px}
+    .top-social-icons a{display:flex;align-items:center;justify-content:center;width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,0.08);color:var(--gray-300);text-decoration:none;transition:all var(--transition-fast);font-size:14px}
+    .top-social-icons a:hover{background:var(--primary);color:var(--white);transform:translateY(-2px);box-shadow:0 4px 12px rgba(249,115,22,0.3)}
+    .aiml-navbar{position:sticky;top:0;left:0;right:0;z-index:501;background:#0b1120;border-bottom:1px solid rgba(255,255,255,0.06);transition:all var(--transition-base)}
+    .aiml-navbar.scrolled{background:rgba(11,17,32,0.98);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);box-shadow:0 4px 30px rgba(0,0,0,0.3)}
+    .aiml-navbar .container{display:flex;align-items:center;justify-content:space-between;height:64px}
+    .aiml-navbar-brand{font-family:var(--font-heading);font-size:var(--fs-xl);font-weight:var(--fw-bold);color:var(--white);text-decoration:none;display:flex;align-items:center;gap:var(--space-2);flex-shrink:0}
+    .aiml-navbar-brand .brand-accent{color:var(--primary)}
+    .aiml-navbar-menu{display:flex;align-items:center;gap:4px;list-style:none}
+    .aiml-navbar-link{padding:8px 16px;color:rgba(255,255,255,0.75);font-size:13.5px;font-weight:var(--fw-medium);text-decoration:none;border-radius:var(--radius-md);transition:all var(--transition-fast);white-space:nowrap;letter-spacing:.3px;position:relative}
+    .aiml-navbar-link:hover{color:var(--white);background:rgba(255,255,255,0.07)}
+    .aiml-navbar-link::after{content:'';position:absolute;bottom:2px;left:50%;transform:translateX(-50%) scaleX(0);width:20px;height:2px;background:var(--primary);border-radius:var(--radius-full);transition:transform var(--transition-base)}
+    .aiml-navbar-link:hover::after{transform:translateX(-50%) scaleX(1)}
+    .aiml-navbar-link.active{color:var(--primary-light);background:rgba(249,115,22,0.1)}
+    .aiml-navbar-link.active::after{transform:translateX(-50%) scaleX(1)}
+    .aiml-navbar-toggle{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:var(--space-2)}
+    .aiml-navbar-toggle span{display:block;width:22px;height:2px;background:var(--white);border-radius:2px;transition:all var(--transition-base)}
+    .aiml-navbar-toggle.active span:nth-child(1){transform:rotate(45deg) translate(5px,5px)}
+    .aiml-navbar-toggle.active span:nth-child(2){opacity:0}
+    .aiml-navbar-toggle.active span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px)}
+    .aiml-navbar-link.innoviyal-nav-highlight,.aiml-navbar-link.innoviyal-nav-highlight:hover,.aiml-navbar-link.innoviyal-nav-highlight.active{background:rgba(249,115,22,0.1);color:#3B82F6;border-radius:var(--radius-md)}
+    @media(max-width:768px){.top-info-bar .container{height:auto;flex-wrap:wrap;padding:8px var(--space-4);gap:6px}
+    .top-bar-text .college-name{font-size:12px}
+    .top-bar-text .dept-subtitle{font-size:11px}
+    .top-info-bar-left .top-bar-logo{height:36px}
+    .counselling-code{font-size:10px;padding:2px 8px}
+    .top-social-icons a{width:28px;height:28px;font-size:12px}
+    .top-info-bar-right{gap:var(--space-3)}
+    .aiml-navbar .container{height:56px}
+    .aiml-navbar-menu{display:none}
+    .aiml-navbar-toggle{display:flex}
+    .aiml-navbar-menu.open{display:flex;position:fixed;top:0;right:0;width:280px;height:100vh;background:#0b1120;flex-direction:column;padding:80px var(--space-6) var(--space-6);gap:var(--space-1);box-shadow:-10px 0 30px rgba(0,0,0,0.4);z-index:500}
+    .aiml-navbar-menu.open .aiml-navbar-link{width:100%;padding:12px 16px;font-size:14px}
+    .aiml-navbar-menu.open .aiml-navbar-link::after{display:none}}
+
+    /* Magazine card enhancements */
+    .magazine-card {
+      background: var(--white);
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      box-shadow: var(--shadow-card);
+      transition: all var(--transition-base);
+      display: flex;
+      flex-direction: column;
+    }
+    .magazine-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.12);
+    }
+    .magazine-card-cover {
+      position: relative;
+      aspect-ratio: 8.5/11;
+      background: linear-gradient(145deg, var(--gray-100), var(--gray-200));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+    .magazine-card-cover .cover-icon {
+      font-size: 56px;
+      opacity: 0.6;
+      transition: all var(--transition-base);
+      position: relative;
+      z-index: 1;
+    }
+    .magazine-card-cover::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, transparent 50%, rgba(0,0,0,0.03));
+      pointer-events: none;
+    }
+    .magazine-card:hover .magazine-card-cover .cover-icon {
+      transform: scale(1.1) rotate(-5deg);
+      opacity: 0.8;
+    }
+    .magazine-card-body {
+      padding: var(--space-4);
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    .magazine-card-body h4 {
+      font-size: var(--fs-md);
+      font-weight: var(--fw-semibold);
+      margin-bottom: var(--space-1);
+      color: var(--secondary);
+    }
+    .magazine-card-body .edition-info {
+      font-size: var(--fs-xs);
+      color: var(--primary);
+      font-weight: var(--fw-medium);
+      margin-bottom: var(--space-1);
+    }
+    .magazine-card-body .file-size {
+      font-size: var(--fs-xs);
+      color: var(--gray-400);
+      margin-bottom: var(--space-3);
+    }
+    .magazine-actions {
+      display: flex;
+      gap: var(--space-2);
+      margin-top: auto;
+    }
+    .magazine-actions .btn {
+      flex: 1;
+      justify-content: center;
+      font-size: var(--fs-xs);
+      padding: var(--space-2) var(--space-3);
+    }
+    .magazine-actions .btn i {
+      font-size: 12px;
+    }
+
+    /* Year badges for editions */
+    .edition-year-badge {
+      position: absolute;
+      top: var(--space-3);
+      right: var(--space-3);
+      background: var(--primary);
+      color: var(--white);
+      padding: 4px 10px;
+      border-radius: var(--radius-full);
+      font-size: 11px;
+      font-weight: var(--fw-bold);
+      z-index: 2;
+      box-shadow: 0 2px 10px rgba(249,115,22,0.3);
+    }
+
+    /* Newsletter cards - smaller variant */
+    .newsletter-card {
+      background: var(--white);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-card);
+      transition: all var(--transition-base);
+      text-decoration: none;
+      color: inherit;
+      display: block;
+      overflow: hidden;
+    }
+    .newsletter-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-hover);
+    }
+    .newsletter-card-inner {
+      padding: var(--space-4);
+      text-align: center;
+    }
+    .newsletter-card-inner .nl-icon {
+      font-size: 32px;
+      margin-bottom: var(--space-2);
+    }
+    .newsletter-card-inner h4 {
+      font-size: var(--fs-sm);
+      font-weight: var(--fw-semibold);
+      color: var(--secondary);
+      margin-bottom: var(--space-1);
+    }
+    .newsletter-card-inner .nl-date {
+      font-size: var(--fs-xs);
+      color: var(--gray-400);
+      margin-bottom: var(--space-2);
+    }
+
+    /* Newsletter actions */
+    .nl-actions {
+      display: flex;
+      gap: 6px;
+      justify-content: center;
+    }
+    .nl-actions a {
+      padding: 4px 12px;
+      border-radius: var(--radius-full);
+      font-size: 11px;
+      font-weight: var(--fw-medium);
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      transition: all var(--transition-fast);
+      text-decoration: none;
+    }
+    .nl-actions .nl-view {
+      background: var(--primary-bg);
+      color: var(--primary);
+      border: 1px solid rgba(249,115,22,0.2);
+    }
+    .nl-actions .nl-view:hover {
+      background: var(--primary);
+      color: var(--white);
+    }
+    .nl-actions .nl-download {
+      background: var(--gray-50);
+      color: var(--gray-600);
+      border: 1px solid var(--gray-200);
+    }
+    .nl-actions .nl-download:hover {
+      background: var(--secondary);
+      color: var(--white);
+      border-color: var(--secondary);
+    }
+
+    /* Section spacing */
+    .magazine-section-divider {
+      margin: var(--space-16) 0 var(--space-8);
+      border: none;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gray-200), transparent);
+    }
+
+    @media (max-width: 768px) {
+      .magazine-card-cover .cover-icon { font-size: 40px; }
+    }
+  </style>
+</head>
+<body>
+  <!-- ===== TOP INFO BAR ===== -->
+  <div class="top-info-bar"><div class="container">
+    <div class="top-info-bar-left">
+      <img src="../assets/logo/innoviyal-logo.png" alt="MCET" class="top-bar-logo" onerror="this.style.display='none'">
+      <div class="top-bar-text">
+        <div class="college-name">Dr. Mahalingam College of Engineering and Technology</div>
+        <div class="dept-subtitle">Department of CSE (AI & ML)</div>
+      </div>
+    </div>
+    <div class="top-info-bar-right">
+      <div class="counselling-code"><span class="code-label">TNEA Counselling Code: </span><span class="code-value">2706</span></div>
+      <div class="top-social-icons">
+        <a href="https://facebook.com" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+        <a href="https://instagram.com" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+        <a href="https://linkedin.com" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+        <a href="https://youtube.com" target="_blank" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+      </div>
+    </div>
+  </div></div>
+
+  <!-- ===== MAIN NAVBAR ===== -->
+  <nav class="aiml-navbar" role="navigation">
+    <div class="container">
+      <a href="../index.html" class="aiml-navbar-brand"><span class="brand-accent">AI</span><span style="color:var(--gray-300)">&amp;</span><span style="color:var(--white)">ML</span></a>
+      <button class="aiml-navbar-toggle" aria-label="Toggle menu" aria-expanded="false"><span></span><span></span><span></span></button>
+      <ul class="aiml-navbar-menu">
+        <li><a href="../index.html" class="aiml-navbar-link">Home</a></li>
+        <li class="navbar-dropdown">
+          <a href="aiml-about.html" class="aiml-navbar-link">About <span class="arrow">▼</span></a>
+          <ul class="navbar-dropdown-menu">
+            <li><a href="aiml-about.html#what-we-offer" class="navbar-dropdown-link"><span class="dd-icon">📚</span><span class="dd-text"><span class="dd-label">What We Offer</span><span class="dd-desc">Four pillars of AIML education</span></span></a></li>
+            <li><a href="aiml-about.html#peos" class="navbar-dropdown-link"><span class="dd-icon">🎯</span><span class="dd-text"><span class="dd-label">Program Educational Objectives</span><span class="dd-desc">Career &amp; professional accomplishments</span></span></a></li>
+            <li><a href="aiml-about.html#psos" class="navbar-dropdown-link"><span class="dd-icon">⚡</span><span class="dd-text"><span class="dd-label">Program Specific Outcomes</span><span class="dd-desc">Specific outcomes for AIML program</span></span></a></li>
+          </ul>
+        </li>
+        <li><a href="team.html" class="aiml-navbar-link">Team</a></li>
+        <li><a href="events.html" class="aiml-navbar-link">Events</a></li>
+        <li><a href="gallery.html" class="aiml-navbar-link">Rank Holders</a></li>
+        <li><a href="magazine.html" class="aiml-navbar-link active">Magazine</a></li>
+        <li><a href="placement.html" class="aiml-navbar-link">Placements</a></li>
+        <li><a href="innovial.html" class="aiml-navbar-link innoviyal-nav-highlight">Innoviyal</a></li>
+        <li><a href="contact.html" class="aiml-navbar-link">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <section class="page-hero">
+    <div class="container">
+      <div class="breadcrumb"><a href="../index.html">Home</a> / <span>AIML Magazine</span></div>
+      <h1>AIML Magazine</h1>
+      <p>Exploring innovation through words — The official magazine of CSE (AIML)</p>
+    </div>
+  </section>
+
+  <main class="section">
+    <div class="container">
+      <!-- ===== LATEST EDITION ===== -->
+      <div class="section-header">
+        <h2>Latest Edition</h2>
+        <p>Innoviyal Spectrum — April 2026</p>
+      </div>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:var(--space-8);align-items:start;margin-bottom:var(--space-12)">
+        <div>
+          <div style="border-radius:var(--radius-2xl);overflow:hidden;box-shadow:var(--shadow-xl);aspect-ratio:8.5/11;background:var(--white);display:flex;align-items:center;justify-content:center;position:relative">
+            <canvas id="magazine-preview-canvas" style="width:100%;height:100%;display:block;"></canvas>
+          </div>
+        </div>
+        <div>
+          <h3 style="font-size:var(--fs-2xl);margin-bottom:var(--space-3)">Innoviyal Spectrum</h3>
+          <p style="color:var(--primary);font-weight:var(--fw-medium);margin-bottom:var(--space-2)">Volume 1 • April 2026</p>
+          <p style="color:var(--gray-600);line-height:var(--lh-relaxed);margin-bottom:var(--space-6)">The latest edition of Innoviyal Spectrum features articles on AI trends, student projects, faculty research, event highlights, and much more from the CSE (AI & ML) department.</p>
+          <div style="display:flex;gap:var(--space-3);flex-wrap:wrap">
+            <a id="read-online-btn" href="../assets/magazines/magazine-2026.pdf" class="btn btn-primary" target="_blank"><i class="fas fa-book-open"></i> Read Online</a>
+            <a id="download-pdf-btn" href="../assets/magazines/magazine-2026.pdf" class="btn btn-outline" download><i class="fas fa-download"></i> Download PDF</a>
+          </div>
+          <div style="margin-top:var(--space-6);padding-top:var(--space-6);border-top:1px solid var(--gray-200)">
+            <h4 style="margin-bottom:var(--space-4)">In This Issue</h4>
+            <ul style="display:flex;flex-direction:column;gap:var(--space-2)">
+              <li style="display:flex;gap:var(--space-2);font-size:var(--fs-sm)">• 🤖 The Rise of Generative AI — Dr. Priya Sharma</li>
+              <li style="display:flex;gap:var(--space-2);font-size:var(--fs-sm)">• 🏆 Hackathon 2025: A Retrospective — Ananya Singh</li>
+              <li style="display:flex;gap:var(--space-2);font-size:var(--fs-sm)">• 💡 Student Projects Showcase — AIML Class of '26</li>
+              <li style="display:flex;gap:var(--space-2);font-size:var(--fs-sm)">• 🌐 Industry 4.0 and AI — Prof. Rahul Verma</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <hr class="magazine-section-divider">
+
+      <!-- ===== PAST EDITIONS ===== -->
+      <div class="section-header"><h2>Past Editions</h2><p>Earlier issues of the AIML department magazine</p></div>
+      <div class="grid grid-3" style="grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:var(--space-6);margin-bottom:var(--space-8)">
+        <!-- 2025 Magazine -->
+        <div class="magazine-card">
+          <div class="magazine-card-cover" style="background:linear-gradient(145deg, #1E293B, #0F172A)">
+            <div class="edition-year-badge">2025</div>
+            <canvas class="pdf-thumbnail" data-pdf-src="../assets/magazines/magazine-2025.pdf" style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;"></canvas>
+          </div>
+          <div class="magazine-card-body">
+            <h4>Innoviyal Spectrum</h4>
+            <div class="edition-info"><i class="far fa-calendar-alt" style="margin-right:4px"></i>Volume 1 • March 2025</div>
+            <div class="file-size"><i class="far fa-file-pdf" style="margin-right:4px;color:var(--error)"></i>95.6 MB</div>
+            <div class="magazine-actions">
+              <a href="../assets/magazines/magazine-2025.pdf" target="_blank" class="btn btn-primary btn-sm"><i class="fas fa-eye"></i> View</a>
+              <a href="../assets/magazines/magazine-2025.pdf" download class="btn btn-outline btn-sm"><i class="fas fa-download"></i> Download</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2024 Magazine -->
+        <div class="magazine-card">
+          <div class="magazine-card-cover" style="background:linear-gradient(145deg, #1E293B, #0F172A)">
+            <div class="edition-year-badge">2024</div>
+            <canvas class="pdf-thumbnail" data-pdf-src="../assets/magazines/magazine-2024.pdf" style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;"></canvas>
+          </div>
+          <div class="magazine-card-body">
+            <h4>Innoviyal Spectrum</h4>
+            <div class="edition-info"><i class="far fa-calendar-alt" style="margin-right:4px"></i>Inaugural Edition • 2024</div>
+            <div class="file-size"><i class="far fa-file-pdf" style="margin-right:4px;color:var(--error)"></i>21.0 MB</div>
+            <div class="magazine-actions">
+              <a href="../assets/magazines/magazine-2024.pdf" target="_blank" class="btn btn-primary btn-sm"><i class="fas fa-eye"></i> View</a>
+              <a href="../assets/magazines/magazine-2024.pdf" download class="btn btn-outline btn-sm"><i class="fas fa-download"></i> Download</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- More Coming Soon (unchanged) -->
+        <div class="magazine-card">
+          <div class="magazine-card-cover" style="background:linear-gradient(145deg, var(--gray-100), var(--gray-200))">
+            <div class="cover-icon" style="color:var(--gray-400)">🔮</div>
+          </div>
+          <div class="magazine-card-body" style="align-items:center;text-align:center">
+            <h4 style="color:var(--gray-400)">More Editions</h4>
+            <div class="edition-info" style="color:var(--gray-400)">Coming Soon</div>
+            <div class="file-size" style="color:var(--gray-300)">Stay tuned for future releases</div>
+          </div>
+        </div>
+      </div>
+
+      <hr class="magazine-section-divider">
+
+      <!-- ===== NEWSLETTERS SECTION ===== -->
+      <div class="section-header">
+        <h2>AIML <span style="color:var(--primary)">Newsletters</span></h2>
+        <p>Monthly newsletters from the CSE (AIML) department — insights, updates, and achievements</p>
+      </div>
+
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:var(--space-4)" id="newsletters-grid">
+        <div class="newsletter-card"><a href="../assets/newsletters/newsletter-january-2025.pdf" target="_blank" class="newsletter-card-inner" style="text-decoration:none;color:inherit;display:block">
+          <div class="nl-icon">📬</div>
+          <h4>January 2025</h4>
+          <div class="nl-date">Issue #1</div>
+          <div class="nl-actions">
+            <span class="nl-view"><i class="fas fa-eye"></i> View</span>
+            <a href="../assets/newsletters/newsletter-january-2025.pdf" download class="nl-download" onclick="event.stopPropagation()"><i class="fas fa-download"></i></a>
+          </div>
+        </a></div>
+
+        <div class="newsletter-card"><a href="../assets/newsletters/newsletter-february-2025.pdf" target="_blank" class="newsletter-card-inner" style="text-decoration:none;color:inherit;display:block">
+          <div class="nl-icon">📬</div>
+          <h4>February 2025</h4>
+          <div class="nl-date">Issue #2</div>
+          <div class="nl-actions">
+            <span class="nl-view"><i class="fas fa-eye"></i> View</span>
+            <a href="../assets/newsletters/newsletter-february-2025.pdf" download class="nl-download" onclick="event.stopPropagation()"><i class="fas fa-download"></i></a>
+          </div>
+        </a></div>
+
+        <div class="newsletter-card"><a href="../assets/newsletters/newsletter-march-2025.pdf" target="_blank" class="newsletter-card-inner" style="text-decoration:none;color:inherit;display:block">
+          <div class="nl-icon">📬</div>
+          <h4>March 2025</h4>
+          <div class="nl-date">Issue #3</div>
+          <div class="nl-actions">
+            <span class="nl-view"><i class="fas fa-eye"></i> View</span>
+            <a href="../assets/newsletters/newsletter-march-2025.pdf" download class="nl-download" onclick="event.stopPropagation()"><i class="fas fa-download"></i></a>
+          </div>
+        </a></div>
+
+        <div class="newsletter-card"><a href="../assets/newsletters/newsletter-april-2025.pdf" target="_blank" class="newsletter-card-inner" style="text-decoration:none;color:inherit;display:block">
+          <div class="nl-icon">📬</div>
+          <h4>April 2025</h4>
+          <div class="nl-date">Issue #4</div>
+          <div class="nl-actions">
+            <span class="nl-view"><i class="fas fa-eye"></i> View</span>
+            <a href="../assets/newsletters/newsletter-april-2025.pdf" download class="nl-download" onclick="event.stopPropagation()"><i class="fas fa-download"></i></a>
+          </div>
+        </a></div>
+
+        <div class="newsletter-card"><a href="../assets/newsletters/newsletter-june-2025.pdf" target="_blank" class="newsletter-card-inner" style="text-decoration:none;color:inherit;display:block">
+          <div class="nl-icon">📬</div>
+          <h4>June 2025</h4>
+          <div class="nl-date">Issue #5</div>
+          <div class="nl-actions">
+            <span class="nl-view"><i class="fas fa-eye"></i> View</span>
+            <a href="../assets/newsletters/newsletter-june-2025.pdf" download class="nl-download" onclick="event.stopPropagation()"><i class="fas fa-download"></i></a>
+          </div>
+        </a></div>
+
+        <div class="newsletter-card"><a href="../assets/newsletters/newsletter-july-2025.pdf" target="_blank" class="newsletter-card-inner" style="text-decoration:none;color:inherit;display:block">
+          <div class="nl-icon">📬</div>
+          <h4>July 2025</h4>
+          <div class="nl-date">Issue #6</div>
+          <div class="nl-actions">
+            <span class="nl-view"><i class="fas fa-eye"></i> View</span>
+            <a href="../assets/newsletters/newsletter-july-2025.pdf" download class="nl-download" onclick="event.stopPropagation()"><i class="fas fa-download"></i></a>
+          </div>
+        </a></div>
+
+        <div class="newsletter-card"><a href="../assets/newsletters/newsletter-august-2025.pdf" target="_blank" class="newsletter-card-inner" style="text-decoration:none;color:inherit;display:block">
+          <div class="nl-icon">📬</div>
+          <h4>August 2025</h4>
+          <div class="nl-date">Issue #7</div>
+          <div class="nl-actions">
+            <span class="nl-view"><i class="fas fa-eye"></i> View</span>
+            <a href="../assets/newsletters/newsletter-august-2025.pdf" download class="nl-download" onclick="event.stopPropagation()"><i class="fas fa-download"></i></a>
+          </div>
+        </a></div>
+
+        <div class="newsletter-card"><a href="../assets/newsletters/newsletter-october-2025.pdf" target="_blank" class="newsletter-card-inner" style="text-decoration:none;color:inherit;display:block">
+          <div class="nl-icon">📬</div>
+          <h4>October 2025</h4>
+          <div class="nl-date">Issue #8</div>
+          <div class="nl-actions">
+            <span class="nl-view"><i class="fas fa-eye"></i> View</span>
+            <a href="../assets/newsletters/newsletter-october-2025.pdf" download class="nl-download" onclick="event.stopPropagation()"><i class="fas fa-download"></i></a>
+          </div>
+        </a></div>
+
+        <div class="newsletter-card"><a href="../assets/newsletters/newsletter-february-2026.pdf" target="_blank" class="newsletter-card-inner" style="text-decoration:none;color:inherit;display:block">
+          <div class="nl-icon">📬</div>
+          <h4>February 2026</h4>
+          <div class="nl-date">Issue #9</div>
+          <div class="nl-actions">
+            <span class="nl-view"><i class="fas fa-eye"></i> View</span>
+            <a href="../assets/newsletters/newsletter-february-2026.pdf" download class="nl-download" onclick="event.stopPropagation()"><i class="fas fa-download"></i></a>
+          </div>
+        </a></div>
+
+        <div class="newsletter-card"><a href="../assets/newsletters/newsletter-march-2026.pdf" target="_blank" class="newsletter-card-inner" style="text-decoration:none;color:inherit;display:block">
+          <div class="nl-icon">📬</div>
+          <h4>March 2026</h4>
+          <div class="nl-date">Issue #10</div>
+          <div class="nl-actions">
+            <span class="nl-view"><i class="fas fa-eye"></i> View</span>
+            <a href="../assets/newsletters/newsletter-march-2026.pdf" download class="nl-download" onclick="event.stopPropagation()"><i class="fas fa-download"></i></a>
+          </div>
+        </a></div>
+
+        <div class="newsletter-card"><a href="../assets/newsletters/newsletter-may-2026.pdf" target="_blank" class="newsletter-card-inner" style="text-decoration:none;color:inherit;display:block">
+          <div class="nl-icon">📬</div>
+          <h4>May 2026</h4>
+          <div class="nl-date">Issue #11</div>
+          <div class="nl-actions">
+            <span class="nl-view"><i class="fas fa-eye"></i> View</span>
+            <a href="../assets/newsletters/newsletter-may-2026.pdf" download class="nl-download" onclick="event.stopPropagation()"><i class="fas fa-download"></i></a>
+          </div>
+        </a></div>
+      </div>
+
+      <hr class="magazine-section-divider">
+
+      <!-- ===== ANNUAL NEWSLETTER ===== -->
+      <div class="section-header">
+        <h2>Annual <span style="color:var(--primary)">Newsletter</span></h2>
+        <p>Year-in-review newsletter featuring the department's annual highlights</p>
+      </div>
+
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,330px));gap:var(--space-6)">
+        <div class="magazine-card">
+          <div class="magazine-card-cover" style="background:linear-gradient(145deg, var(--primary), var(--primary-dark))">
+            <div class="edition-year-badge">2025</div>
+            <canvas class="pdf-thumbnail" data-pdf-src="../assets/newsletters/annual-newsletter-2025.pdf" style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;"></canvas>
+          </div>
+          <div class="magazine-card-body">
+            <h4>Annual Newsletter</h4>
+            <div class="edition-info"><i class="far fa-calendar-alt" style="margin-right:4px"></i>Academic Year 2024–2025</div>
+            <div class="file-size"><i class="far fa-file-pdf" style="margin-right:4px;color:var(--error)"></i>38.3 MB</div>
+            <div class="magazine-actions">
+              <a href="../assets/newsletters/annual-newsletter-2025.pdf" target="_blank" class="btn btn-primary btn-sm"><i class="fas fa-eye"></i> View</a>
+              <a href="../assets/newsletters/annual-newsletter-2025.pdf" download class="btn btn-outline btn-sm"><i class="fas fa-download"></i> Download</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer style="background:var(--secondary-dark);color:var(--gray-300);padding:var(--space-8) 0">
+    <div class="container text-center"><p>© 2026 Innoviyal — CSE (AIML) Association</p></div>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+  <script src="../js/api.js"></script>
+  <script src="../js/utils.js"></script>
+  <script src="../js/main.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Navbar scroll effect
+      const navbar = document.querySelector('.aiml-navbar');
+      if (navbar) {
+        window.addEventListener('scroll', () => {
+          navbar.classList.toggle('scrolled', window.scrollY > 80);
+        }, { passive: true });
+      }
+      
+      // Mobile menu toggle
+      const toggle = document.querySelector('.aiml-navbar-toggle');
+      const menu = document.querySelector('.aiml-navbar-menu');
+      if(toggle&&menu){toggle.addEventListener('click',()=>{const isOpen=menu.classList.toggle('open');toggle.classList.toggle('active');toggle.setAttribute('aria-expanded',isOpen);document.body.style.overflow=isOpen?'hidden':''});menu.querySelectorAll('a').forEach(link=>{link.addEventListener('click',()=>{menu.classList.remove('open');toggle.classList.remove('active');toggle.setAttribute('aria-expanded','false');document.body.style.overflow=''})})}
+      
+      // Render PDF thumbnails for Past Editions cards
+      pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+      
+      document.querySelectorAll('.pdf-thumbnail').forEach(canvas => {
+        const pdfSrc = canvas.getAttribute('data-pdf-src');
+        if (!pdfSrc) return;
+        
+        // Add loading indicator
+        canvas.style.background = 'rgba(255,255,255,0.05)';
+        
+        pdfjsLib.getDocument(pdfSrc).promise.then(pdf => {
+          return pdf.getPage(1);
+        }).then(page => {
+          const container = canvas.parentElement;
+          const containerWidth = container.clientWidth;
+          const containerHeight = container.clientHeight;
+          const scale = Math.max(containerWidth, containerHeight) / Math.max(page.getViewport({ scale: 1 }).width, page.getViewport({ scale: 1 }).height) * 1.1;
+          const viewport = page.getViewport({ scale: scale });
+          canvas.width = viewport.width;
+          canvas.height = viewport.height;
+          const ctx = canvas.getContext('2d');
+          return page.render({ canvasContext: ctx, viewport: viewport }).promise;
+        }).catch(() => {
+          // Fallback: show a minimal placeholder
+          canvas.style.display = 'none';
+        });
+      });
+      
+      // Render the main magazine cover page preview
+      const previewCanvas = document.getElementById('magazine-preview-canvas');
+      if (previewCanvas) {
+        pdfjsLib.getDocument('../assets/magazines/magazine-2026.pdf').promise.then(pdf => {
+          return pdf.getPage(1);
+        }).then(page => {
+          const container = previewCanvas.parentElement;
+          const containerWidth = container.clientWidth;
+          const containerHeight = container.clientHeight;
+          const scale = Math.max(containerWidth, containerHeight) / Math.max(page.getViewport({ scale: 1 }).width, page.getViewport({ scale: 1 }).height) * 1.8;
+          const viewport = page.getViewport({ scale: scale });
+          previewCanvas.width = viewport.width;
+          previewCanvas.height = viewport.height;
+          const ctx = previewCanvas.getContext('2d');
+          ctx.fillStyle = '#fff';
+          ctx.fillRect(0, 0, previewCanvas.width, previewCanvas.height);
+          return page.render({ canvasContext: ctx, viewport: viewport }).promise;
+        }).catch(() => {});
+      }
+    });
+  </script>
+</body>
+</html>

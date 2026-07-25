@@ -1,0 +1,824 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Department of CSE (AI & ML) — MCET | Innoviyal Association</title>
+  <meta name="description" content="Department of Computer Science & Engineering (Artificial Intelligence & Machine Learning) at Dr. Mahalingam College of Engineering and Technology. Home of Innoviyal — the official AI & ML student association.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/loading.css">
+  <link rel="stylesheet" href="css/hero.css">
+  <link rel="stylesheet" href="css/glass-card.css">
+  <link rel="stylesheet" href="css/lightbox.css">
+  <link rel="stylesheet" href="css/components.css">
+  <style>
+    /* ===== PREMIUM TOP INFO BAR ===== */
+    .top-info-bar{background:var(--secondary-dark);color:var(--gray-300);font-size:13px;border-bottom:1px solid rgba(255,255,255,0.06);position:relative;z-index:502}
+    .top-info-bar .container{display:flex;align-items:center;justify-content:space-between;height:56px;gap:var(--space-4)}
+    .top-info-bar-left{display:flex;align-items:center;gap:var(--space-4k);flex:1;min-width:0}
+    .top-info-bar-left .top-bar-logo{height:46px;width:auto;flex-shrink:0;transition:all var(--transition-base)}
+    .top-info-bar-left .top-bar-logo:hover{transform:scale(1.05)}
+    .top-bar-text{line-height:1.25;min-width:0}
+    .top-bar-text .college-name{font-size:14px;font-weight:var(--fw-bold);color:var(--white);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;letter-spacing:0.3px}
+    .top-bar-text .dept-subtitle{font-size:12px;color:var(--primary-light);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-weight:var(--fw-medium)}
+    .top-info-bar-right{display:flex;align-items:center;gap:var(--space-6);flex-shrink:0}
+    .counselling-code{display:flex;align-items:center;gap:var(--space-1);font-size:12px;color:var(--gray-300);padding:4px 12px;background:rgba(255,255,255,0.05);border-radius:var(--radius-md);border:1px solid rgba(255,255,255,0.06)}
+    .counselling-code .code-label{font-weight:var(--fw-medium);color:var(--gray-400)}
+    .counselling-code .code-value{font-weight:var(--fw-bold);color:var(--primary);letter-spacing:.5px}
+    .top-social-icons{display:flex;align-items:center;gap:8px}
+    .top-social-icons a{display:flex;align-items:center;justify-content:center;width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,0.08);color:var(--gray-300);text-decoration:none;transition:all var(--transition-fast);font-size:14px}
+    .top-social-icons a:hover{background:var(--primary);color:var(--white);transform:translateY(-2px);box-shadow:0 4px 12px rgba(249,115,22,0.3)}
+
+    /* ===== PREMIUM AIML NAVBAR ===== */
+    .aiml-navbar{position:sticky;top:0;left:0;right:0;z-index:501;background:#0b1120;border-bottom:1px solid rgba(255,255,255,0.06);transition:all var(--transition-base)}
+    .aiml-navbar.scrolled{background:rgba(11,17,32,0.98);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);box-shadow:0 4px 30px rgba(0,0,0,0.3)}
+    .aiml-navbar .container{display:flex;align-items:center;justify-content:space-between;height:64px}
+    .aiml-navbar-brand{font-family:var(--font-heading);font-size:var(--fs-xl);font-weight:var(--fw-bold);color:var(--white);text-decoration:none;display:flex;align-items:center;gap:var(--space-2);flex-shrink:0;position:relative;padding:4px 0}
+    .aiml-navbar-brand .brand-accent{color:var(--primary)}
+    .aiml-navbar-brand small{display:block;font-size:9px;color:var(--gray-500);letter-spacing:1px;text-transform:uppercase;line-height:1}
+    .aiml-navbar-menu{display:flex;align-items:center;gap:4px;list-style:none}
+    .aiml-navbar-link{padding:8px 16px;color:rgba(255,255,255,0.75);font-size:13.5px;font-weight:var(--fw-medium);text-decoration:none;border-radius:var(--radius-md);transition:all var(--transition-fast);white-space:nowrap;letter-spacing:.3px;position:relative}
+    .aiml-navbar-link:hover{color:var(--white);background:rgba(255,255,255,0.07)}
+    .aiml-navbar-link::after{content:'';position:absolute;bottom:2px;left:50%;transform:translateX(-50%) scaleX(0);width:20px;height:2px;background:var(--primary);border-radius:var(--radius-full);transition:transform var(--transition-base)}
+    .aiml-navbar-link:hover::after{transform:translateX(-50%) scaleX(1)}
+    .aiml-navbar-link.active{color:var(--primary-light);background:rgba(249,115,22,0.1)}
+    .aiml-navbar-link.active::after{transform:translateX(-50%) scaleX(1)}
+    .aiml-navbar-toggle{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:var(--space-2)}
+    .aiml-navbar-toggle span{display:block;width:22px;height:2px;background:var(--white);border-radius:2px;transition:all var(--transition-base)}
+    .aiml-navbar-toggle.active span:nth-child(1){transform:rotate(45deg) translate(5px,5px)}
+    .aiml-navbar-toggle.active span:nth-child(2){opacity:0}
+    .aiml-navbar-toggle.active span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px)}
+
+    @media(max-width:768px){
+      .top-info-bar .container{height:auto;flex-wrap:wrap;padding:8px var(--space-4);gap:6px}
+      .top-bar-text .college-name{font-size:12px}
+      .top-bar-text .dept-subtitle{font-size:11px}
+      .top-info-bar-left .top-bar-logo{height:36px}
+      .counselling-code{font-size:10px;padding:2px 8px}
+      .top-social-icons a{width:28px;height:28px;font-size:12px}
+      .aiml-navbar .container{height:56px}
+      .aiml-navbar-menu{display:none}
+      .aiml-navbar-toggle{display:flex}
+      .aiml-navbar-menu.open{display:flex;position:fixed;top:0;right:0;width:280px;height:100vh;background:#0b1120;flex-direction:column;padding:80px var(--space-6) var(--space-6);gap:var(--space-1);box-shadow:-10px 0 30px rgba(0,0,0,0.4);z-index:500}
+      .aiml-navbar-menu.open .aiml-navbar-link{width:100%;padding:12px 16px;font-size:14px}
+      .aiml-navbar-menu.open .aiml-navbar-link::after{display:none}
+    }
+    /* Fix hero content padding */
+    .hero-content { padding-top: 0 !important; }
+    @keyframes floatCard {
+      0%, 100% { transform: perspective(1000px) rotateY(-5deg) translateY(0px); }
+      50% { transform: perspective(1000px) rotateY(-5deg) translateY(-10px); }
+    }
+    .aiml-navbar-link.innoviyal-nav-highlight,.aiml-navbar-link.innoviyal-nav-highlight:hover,.aiml-navbar-link.innoviyal-nav-highlight.active{background:rgba(249,115,22,0.1);color:#3B82F6;border-radius:var(--radius-md)}
+  </style>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><text y='28' font-size='28'>🤖</text></svg>">
+</head>
+<body>
+  <!-- ========== LOADING SCREEN ========== -->
+  <div id="loading-screen" class="loading-screen">
+    <div class="loading-particles"></div>
+    <div class="loading-logo">
+      <div class="loading-logo-ring"></div>
+      <div class="loading-logo-ring"></div>
+      <img src="assets/logo/mcet-logo.png" alt="MCET" onerror="this.style.display='none'">
+    </div>
+    <div class="loading-tagline"></div>
+    <div class="loading-progress">
+      <div class="loading-progress-bar"></div>
+    </div>
+    <div class="loading-progress-text">0%</div>
+  </div>
+
+  <!-- ===== TOP INFO BAR ===== -->
+  <div class="top-info-bar"><div class="container">
+    <div class="top-info-bar-left">
+      <img src="assets/logo/mcet-logo.png" alt="MCET" class="top-bar-logo" onerror="this.style.display='none'">
+      <div class="top-bar-text">
+        <div class="college-name">Dr. Mahalingam College of Engineering and Technology</div>
+        <div class="dept-subtitle">Department of CSE (AI & ML)</div>
+      </div>
+    </div>
+    <div class="top-info-bar-right">
+      <div class="counselling-code"><span class="code-label">TNEA Counselling Code: </span><span class="code-value">2706</span></div>
+      <div class="top-social-icons">
+        <a href="https://www.instagram.com/innoviyal.mcet?igsh=NGcyNGwzYXUydjJh" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+        <a href="https://www.linkedin.com/in/inno%E0%AE%B5%E0%AE%BF%E0%AE%AF%E0%AE%B2%E0%AF%8D-aiml-01a743330?utm_source=share_via&utm_content=profile&utm_medium=member_android" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+        <a href="https://drmcet.ac.in/" target="_blank" aria-label="College Website"><i class="fas fa-globe"></i></a>
+      </div>
+    </div>
+  </div></div>
+
+  <!-- ===== MAIN NAVBAR ===== -->
+  <nav class="aiml-navbar" role="navigation">
+    <div class="container">
+      <a href="/" class="aiml-navbar-brand"><span class="brand-accent">AI</span><span style="color:var(--gray-300)">&amp;</span><span style="color:var(--white)">ML</span></a>
+      <button class="aiml-navbar-toggle" aria-label="Toggle menu" aria-expanded="false"><span></span><span></span><span></span></button>
+      <ul class="aiml-navbar-menu">
+        <li><a href="index.html" class="aiml-navbar-link active">Home</a></li>
+        <li class="navbar-dropdown">
+          <a href="pages/aiml-about.html" class="aiml-navbar-link">About <span class="arrow">▼</span></a>
+          <ul class="navbar-dropdown-menu">
+            <li><a href="pages/aiml-about.html#what-we-offer" class="navbar-dropdown-link"><span class="dd-icon">📚</span><span class="dd-text"><span class="dd-label">What We Offer</span><span class="dd-desc">Four pillars of AIML education</span></span></a></li>
+            <li><a href="pages/aiml-about.html#peos" class="navbar-dropdown-link"><span class="dd-icon">🎯</span><span class="dd-text"><span class="dd-label">Program Educational Objectives</span><span class="dd-desc">Career &amp; professional accomplishments</span></span></a></li>
+            <li><a href="pages/aiml-about.html#psos" class="navbar-dropdown-link"><span class="dd-icon">⚡</span><span class="dd-text"><span class="dd-label">Program Specific Outcomes</span><span class="dd-desc">Specific outcomes for AIML program</span></span></a></li>
+          </ul>
+        </li>
+        <li><a href="pages/team.html" class="aiml-navbar-link">Team</a></li>
+        <li><a href="pages/events.html" class="aiml-navbar-link">Events</a></li>
+        <li><a href="pages/gallery.html" class="aiml-navbar-link">Rank Holders</a></li>
+        <li><a href="pages/placement.html" class="aiml-navbar-link">Placements</a></li>
+        <li><a href="pages/innovial.html" class="aiml-navbar-link innoviyal-nav-highlight">Innoviyal</a></li>
+        <li><a href="pages/contact.html" class="aiml-navbar-link">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- ========== HERO SECTION ========== -->
+  <section class="hero" id="home">
+    <div class="hero-slides"></div>
+    <div class="hero-overlay"></div>
+
+    <div class="hero-content container">
+      <div class="hero-logo">
+        <img src="assets/logo/mcet-logo.png" alt="MCET">
+      </div>
+      <div class="hero-badge">🏆 Department of CSE (Artificial Intelligence & Machine Learning)</div>
+      <h1 class="hero-title"><span>Empowering the Future with</span> <span>Artificial Intelligence</span> & <span>Machine Learning</span></h1>
+      <p class="hero-subtitle">Connecting students, innovators, and industry leaders to explore, build, and shape the future of intelligent technology.<br>Dr. Mahalingam College of Engineering and Technology</p>
+      <div class="hero-cta">
+        <a href="#about-department" class="btn btn-primary btn-lg">Explore Department</a>
+        <a href="pages/innovial.html" class="btn btn-secondary btn-lg">✨ Innoviyal Association</a>
+        <a href="pages/team.html" class="btn btn-secondary btn-lg">Meet Our Team</a>
+      </div>
+    </div>
+
+    <nav class="hero-nav" aria-label="Hero slide navigation"></nav>
+
+
+  </section>
+
+<main>
+  <!-- ========== ANNOUNCEMENT TICKER ========== -->
+  <div class="announcement-ticker" id="ticker">
+    <div class="ticker-track"></div>
+  </div>
+
+  <!-- ========== ABOUT MCET ========== -->
+  <section class="section" id="about-college" style="background:linear-gradient(135deg,var(--gray-50),var(--white))">
+    <div class="container">
+      <div class="section-header animate-on-scroll">
+        <h2>About MCET</h2>
+        <p>Dr. Mahalingam College of Engineering and Technology — A Premier Institution</p>
+      </div>
+      <div style="display:flex;gap:var(--space-8);align-items:center;flex-wrap:wrap">
+        <div style="flex:1;min-width:300px">
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:var(--space-3);margin-bottom:var(--space-6)">
+            <img src="assets/mcet/MCET01.jpg.jpeg" alt="MCET Campus" style="border-radius:var(--radius-lg);height:200px;object-fit:cover;width:100%" loading="lazy">
+            <img src="assets/mcet/MCET02.jpg.jpeg" alt="MCET Library" style="border-radius:var(--radius-lg);height:200px;object-fit:cover;width:100%" loading="lazy">
+            <img src="assets/mcet/MCET%20COLLEGE%20PHOTO.jpg" alt="MCET Lab" style="border-radius:var(--radius-lg);height:200px;object-fit:cover;width:100%" loading="lazy">
+            <img src="assets/mcet/MCET%20NAACHIMUTHU.jpg" alt="MCET Activities" style="border-radius:var(--radius-lg);height:200px;object-fit:cover;width:100%" loading="lazy">
+          </div>
+        </div>
+        <div style="flex:1;min-width:300px">
+          <h3 style="font-size:var(--fs-2xl);margin-bottom:var(--space-4)">A Legacy of Excellence</h3>
+          <p style="color:var(--gray-600);line-height:var(--lh-relaxed);margin-bottom:var(--space-4)">
+            Established in 1998, Dr. Mahalingam College of Engineering and Technology (MCET) is an autonomous institution 
+            affiliated with Anna University, Chennai. The college is accredited by NAAC with 'A++' Grade and several programs 
+            are accredited by NBA.
+          </p>
+          <p style="color:var(--gray-600);line-height:var(--lh-relaxed);margin-bottom:var(--space-6)">
+            The Department of CSE (AI & ML) offers state-of-the-art infrastructure, experienced faculty, and 
+            industry-aligned curriculum to prepare students for careers in artificial intelligence and machine learning.
+          </p>
+          <div style="display:flex;gap:var(--space-4);flex-wrap:wrap">
+            <div style="background:var(--primary-bg);padding:var(--space-3) var(--space-5);border-radius:var(--radius-lg);text-align:center">
+              <div style="font-size:var(--fs-2xl);font-weight:var(--fw-bold);color:var(--primary)">NAAC</div>
+              <div style="font-size:var(--fs-xs);color:var(--gray-500)">A++ Grade</div>
+            </div>
+            <div style="background:var(--primary-bg);padding:var(--space-3) var(--space-5);border-radius:var(--radius-lg);text-align:center">
+              <div style="font-size:var(--fs-2xl);font-weight:var(--fw-bold);color:var(--primary)">NBA</div>
+              <div style="font-size:var(--fs-xs);color:var(--gray-500)">Accredited</div>
+            </div>
+            <div style="background:var(--primary-bg);padding:var(--space-3) var(--space-5);border-radius:var(--radius-lg);text-align:center">
+              <div style="font-size:var(--fs-2xl);font-weight:var(--fw-bold);color:var(--primary)">98%</div>
+              <div style="font-size:var(--fs-xs);color:var(--gray-500)">Placement</div>
+            </div>
+          </div>
+          <a href="https://www.drmcet.ac.in" target="_blank" class="btn btn-outline mt-6">Visit College Website →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== ABOUT THE ASSOCIATION ========== -->
+  <section class="section section-dark" id="about-department" style="position:relative;overflow:hidden">
+    <div style="position:absolute;top:-50%;right:-30%;width:80%;height:80%;background:radial-gradient(circle,rgba(249,115,22,0.08),transparent 70%);pointer-events:none"></div>
+    <div class="container">
+      <div class="section-header animate-on-scroll">
+        <h2>Who We Are</h2>
+        <p>The Department of CSE (AI & ML) — Dr. Mahalingam College of Engineering and Technology</p>
+      </div>
+      <div style="text-align:center;max-width:800px;margin:0 auto var(--space-12)">
+        <p style="font-size:var(--fs-lg);line-height:var(--lh-relaxed);color:var(--gray-300)">
+          The Department of Computer Science & Engineering (Artificial Intelligence & Machine Learning) at Dr. Mahalingam College of Engineering and Technology (MCET) is a premier academic department dedicated to shaping the next generation of AI professionals. Established with a vision to excel in AI and ML education, the department offers a comprehensive curriculum that blends theoretical foundations with hands-on practical experience. Our state-of-the-art laboratories, experienced faculty, and industry-aligned programs ensure that students are well-prepared for careers in the rapidly evolving field of artificial intelligence.
+        </p>
+        <div style="margin-top:var(--space-6)">
+          <p style="font-size:var(--fs-xl);font-weight:var(--fw-semibold);color:var(--primary-light);font-style:italic">
+            "Empowering the Future with Artificial Intelligence & Machine Learning"<br>
+            <span style="font-size:var(--fs-md);opacity:0.8">Building Tomorrow's AI Leaders Today</span>
+          </p>
+        </div>
+      </div>
+      <div class="grid grid-4 stagger-children">
+        <div class="glass-card">
+          <div class="card-icon">🎯</div>
+          <h3>Our Vision</h3>
+          <p>To become a leading department that inspires future innovators, promotes cutting-edge research, and drives meaningful advancements in Artificial Intelligence and Machine Learning education and application.</p>
+        </div>
+        <div class="glass-card">
+          <div class="card-icon">🚀</div>
+          <h3>Our Mission</h3>
+          <p>To provide quality education in AI & ML through an industry-aligned curriculum, foster research and innovation, develop professional competencies, and nurture ethical, socially responsible AI professionals.</p>
+        </div>
+        <div class="glass-card">
+          <div class="card-icon">💡</div>
+          <h3>Academic Excellence</h3>
+          <p>The department offers a rigorous B.E. program in CSE (AI & ML) with courses covering machine learning, deep learning, natural language processing, computer vision, data science, and more. Our curriculum is regularly updated to reflect the latest industry trends and research developments.</p>
+        </div>
+        <div class="glass-card">
+          <div class="card-icon">🏭</div>
+          <h3>Industry Collaboration</h3>
+          <p>We maintain strong partnerships with leading organizations like IBM, TCS, Infosys, and EPAM. Through MoUs, guest lectures, internships, and placement drives, students gain invaluable industry exposure. Our dedicated placement cell ensures excellent career opportunities.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== STATISTICS COUNTERS ========== -->
+  <section class="section stats-section" style="background:linear-gradient(135deg,var(--primary),var(--primary-dark));color:var(--white)">
+    <div class="container">
+      <div class="section-header">
+        <h2 style="color:var(--white)">By the Numbers</h2>
+        <p style="color:rgba(255,255,255,0.7)">Our department's journey in numbers</p>
+      </div>
+      <div class="grid grid-6" style="grid-template-columns:repeat(auto-fit,minmax(150px,1fr));text-align:center;gap:var(--space-6)">
+        <div class="animate-on-scroll">
+          <div class="stat-counter" data-target="250" data-suffix="+" style="font-size:var(--fs-4xl);font-weight:var(--fw-extrabold);margin-bottom:var(--space-2)">0+</div>
+          <div style="font-size:var(--fs-sm);opacity:0.8">Students</div>
+        </div>
+        <div class="animate-on-scroll">
+          <div class="stat-counter" data-target="15" data-suffix="+" style="font-size:var(--fs-4xl);font-weight:var(--fw-extrabold);margin-bottom:var(--space-2)">0+</div>
+          <div style="font-size:var(--fs-sm);opacity:0.8">Faculty</div>
+        </div>
+        <div class="animate-on-scroll">
+          <div class="stat-counter" data-target="30" data-suffix="+" style="font-size:var(--fs-4xl);font-weight:var(--fw-extrabold);margin-bottom:var(--space-2)">0+</div>
+          <div style="font-size:var(--fs-sm);opacity:0.8">Events</div>
+        </div>
+        <div class="animate-on-scroll">
+          <div class="stat-counter" data-target="10" data-suffix="+" style="font-size:var(--fs-4xl);font-weight:var(--fw-extrabold);margin-bottom:var(--space-2)">0+</div>
+          <div style="font-size:var(--fs-sm);opacity:0.8">Hackathons</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== HOME PAGE PLACEMENT SECTION ========== -->
+  <section class="section" id="home-placements" style="background:linear-gradient(135deg,var(--secondary),var(--secondary-dark));position:relative;overflow:hidden">
+    <div style="position:absolute;top:-50%;left:-20%;width:60%;height:80%;background:radial-gradient(circle,rgba(249,115,22,0.08),transparent 70%);pointer-events:none"></div>
+    <div class="container" style="position:relative;z-index:1">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:var(--space-12);align-items:center">
+        <div>
+          <div class="hero-badge" style="margin-bottom:var(--space-4)">🏆 CSE (AI & ML) Placements</div>
+          <h2 style="font-size:var(--fs-4xl);color:var(--white);margin-bottom:var(--space-4);line-height:1.2">
+            Building <span style="background:linear-gradient(135deg,var(--primary),var(--primary-light));-webkit-background-clip:text;-webkit-text-fill-color:transparent">Careers</span> of Tomorrow
+          </h2>
+          <p style="color:var(--gray-300);font-size:var(--fs-lg);line-height:var(--lh-relaxed);margin-bottom:var(--space-6)">
+            Our dedicated placement cell works tirelessly to connect students with top recruiters. With a highest package of 13 LPA and an average package of 4.2 LPA, our students have secured positions at leading companies like EPAM, Capgemini, Huawei, and more.
+          </p>
+          <div class="section-header animate-on-scroll" style="margin-bottom:var(--space-6)">
+            <h2 style="color:var(--white)">2025–26 Placement Records</h2>
+          </div>
+          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:var(--space-4);margin-bottom:var(--space-6)">
+            <div class="glass-card" style="text-align:center;padding:var(--space-5)">
+              <div style="font-size:var(--fs-2xl);font-weight:var(--fw-extrabold);color:var(--primary)">13 LPA</div>
+              <div style="font-size:var(--fs-xs);color:var(--gray-400)">Highest Package</div>
+            </div>
+            <div class="glass-card" style="text-align:center;padding:var(--space-5)">
+              <div style="font-size:var(--fs-2xl);font-weight:var(--fw-extrabold);color:var(--primary)">4.2 LPA</div>
+              <div style="font-size:var(--fs-xs);color:var(--gray-400)">Average Package</div>
+            </div>
+            <div class="glass-card" style="text-align:center;padding:var(--space-5)">
+              <div style="font-size:var(--fs-2xl);font-weight:var(--fw-extrabold);color:var(--primary)">25+</div>
+              <div style="font-size:var(--fs-xs);color:var(--gray-400)">Students Placed</div>
+            </div>
+            <div class="glass-card" style="text-align:center;padding:var(--space-5)">
+              <div style="font-size:var(--fs-2xl);font-weight:var(--fw-extrabold);color:var(--primary)">6+</div>
+              <div style="font-size:var(--fs-xs);color:var(--gray-400)">Top Recruiters</div>
+            </div>
+          </div>
+          <a href="pages/placement.html" class="btn btn-primary btn-lg">View Placements →</a>
+        </div>
+        <div style="text-align:center">
+          <div style="width:100%;max-width:400px;margin:0 auto;border-radius:var(--radius-2xl);overflow:hidden;box-shadow:var(--shadow-2xl);transform:perspective(1000px) rotateY(-5deg);transition:transform var(--transition-base);animation:floatCard 4s ease-in-out infinite">
+            <img src="assets/placement/placement-overview.jpg" alt="MCET Placements" style="width:100%;height:auto;display:block;object-fit:cover">
+          </div>
+          <div style="margin-top:var(--space-4);display:flex;gap:var(--space-3);justify-content:center">
+            <span style="background:rgba(249,115,22,0.2);color:var(--primary);padding:var(--space-1) var(--space-3);border-radius:var(--radius-full);font-size:var(--fs-xs);font-weight:var(--fw-medium)">EPAM</span>
+            <span style="background:rgba(249,115,22,0.2);color:var(--primary);padding:var(--space-1) var(--space-3);border-radius:var(--radius-full);font-size:var(--fs-xs);font-weight:var(--fw-medium)">Capgemini</span>
+            <span style="background:rgba(249,115,22,0.2);color:var(--primary);padding:var(--space-1) var(--space-3);border-radius:var(--radius-full);font-size:var(--fs-xs);font-weight:var(--fw-medium)">Huawei</span>
+            <span style="background:rgba(249,115,22,0.2);color:var(--primary);padding:var(--space-1) var(--space-3);border-radius:var(--radius-full);font-size:var(--fs-xs);font-weight:var(--fw-medium)">+3</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== INNOVIYAL ASSOCIATION HIGHLIGHT ========== -->
+  <section class="section" id="innovial-spotlight" style="background:linear-gradient(135deg, var(--secondary), var(--secondary-dark));position:relative;overflow:hidden">
+    <div style="position:absolute;top:-30%;right:-20%;width:60%;height:80%;background:radial-gradient(circle,rgba(249,115,22,0.1),transparent 70%);pointer-events:none"></div>
+    <div class="container" style="position:relative;z-index:1">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:var(--space-12);align-items:center">
+        <div>
+          <div class="hero-badge" style="margin-bottom:var(--space-4)">✨ Innoviyal — AI & ML Association</div>
+          <h2 style="font-size:var(--fs-4xl);color:var(--white);margin-bottom:var(--space-4);line-height:1.2">
+            Empower. Innovate. <span style="background:linear-gradient(135deg,var(--primary),var(--primary-light));-webkit-background-clip:text;-webkit-text-fill-color:transparent">Lead.</span>
+          </h2>
+          <p style="color:var(--gray-300);font-size:var(--fs-lg);line-height:var(--lh-relaxed);margin-bottom:var(--space-6)">
+            Innovate. Learn. Lead. — The AI & ML Association is a collaborative community dedicated to advancing knowledge, 
+            fostering innovation, and creating impactful AI-driven solutions. Inspiring excellence through technical learning, 
+            hands-on projects, research, workshops, and industry collaboration.
+          </p>
+          <div style="display:flex;gap:var(--space-4);flex-wrap:wrap">
+            <a href="pages/innovial.html" class="btn btn-primary btn-lg innovial-pulse-btn" style="animation:innoviyalPulse 2s ease infinite">🚀 Explore Innoviyal</a>
+            <a href="pages/innovial.html#inauguration" class="btn btn-secondary btn-lg">📅 Our Journey</a>
+          </div>
+        </div>
+        <div style="text-align:center">            <div style="width:280px;height:280px;margin:0 auto;border-radius:50%;background:radial-gradient(circle,rgba(249,115,22,0.2),transparent 70%);display:flex;align-items:center;justify-content:center;animation:pulseGlow 3s ease infinite">
+            <img src="assets/logo/innoviyal-logo.png" alt="Innoviyal" style="width:180px;height:180px;object-fit:contain;">
+          </div>
+          <div style="margin-top:var(--space-6);display:flex;gap:var(--space-6);justify-content:center">
+            <div style="text-align:center">
+              <div style="font-size:var(--fs-2xl);font-weight:var(--fw-bold);color:var(--primary)">Building</div>
+              <div style="font-size:var(--fs-xs);color:var(--gray-400)">Tomorrow's AI Leaders Today</div>
+            </div>
+            <div style="text-align:center">
+              <div style="font-size:var(--fs-2xl);font-weight:var(--fw-bold);color:var(--primary)">Innovate</div>
+              <div style="font-size:var(--fs-xs);color:var(--gray-400)">Learn • Lead</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== HOD MESSAGE FOR INNOVIYAL ===== -->
+  <section class="section section-dark">
+    <div class="container">
+      <div class="section-header animate-on-scroll">
+        <h2 style="color:var(--white)">From the <span style="color:var(--primary)">HOD's Desk</span></h2>
+        <p style="color:var(--gray-300)">A message for Innoviyal — The New Student Association</p>
+      </div>
+      <div class="premium-card animate-on-scroll" style="max-width:800px;margin:0 auto;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1)">
+        <div class="premium-card-body">
+          <div style="display:flex;gap:var(--space-6);align-items:center;flex-wrap:wrap;justify-content:center">
+            <div style="text-align:center;flex-shrink:0">
+              <img src="assets/hod/hod-photo.jpg" alt="HOD" style="width:150px;height:150px;border-radius:50%;object-fit:cover;border:5px solid var(--primary)" onerror="this.src='assets/hod/hod-photo.jpeg'">
+              <div style="margin-top:var(--space-2);font-weight:var(--fw-semibold);font-size:var(--fs-sm);color:var(--white)">Dr. Vivekanandan P</div>
+              <div style="color:var(--primary);font-size:var(--fs-xs)">PROFESSOR &amp; HOD (I/C)</div>
+            </div>
+            <div style="flex:1;min-width:250px">
+              <div style="font-size:36px;color:var(--primary);opacity:0.2;font-family:Georgia,serif;line-height:0.6">"</div>
+              <p style="font-style:italic;color:var(--gray-300);line-height:var(--lh-relaxed);font-size:var(--fs-md)">
+                It gives me immense pride and joy to announce the launch of our department's new student association 
+                — <strong>Innoviyal</strong> — set to begin its journey in August 2025. Innoviyal is more than just an 
+                association; it is a vision brought to life by the collective passion, creativity, and dedication of 
+                our students.
+              </p>
+              <p style="font-style:italic;color:var(--gray-300);line-height:var(--lh-relaxed);margin-top:var(--space-3);font-size:var(--fs-md)">
+                With a dynamic team of 39 committee members, Innoviyal aims to be the heartbeat of innovation and 
+                excellence within our department. It will serve as a vibrant platform where academic rigor meets 
+                inventive thinking — encouraging students to explore bold ideas, engage in impactful research, and 
+                participate in a variety of enriching academic and extracurricular initiatives.
+              </p>
+              <p style="font-style:italic;color:var(--gray-300);line-height:var(--lh-relaxed);margin-top:var(--space-3);font-size:var(--fs-md)">
+                I am confident that Innoviyal will grow into a thriving hub of collaboration, inspiration, and leadership. The foundation laid by this talented group of students will undoubtedly shape a legacy of achievements and elevate the reputation of our department in the years to come.
+              </p>
+              <p style="font-style:italic;color:var(--gray-300);line-height:var(--lh-relaxed);margin-top:var(--space-3);font-size:var(--fs-md)">
+                To all the founding members — your enthusiasm and commitment are the pillars upon which Innoviyal stands. I wholeheartedly extend my best wishes as you embark on this exciting journey. May this be the beginning of something truly remarkable.
+              </p>
+              <p style="font-style:italic;color:var(--gray-300);margin-top:var(--space-3);font-size:var(--fs-md)">
+                Let us <strong style="color:var(--primary)">innovate, inspire, and lead — together.</strong>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== LATEST NEWS ========== -->
+  <section class="section" id="news">
+    <div class="container">
+      <div class="section-header animate-on-scroll">
+        <h2>Latest News</h2>
+        <p>Stay updated with the latest from Innoviyal and the department</p>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:var(--space-6)">
+        <div class="achievement-card animate-on-scroll">
+          <div class="ach-icon">📰</div>
+          <div class="ach-content">
+            <h4>Symposium 2026 Registrations Open</h4>
+            <p style="font-size:var(--fs-sm);color:var(--gray-400);margin-bottom:var(--space-2)">March 1, 2026</p>
+            <p>Registrations for the annual AI Symposium are now open. Submit your papers by March 10.</p>
+          </div>
+        </div>
+        <div class="achievement-card animate-on-scroll">
+          <div class="ach-icon">🏆</div>
+          <div class="ach-content">
+            <h4>Team Innoviyal Wins Hackathon</h4>
+            <p style="font-size:var(--fs-sm);color:var(--gray-400);margin-bottom:var(--space-2)">Feb 25, 2026</p>
+            <p>Our team secured first place at the state-level AI Hackathon conducted by Anna University.</p>
+          </div>
+        </div>
+        <div class="achievement-card animate-on-scroll">
+          <div class="ach-icon">🤝</div>
+          <div class="ach-content">
+            <h4>MoU Signed with TCS</h4>
+            <p style="font-size:var(--fs-sm);color:var(--gray-400);margin-bottom:var(--space-2)">Feb 20, 2026</p>
+            <p>Department signed a new MoU with TCS for research collaboration and student internships.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== TIMELINE ========== -->
+  <section class="section" id="timeline" style="background:linear-gradient(135deg,var(--gray-50),var(--white))">
+    <div class="container">
+      <div class="section-header animate-on-scroll">
+        <h2>Our <span style="color:var(--primary)">Journey</span></h2>
+        <p>Key milestones in the department's history</p>
+      </div>
+      <div style="position:relative;max-width:800px;margin:0 auto;padding-left:40px">
+        <div style="position:absolute;left:15px;top:0;bottom:0;width:3px;background:var(--primary);border-radius:var(--radius-full)"></div>
+        <div style="position:relative;margin-bottom:var(--space-8);padding-left:var(--space-6)">
+          <div style="position:absolute;left:-33px;top:4px;width:20px;height:20px;border-radius:50%;background:var(--primary);border:4px solid var(--primary-bg)"></div>
+          <div class="premium-card" style="padding:var(--space-5)">
+            <div style="font-size:var(--fs-xs);color:var(--primary);font-weight:var(--fw-bold)">2022</div>
+            <h4 style="font-size:var(--fs-md);margin-bottom:var(--space-1)">Department Established</h4>
+            <p style="font-size:var(--fs-sm);color:var(--gray-500)">The Department of CSE (AI & ML) was established with an initial intake of 60 students.</p>
+          </div>
+        </div>
+        <div style="position:relative;margin-bottom:var(--space-8);padding-left:var(--space-6)">
+          <div style="position:absolute;left:-33px;top:4px;width:20px;height:20px;border-radius:50%;background:var(--primary);border:4px solid var(--primary-bg)"></div>
+          <div class="premium-card" style="padding:var(--space-5)">
+            <div style="font-size:var(--fs-xs);color:var(--primary);font-weight:var(--fw-bold)">2024</div>
+            <h4 style="font-size:var(--fs-md);margin-bottom:var(--space-1)">First Graduating Batch</h4>
+            <p style="font-size:var(--fs-sm);color:var(--gray-500)">The first batch of AIML students graduated with excellent placement records.</p>
+          </div>
+        </div>
+        <div style="position:relative;margin-bottom:var(--space-8);padding-left:var(--space-6)">
+          <div style="position:absolute;left:-33px;top:4px;width:20px;height:20px;border-radius:50%;background:var(--primary);border:4px solid var(--primary-bg)"></div>
+          <div class="premium-card" style="padding:var(--space-5)">
+            <div style="font-size:var(--fs-xs);color:var(--primary);font-weight:var(--fw-bold)">2025</div>
+            <h4 style="font-size:var(--fs-md);margin-bottom:var(--space-1)">Innoviyal Association Launch</h4>
+            <p style="font-size:var(--fs-sm);color:var(--gray-500)">The Innoviyal student association was inaugurated to foster innovation and leadership.</p>
+          </div>
+        </div>
+        <div style="position:relative;padding-left:var(--space-6)">
+          <div style="position:absolute;left:-33px;top:4px;width:20px;height:20px;border-radius:50%;background:var(--primary);border:4px solid var(--primary-bg)"></div>
+          <div class="premium-card" style="padding:var(--space-5)">
+            <div style="font-size:var(--fs-xs);color:var(--primary);font-weight:var(--fw-bold)">2026</div>
+            <h4 style="font-size:var(--fs-md);margin-bottom:var(--space-1)">25+ Students Placed at 4+ LPA</h4>
+            <p style="font-size:var(--fs-sm);color:var(--gray-500)">Department achieves highest package of 13 LPA with top recruiters.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== QUICK LINKS ========== -->
+  <section class="section section-gray" id="quick-links">
+    <div class="container">
+      <div class="section-header animate-on-scroll">
+        <h2>Quick Links</h2>
+        <p>Everything you need in one place</p>
+      </div>
+      <div class="grid grid-4 stagger-children" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))">
+        <a href="pages/downloads.html" class="glass-card glass-card-dark" style="text-decoration:none;cursor:pointer">
+          <div class="card-icon" style="font-size:32px">🎓</div>
+          <h3 style="font-size:var(--fs-md)">Student Corner</h3>
+          <p>Access syllabus, timetable, materials, and exam dates</p>
+        </a>
+        <a href="pages/magazine.html" class="glass-card glass-card-dark" style="text-decoration:none;cursor:pointer">
+          <div class="card-icon" style="font-size:32px">📖</div>
+          <h3 style="font-size:var(--fs-md)">AIML Magazine</h3>
+          <p>Read the latest edition of our department magazine</p>
+        </a>
+        <a href="pages/downloads.html" class="glass-card glass-card-dark" style="text-decoration:none;cursor:pointer">
+          <div class="card-icon" style="font-size:32px">📥</div>
+          <h3 style="font-size:var(--fs-md)">Downloads</h3>
+          <p>Access study materials, timetables, and resources</p>
+        </a>
+        <a href="pages/placement.html" class="glass-card glass-card-dark" style="text-decoration:none;cursor:pointer">
+          <div class="card-icon" style="font-size:32px">💼</div>
+          <h3 style="font-size:var(--fs-md)">Placement Prep</h3>
+          <p>Curated resources for interview and placement preparation</p>
+        </a>
+      </div>
+    </div>
+  </section>
+
+
+
+  <!-- ========== INDUSTRY PARTNERS ========== -->
+  <section class="section section-gray" id="partners">
+    <div class="container">
+      <div class="section-header animate-on-scroll">
+        <h2>Our Recruiters & Partners</h2>
+        <p>Industry leaders who partner with us for placements, research, and innovation</p>
+      </div>
+      <div class="partner-carousel">
+        <div class="partner-track"></div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+  <!-- ========== FOOTER ========== -->
+  <footer style="background:var(--secondary-dark);color:var(--gray-300);padding:var(--space-16) 0 0">
+    <div class="container">
+      <div style="display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:var(--space-8);margin-bottom:var(--space-12)">
+        <!-- Brand -->
+        <div>
+          <div class="flex-center" style="justify-content:flex-start;gap:var(--space-3);margin-bottom:var(--space-4)">
+            <img src="assets/logo/mcet-logo.png" alt="MCET" style="height:48px" onerror="this.style.display='none'">
+            <div>
+              <div style="font-weight:var(--fw-bold);font-size:var(--fs-xl);color:var(--white)">MCET</div>
+              <div style="font-size:var(--fs-xs);color:var(--gray-400);letter-spacing:1px">Dr. Mahalingam College of Engineering and Technology.</div>
+            </div>
+          </div>
+          <p style="font-size:var(--fs-sm);line-height:var(--lh-relaxed);margin-bottom:var(--space-4)">
+            Official student association of the Department of Computer Science and Engineering (Artificial Intelligence and Machine Learning) 
+            at <span style="white-space:nowrap">Dr. Mahalingam College of Engineering and Technology</span>.
+          </p>
+          <div style="display:flex;gap:var(--space-3)">
+            <a href="https://www.instagram.com/innoviyal.mcet?igsh=NGcyNGwzYXUydjJh" target="_blank" style="width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;transition:all var(--transition-fast)" aria-label="Instagram">
+              <i class="fab fa-instagram"></i>
+            </a>
+            <a href="https://www.linkedin.com/in/inno%E0%AE%B5%E0%AE%BF%E0%AE%AF%E0%AE%B2%E0%AF%8D-aiml-01a743330?utm_source=share_via&utm_content=profile&utm_medium=member_android" target="_blank" style="width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;transition:all var(--transition-fast)" aria-label="LinkedIn">
+              <i class="fab fa-linkedin-in"></i>
+            </a>
+            <a href="https://drmcet.ac.in/" target="_blank" style="width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;transition:all var(--transition-fast)" aria-label="College Website">
+              <i class="fas fa-globe"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- Quick Links -->
+        <div>
+          <h4 style="color:var(--white);margin-bottom:var(--space-4);font-size:var(--fs-md)">Quick Links</h4>
+          <ul style="display:flex;flex-direction:column;gap:var(--space-2)">
+            <li><a href="/" style="font-size:var(--fs-sm);transition:color var(--transition-fast)">Home</a></li>
+            <li><a href="pages/aiml-about.html" style="font-size:var(--fs-sm);transition:color var(--transition-fast)">About AIML</a></li>
+            <li><a href="pages/team.html" style="font-size:var(--fs-sm);transition:color var(--transition-fast)">Team</a></li>
+            <li><a href="pages/events.html" style="font-size:var(--fs-sm);transition:color var(--transition-fast)">Events</a></li>
+            <li><a href="pages/gallery.html" style="font-size:var(--fs-sm);transition:color var(--transition-fast)">Rank Holders</a></li>
+            <li><a href="pages/contact.html" style="font-size:var(--fs-sm);transition:color var(--transition-fast)">Contact</a></li>
+          </ul>
+        </div>
+
+        <!-- Quick Links -->
+        <div>
+          <h4 style="color:var(--white);margin-bottom:var(--space-4);font-size:var(--fs-md)">Department</h4>
+          <ul style="display:flex;flex-direction:column;gap:var(--space-2)">
+            <li><a href="pages/aiml-about.html" style="font-size:var(--fs-sm)">About AIML</a></li>
+            <li><a href="pages/innovial.html" style="font-size:var(--fs-sm)">Innoviyal Association</a></li>
+            <li><a href="pages/team.html" style="font-size:var(--fs-sm)">Faculty & Team</a></li>
+            <li><a href="pages/events.html" style="font-size:var(--fs-sm)">Events</a></li>
+            <li><a href="pages/downloads.html" style="font-size:var(--fs-sm)">Downloads</a></li>
+            <li><a href="pages/placement.html" style="font-size:var(--fs-sm)">Placement Prep</a></li>
+          </ul>
+        </div>
+
+        <!-- Contact -->
+        <div>
+          <h4 style="color:var(--white);margin-bottom:var(--space-4);font-size:var(--fs-md)">Contact</h4>
+          <ul style="display:flex;flex-direction:column;gap:var(--space-3)">
+            <li style="font-size:var(--fs-sm);display:flex;gap:var(--space-2);align-items:flex-start">
+              <span>📍</span>
+              <span>Dept. of CSE (AI & ML), MCET, Pollachi - 642003</span>
+            </li>
+            <li style="font-size:var(--fs-sm);display:flex;gap:var(--space-2)">
+              <span>📧</span>
+              <a href="mailto:hod_ai-ml@drmcet.ac.in">hod_ai-ml@drmcet.ac.in</a>
+            </li>
+            <li style="font-size:var(--fs-sm);display:flex;gap:var(--space-2)">
+              <span>📞</span>
+              <span>+91 9965511155</span>
+            </li>
+            <li style="font-size:var(--fs-sm);display:flex;gap:var(--space-2)">
+              <span>🌐</span>
+              <a href="https://drmcet.ac.in/" target="_blank">https://drmcet.ac.in/</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div style="border-top:1px solid rgba(255,255,255,0.1);padding:var(--space-6) 0;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:var(--space-4)">
+        <p style="font-size:var(--fs-sm)">© 2026 CSE (AI & ML) — Dr. Mahalingam College of Engineering and Technology. All rights reserved.</p>
+        <p style="font-size:var(--fs-xs);color:var(--gray-500)">"Committed to Excellence in Artificial Intelligence and Machine Learning."</p>
+        <p style="font-size:var(--fs-xs);color:var(--gray-500);margin-top:var(--space-2)">Advancing Knowledge • Driving Innovation • Creating Impact</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ========== HANDLED BY ========== -->
+  <section class="handled-by" style="background:var(--secondary-dark);padding:var(--space-12) 0 var(--space-8);border-top:1px solid rgba(255,255,255,0.06)">
+    <div class="container">
+      <div class="section-header" style="margin-bottom:var(--space-10)">
+        <h2 style="color:var(--white)">Handled <span style="color:var(--primary)">By</span></h2>
+        <p style="color:var(--gray-400)">Built with passion by the Innoviyal Technical Team</p>
+      </div>
+      <div class="handled-by-grid">
+        <div class="handled-by-card">
+          <div class="handled-by-card-inner">
+            <h4>THOMAS EDWIN R</h4>
+            <div class="handled-by-links">
+              <a href="https://github.com/Thomas-Edwin" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
+              <a href="https://www.linkedin.com/in/thomas-edwin/" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+              <a href="mailto:thomasedwinrte@gmail.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
+            </div>
+          </div>
+        </div>
+        <div class="handled-by-card">
+          <div class="handled-by-card-inner">
+            <h4>RISHI KARTHICK KS</h4>
+            <div class="handled-by-links">
+              <a href="https://github.com/ksrishi31-git" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
+              <a href="https://www.linkedin.com/in/rishi-karthick-ks" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+              <a href="mailto:ksrishi31@gmail.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
+            </div>
+          </div>
+        </div>
+        <div class="handled-by-card">
+          <div class="handled-by-card-inner">
+            <h4>DHANVANTH U</h4>
+            <div class="handled-by-links">
+              <a href="https://github.com/dhanvanthulags-ai" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
+              <a href="https://www.linkedin.com/in/dhanvanthu/" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+              <a href="mailto:dhanvanthulags@gmail.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
+            </div>
+          </div>
+        </div>
+        <div class="handled-by-card">
+          <div class="handled-by-card-inner">
+            <h4>DHARANI DHARAN P</h4>
+            <div class="handled-by-links">
+              <a href="https://github.com/DharaniDharan2709" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
+              <a href="https://www.linkedin.com/in/dharani-dharan-b57119397/" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+              <a href="mailto:dharanidharan2709d@gmail.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <style>
+    .handled-by-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: var(--space-6);
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    .handled-by-card {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: var(--radius-xl);
+      padding: var(--space-6);
+      text-align: center;
+      transition: all var(--transition-base);
+    }
+    .handled-by-card:hover {
+      background: rgba(255,255,255,0.06);
+      border-color: rgba(249,115,22,0.2);
+      transform: translateY(-4px);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.3);
+    }
+    .handled-by-card-inner h4 {
+      color: var(--white);
+      font-size: var(--fs-sm);
+      font-weight: var(--fw-semibold);
+      margin-bottom: var(--space-4);
+      letter-spacing: 0.5px;
+      word-break: break-word;
+    }
+    .handled-by-links {
+      display: flex;
+      justify-content: center;
+      gap: var(--space-3);
+    }
+    .handled-by-links a {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.08);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--gray-300);
+      font-size: 15px;
+      text-decoration: none;
+      transition: all var(--transition-fast);
+    }
+    .handled-by-links a:hover {
+      background: var(--primary);
+      color: var(--white);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(249,115,22,0.3);
+    }
+    @media (max-width: 1024px) {
+      .handled-by-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 640px) {
+      .handled-by-grid { grid-template-columns: 1fr; }
+      .handled-by-card { padding: var(--space-5); }
+    }
+  </style>
+
+  <!-- ========== BACK TO TOP ========== -->
+  <button class="back-to-top" aria-label="Back to top" style="position:fixed;bottom:30px;right:30px;width:48px;height:48px;border-radius:50%;background:var(--primary);color:white;font-size:20px;box-shadow:var(--shadow-lg);z-index:var(--z-sticky);opacity:0;visibility:hidden;transition:all var(--transition-base);display:flex;align-items:center;justify-content:center">
+    ↑
+  </button>
+
+  <!-- ========== SCRIPTS ========== -->
+  <script src="js/api.js"></script>
+  <script src="js/utils.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/loading-screen.js"></script>
+  <script src="js/hero-carousel.js"></script>
+  <script src="js/counter-animation.js"></script>
+  <script src="js/announcement-ticker.js"></script>
+  <script src="js/glass-card.js"></script>
+  <script src="js/team-filter.js"></script>
+
+  <script src="js/partner-carousel.js"></script>
+  <script src="js/main.js"></script>
+
+  <script>
+    // Navbar scroll effect
+    document.addEventListener('DOMContentLoaded', () => {
+      const navbar = document.querySelector('.aiml-navbar');
+      if (navbar) {
+        window.addEventListener('scroll', () => {
+          navbar.classList.toggle('scrolled', window.scrollY > 80);
+        }, { passive: true });
+      }
+      
+      // Mobile menu toggle
+      const toggle = document.querySelector('.aiml-navbar-toggle');
+      const menu = document.querySelector('.aiml-navbar-menu');
+      if(toggle&&menu){toggle.addEventListener('click',()=>{const isOpen=menu.classList.toggle('open');toggle.classList.toggle('active');toggle.setAttribute('aria-expanded',isOpen);document.body.style.overflow=isOpen?'hidden':''});menu.querySelectorAll('a').forEach(link=>{link.addEventListener('click',()=>{menu.classList.remove('open');toggle.classList.remove('active');toggle.setAttribute('aria-expanded','false');document.body.style.overflow=''})})}
+    });
+  
+    // Default team members (used by team-filter.js on team page)
+    window.INNOVIYAL_TEAM_MEMBERS = [
+      { id: 1, name: 'Dr. Vivekanandan P', category: 'FACULTY', roleTitle: 'PROFESSOR & HOD (I/C)', photoUrl: 'https://images.unsplash.com/photo-1568602471122-7832951cc4c5?w=400&q=80' },
+      { id: 2, name: 'Dr. Priya Sharma', category: 'FACULTY', roleTitle: 'Professor', photoUrl: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&q=80' },
+      { id: 3, name: 'Prof. Rahul Verma', category: 'FACULTY', roleTitle: 'Associate Professor', photoUrl: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&q=80' },
+      { id: 4, name: 'Ananya Singh', category: 'ASSOCIATION_CORE', roleTitle: 'President', year: '3rd Year', description: 'Leading Innoviyal with passion and vision.', photoUrl: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&q=80' },
+      { id: 5, name: 'Rohit Patel', category: 'ASSOCIATION_CORE', roleTitle: 'Vice President', year: '3rd Year', description: 'Passionate about AI and ML.', photoUrl: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&q=80' },
+      { id: 6, name: 'Sneha Gupta', category: 'ASSOCIATION_COORDINATOR', roleTitle: 'Event Coordinator', year: '2nd Year', photoUrl: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&q=80' },
+      { id: 7, name: 'Arjun Nair', category: 'ASSOCIATION_CORE', roleTitle: 'Tech Lead', year: '3rd Year', photoUrl: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&q=80' },
+    ];
+
+    // Default announcements
+    window.INNOVIYAL_ANNOUNCEMENTS = [
+      '🎓 Symposium Registration Open — March 15-16, 2026',
+      '💻 Hackathon 2026 Registrations Live — Register Now!',
+      '🤖 Workshop on Generative AI — March 10, 2026',
+      '🏆 AIML Project Expo — Submit Your Projects',
+      '📢 Industrial Visit to TCS — Limited Seats Available',
+      '📚 Magazine Submissions Open — Share Your Articles!',
+    ];
+
+    // Default partners
+    window.INNOVIYAL_PARTNERS = [
+      { name: 'IBM', logo: 'https://upload.wikimedia.org/wikipedia/commons/5/51/IBM_logo.svg' },
+      { name: 'Infosys', logo: 'https://upload.wikimedia.org/wikipedia/commons/9/95/Infosys_logo.svg' },
+      { name: 'TCS', logo: 'https://upload.wikimedia.org/wikipedia/commons/b/b1/Tata_Consultancy_Services_Logo.svg' },
+      { name: 'Zoho', logo: 'https://upload.wikimedia.org/wikipedia/commons/0/0e/Zoho_Corporation_Logo.svg' },
+      { name: 'Accenture', logo: 'https://upload.wikimedia.org/wikipedia/commons/c/cd/Accenture.svg' },
+      { name: 'Cognizant', logo: 'https://upload.wikimedia.org/wikipedia/commons/9/9e/Cognizant_logo_2020.svg' },
+    ];
+  </script>
+</body>
+</html>

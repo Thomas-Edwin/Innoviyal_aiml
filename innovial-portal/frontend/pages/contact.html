@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Contact Us — CSE (AI & ML) | MCET</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="../css/variables.css">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <style>
+    .top-info-bar{background:var(--secondary-dark);color:var(--gray-300);font-size:13px;border-bottom:1px solid rgba(255,255,255,0.06);position:relative;z-index:502}
+    .top-info-bar .container{display:flex;align-items:center;justify-content:space-between;height:56px;gap:var(--space-4)}
+    .top-info-bar-left{display:flex;align-items:center;gap:var(--space-4);flex:1;min-width:0}
+    .top-info-bar-left .top-bar-logo{height:46px;width:auto;flex-shrink:0;transition:all var(--transition-base)}
+    .top-info-bar-left .top-bar-logo:hover{transform:scale(1.05)}
+    .top-bar-text{line-height:1.25;min-width:0}
+    .top-bar-text .college-name{font-size:14px;font-weight:var(--fw-bold);color:var(--white);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;letter-spacing:0.3px}
+    .top-bar-text .dept-subtitle{font-size:12px;color:var(--primary-light);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-weight:var(--fw-medium)}
+    .top-info-bar-right{display:flex;align-items:center;gap:var(--space-6);flex-shrink:0}
+    .counselling-code{display:flex;align-items:center;gap:var(--space-1);font-size:12px;color:var(--gray-300);padding:4px 12px;background:rgba(255,255,255,0.05);border-radius:var(--radius-md);border:1px solid rgba(255,255,255,0.06)}
+    .counselling-code .code-label{font-weight:var(--fw-medium);color:var(--gray-400)}
+    .counselling-code .code-value{font-weight:var(--fw-bold);color:var(--primary);letter-spacing:.5px}
+    .top-social-icons{display:flex;align-items:center;gap:8px}
+    .top-social-icons a{display:flex;align-items:center;justify-content:center;width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,0.08);color:var(--gray-300);text-decoration:none;transition:all var(--transition-fast);font-size:14px}
+    .top-social-icons a:hover{background:var(--primary);color:var(--white);transform:translateY(-2px);box-shadow:0 4px 12px rgba(249,115,22,0.3)}
+    .aiml-navbar{position:sticky;top:0;left:0;right:0;z-index:501;background:#0b1120;border-bottom:1px solid rgba(255,255,255,0.06);transition:all var(--transition-base)}
+    .aiml-navbar.scrolled{background:rgba(11,17,32,0.98);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);box-shadow:0 4px 30px rgba(0,0,0,0.3)}
+    .aiml-navbar .container{display:flex;align-items:center;justify-content:space-between;height:64px}
+    .aiml-navbar-brand{font-family:var(--font-heading);font-size:var(--fs-xl);font-weight:var(--fw-bold);color:var(--white);text-decoration:none;display:flex;align-items:center;gap:var(--space-2);flex-shrink:0}
+    .aiml-navbar-brand .brand-accent{color:var(--primary)}
+    .aiml-navbar-menu{display:flex;align-items:center;gap:4px;list-style:none}
+    .aiml-navbar-link{padding:8px 16px;color:rgba(255,255,255,0.75);font-size:13.5px;font-weight:var(--fw-medium);text-decoration:none;border-radius:var(--radius-md);transition:all var(--transition-fast);white-space:nowrap;letter-spacing:.3px;position:relative}
+    .aiml-navbar-link:hover{color:var(--white);background:rgba(255,255,255,0.07)}
+    .aiml-navbar-link::after{content:'';position:absolute;bottom:2px;left:50%;transform:translateX(-50%) scaleX(0);width:20px;height:2px;background:var(--primary);border-radius:var(--radius-full);transition:transform var(--transition-base)}
+    .aiml-navbar-link:hover::after{transform:translateX(-50%) scaleX(1)}
+    .aiml-navbar-link.active{color:var(--primary-light);background:rgba(249,115,22,0.1)}
+    .aiml-navbar-link.active::after{transform:translateX(-50%) scaleX(1)}
+    .aiml-navbar-toggle{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:var(--space-2)}
+    .aiml-navbar-toggle span{display:block;width:22px;height:2px;background:var(--white);border-radius:2px;transition:all var(--transition-base)}
+    .aiml-navbar-toggle.active span:nth-child(1){transform:rotate(45deg) translate(5px,5px)}
+    .aiml-navbar-toggle.active span:nth-child(2){opacity:0}
+    .aiml-navbar-toggle.active span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px)}
+    @media(max-width:768px){.top-info-bar .container{height:auto;flex-wrap:wrap;padding:8px var(--space-4);gap:6px}
+    .top-bar-text .college-name{font-size:12px}
+    .top-bar-text .dept-subtitle{font-size:11px}
+    .top-info-bar-left .top-bar-logo{height:36px}
+    .counselling-code{font-size:10px;padding:2px 8px}
+    .top-social-icons a{width:28px;height:28px;font-size:12px}
+    .aiml-navbar .container{height:56px}
+    .aiml-navbar-menu{display:none}
+    .aiml-navbar-toggle{display:flex}
+    .aiml-navbar-menu.open{display:flex;position:fixed;top:0;right:0;width:280px;height:100vh;background:#0b1120;flex-direction:column;padding:80px var(--space-6) var(--space-6);gap:var(--space-1);box-shadow:-10px 0 30px rgba(0,0,0,0.4);z-index:500}
+    .aiml-navbar-menu.open .aiml-navbar-link{width:100%;padding:12px 16px;font-size:14px}
+    .aiml-navbar-menu.open .aiml-navbar-link::after{display:none}}
+    /* Contact Page Styles */
+    .contact-info-card{background:var(--white);border-radius:var(--radius-xl);padding:var(--space-6);box-shadow:var(--shadow-card);border:1px solid var(--gray-100);display:flex;gap:var(--space-4);align-items:flex-start;transition:all var(--transition-base)}
+    .contact-info-card:hover{transform:translateY(-2px);box-shadow:var(--shadow-hover)}
+    .contact-info-icon{width:52px;height:52px;min-width:52px;border-radius:var(--radius-lg);background:var(--primary-bg);display:flex;align-items:center;justify-content:center;font-size:24px}
+    .contact-info-card h4{font-size:var(--fs-md);margin-bottom:var(--space-1)}
+    .contact-info-card p{font-size:var(--fs-sm);color:var(--gray-500);line-height:var(--lh-relaxed)}
+    .contact-link{color:var(--primary);font-size:var(--fs-sm);font-weight:var(--fw-medium);text-decoration:none;transition:color var(--transition-fast)}
+    .contact-link:hover{color:var(--primary-dark)}
+    .contact-text{font-size:var(--fs-sm);color:var(--gray-500);font-weight:var(--fw-medium)}
+    .contact-social-link{width:44px;height:44px;border-radius:50%;background:var(--primary-bg);display:flex;align-items:center;justify-content:center;transition:all var(--transition-fast);font-size:20px;text-decoration:none}
+    .contact-social-link:hover{background:var(--primary);transform:translateY(-3px);box-shadow:0 4px 12px rgba(249,115,22,0.3)}
+    .contact-map{border-radius:var(--radius-xl);overflow:hidden;box-shadow:var(--shadow-lg);height:260px;border:1px solid var(--gray-100)}
+    /* Contact form styles */
+    .contact-form-wrapper .form-group{margin-bottom:var(--space-5)}
+    .contact-form-wrapper .form-group label{display:block;font-size:var(--fs-sm);font-weight:var(--fw-semibold);color:var(--secondary);margin-bottom:var(--space-2)}
+    .form-control{width:100%;padding:var(--space-3) var(--space-4);border:2px solid var(--gray-200);border-radius:var(--radius-lg);transition:border-color var(--transition-fast),box-shadow var(--transition-fast);background:var(--white);color:var(--secondary);font-size:var(--fs-sm)}
+    .form-control:focus{border-color:var(--primary);box-shadow:0 0 0 4px rgba(249,115,22,0.1);outline:none}
+    .form-control::placeholder{color:var(--gray-400)}
+    textarea.form-control{resize:vertical;min-height:120px}
+    /* Align form button */
+    .contact-form-wrapper .btn-block{margin-top:var(--space-2)}
+    @media(max-width:768px){
+      .contact-info-card{padding:var(--space-4)}
+      .contact-info-icon{width:44px;height:44px;min-width:44px;font-size:20px}
+      .contact-map{height:200px}
+    }
+    .aiml-navbar-link.innoviyal-nav-highlight,.aiml-navbar-link.innoviyal-nav-highlight:hover,.aiml-navbar-link.innoviyal-nav-highlight.active{background:rgba(249,115,22,0.1);color:#3B82F6;border-radius:var(--radius-md)}
+  </style>
+</head>
+<body>
+  <!-- ===== TOP INFO BAR ===== -->
+  <div class="top-info-bar"><div class="container">
+    <div class="top-info-bar-left">
+      <img src="../assets/logo/mcet-logo.png" alt="MCET" class="top-bar-logo" onerror="this.style.display='none'">
+      <div class="top-bar-text">
+        <div class="college-name">Dr. Mahalingam College of Engineering and Technology</div>
+        <div class="dept-subtitle">Department of CSE (AI & ML)</div>
+      </div>
+    </div>
+    <div class="top-info-bar-right">
+      <div class="counselling-code"><span class="code-label">TNEA Counselling Code: </span><span class="code-value">2706</span></div>
+      <div class="top-social-icons">
+        <a href="https://facebook.com" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+        <a href="https://instagram.com" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+        <a href="https://linkedin.com" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+        <a href="https://youtube.com" target="_blank" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+      </div>
+    </div>
+  </div></div>
+
+  <!-- ===== MAIN NAVBAR ===== -->
+  <nav class="aiml-navbar" role="navigation">
+    <div class="container">
+      <a href="../index.html" class="aiml-navbar-brand"><span class="brand-accent">AI</span><span style="color:var(--gray-300)">&amp;</span><span style="color:var(--white)">ML</span></a>
+      <button class="aiml-navbar-toggle" aria-label="Toggle menu" aria-expanded="false"><span></span><span></span><span></span></button>
+      <ul class="aiml-navbar-menu">
+        <li><a href="../index.html" class="aiml-navbar-link">Home</a></li>
+        <li class="navbar-dropdown">
+          <a href="aiml-about.html" class="aiml-navbar-link">About <span class="arrow">▼</span></a>
+          <ul class="navbar-dropdown-menu">
+            <li><a href="aiml-about.html#what-we-offer" class="navbar-dropdown-link"><span class="dd-icon">📚</span><span class="dd-text"><span class="dd-label">What We Offer</span><span class="dd-desc">Four pillars of AIML education</span></span></a></li>
+            <li><a href="aiml-about.html#peos" class="navbar-dropdown-link"><span class="dd-icon">🎯</span><span class="dd-text"><span class="dd-label">Program Educational Objectives</span><span class="dd-desc">Career &amp; professional accomplishments</span></span></a></li>
+            <li><a href="aiml-about.html#psos" class="navbar-dropdown-link"><span class="dd-icon">⚡</span><span class="dd-text"><span class="dd-label">Program Specific Outcomes</span><span class="dd-desc">Specific outcomes for AIML program</span></span></a></li>
+          </ul>
+        </li>
+        <li><a href="team.html" class="aiml-navbar-link">Team</a></li>
+        <li><a href="events.html" class="aiml-navbar-link">Events</a></li>
+        <li><a href="gallery.html" class="aiml-navbar-link">Rank Holders</a></li>
+        <li><a href="placement.html" class="aiml-navbar-link">Placements</a></li>
+        <li><a href="innovial.html" class="aiml-navbar-link innoviyal-nav-highlight">Innoviyal</a></li>
+        <li><a href="contact.html" class="aiml-navbar-link active">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <section class="page-hero">
+    <div class="container">
+      <div class="breadcrumb"><a href="../index.html">Home</a> / <span>Contact</span></div>
+      <h1><span style="color:var(--primary)">Get in Touch</span></h1>
+      <p>Department of CSE (AI &amp; ML) | Innoviyal Association — We'd love to hear from you</p>
+    </div>
+  </section>
+
+  <main class="section">
+    <div class="container">
+      <div class="section-header" style="margin-bottom:var(--space-10)">
+        <h2>Contact <span style="color:var(--primary)">Information</span></h2>
+        <p>Have a question, suggestion, or want to collaborate? Reach out to us!</p>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:var(--space-8);align-items:start">
+        <!-- Contact Form -->
+        <div style="background:var(--white);border-radius:var(--radius-xl);padding:var(--space-8);box-shadow:var(--shadow-lg);border:1px solid var(--gray-100)">
+          <div style="display:flex;align-items:center;gap:var(--space-3);margin-bottom:var(--space-6)">
+            <div style="width:48px;height:48px;border-radius:var(--radius-lg);background:var(--primary-bg);display:flex;align-items:center;justify-content:center;font-size:24px">✉️</div>
+            <div>
+              <h3 style="margin-bottom:4px">Send us a Message</h3>
+              <p style="font-size:var(--fs-sm);color:var(--gray-500)">We'll get back to you within 24 hours</p>
+            </div>
+          </div>
+          <form id="contact-form" class="contact-form-wrapper" style="max-width:100%;padding:0;box-shadow:none">
+            <div class="form-group">
+              <label>Your Name</label>
+              <input type="text" class="form-control" id="contact-name" required placeholder="Enter your full name">
+            </div>
+            <div class="form-group">
+              <label>Email Address</label>
+              <input type="email" class="form-control" id="contact-email" required placeholder="Enter your email">
+            </div>
+            <div class="form-group">
+              <label>Subject</label>
+              <input type="text" class="form-control" id="contact-subject" required placeholder="What's this about?">
+            </div>
+            <div class="form-group">
+              <label>Message</label>
+              <textarea class="form-control" id="contact-message" rows="5" required placeholder="Write your message here..."></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary btn-lg btn-block" style="padding:var(--space-4)">Send Message <span style="margin-left:var(--space-2)">→</span></button>
+          </form>
+        </div>
+
+        <!-- Contact Info & Map -->
+        <div>
+          <!-- Info Cards -->
+          <div style="display:flex;flex-direction:column;gap:var(--space-4);margin-bottom:var(--space-6)">
+            <div class="contact-info-card">
+              <div class="contact-info-icon">📍</div>
+              <div>
+                <h4>Department Address</h4>
+                <p>Department of CSE (AI &amp; ML), Dr. Mahalingam College of Engineering and Technology, Pollachi - 642003</p>
+              </div>
+            </div>
+
+
+            
+            <div class="contact-info-card">
+              <div class="contact-info-icon">📞</div>
+              <div>
+                <h4>Phone</h4>
+                <span class="contact-text">+91 9965511155</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Social Links + Map Row -->
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:var(--space-4);margin-bottom:var(--space-6)">
+            <div class="contact-info-card">
+              <h4 style="margin-bottom:var(--space-4)">Follow Us</h4>
+              <div class="top-social-icons">
+                <a href="https://www.instagram.com/innoviyal.mcet?igsh=NGcyNGwzYXUydjJh" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="https://www.linkedin.com/in/inno%E0%AE%B5%E0%AE%BF%E0%AE%AF%E0%AE%B2%E0%AF%8D-aiml-01a743330?utm_source=share_via&utm_content=profile&utm_medium=member_android" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                <a href="https://drmcet.ac.in/" target="_blank" aria-label="College Website"><i class="fas fa-globe"></i></a>
+              </div>
+            </div>
+            
+            <div class="contact-info-card" style="display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center">
+              <div style="font-size:36px;margin-bottom:var(--space-2)">🌐</div>
+              <h4 style="margin-bottom:var(--space-1)">College Website</h4>
+              <a href="https://drmcet.ac.in/" target="_blank" class="contact-link" style="font-size:var(--fs-sm)">https://drmcet.ac.in/</a>
+            </div>
+          </div>
+
+          <!-- Google Map -->
+          <div class="contact-map">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3916.5!2d77.0!3d10.6!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTDCsDM2JzEwLjAiTiA3N8KwMDAnMDAuMCJF!5e0!3m2!1sen!2sin!4v1" width="100%" height="100%" style="border:0" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer style="background:var(--secondary-dark);color:var(--gray-300);padding:var(--space-8) 0">
+    <div class="container text-center">
+      <p>© 2026 CSE (AI & ML) — MCET. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- ========== HANDLED BY ========== -->
+  <section class="handled-by" style="background:var(--secondary-dark);padding:var(--space-12) 0 var(--space-8);border-top:1px solid rgba(255,255,255,0.06)">
+    <div class="container">
+      <div class="section-header" style="margin-bottom:var(--space-10)">
+        <h2 style="color:var(--white)">Handled <span style="color:var(--primary)">By</span></h2>
+        <p style="color:var(--gray-400)">Built with passion by the Innoviyal Technical Team</p>
+      </div>
+      <div class="handled-by-grid">
+        <div class="handled-by-card">
+          <div class="handled-by-card-inner">
+            <h4>THOMAS EDWIN R</h4>
+            <div class="handled-by-links">
+              <a href="https://github.com/Thomas-Edwin" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
+              <a href="https://www.linkedin.com/in/thomas-edwin/" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+              <a href="mailto:thomasedwinrte@gmail.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
+            </div>
+          </div>
+        </div>
+        <div class="handled-by-card">
+          <div class="handled-by-card-inner">
+            <h4>RISHI KARTHICK KS</h4>
+            <div class="handled-by-links">
+              <a href="https://github.com/ksrishi31-git" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
+              <a href="https://www.linkedin.com/in/rishi-karthick-ks" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+              <a href="mailto:ksrishi31@gmail.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
+            </div>
+          </div>
+        </div>
+        <div class="handled-by-card">
+          <div class="handled-by-card-inner">
+            <h4>DHANVANTH U</h4>
+            <div class="handled-by-links">
+              <a href="https://github.com/dhanvanthulags-ai" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
+              <a href="https://www.linkedin.com/in/dhanvanthu/" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+              <a href="mailto:dhanvanthulags@gmail.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
+            </div>
+          </div>
+        </div>
+        <div class="handled-by-card">
+          <div class="handled-by-card-inner">
+            <h4>DHARANI DHARAN P</h4>
+            <div class="handled-by-links">
+              <a href="https://github.com/DharaniDharan2709" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
+              <a href="https://www.linkedin.com/in/dharani-dharan-b57119397/" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+              <a href="mailto:dharanidharan2709d@gmail.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <style>
+    .handled-by-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: var(--space-6);
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    .handled-by-card {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: var(--radius-xl);
+      padding: var(--space-6);
+      text-align: center;
+      transition: all var(--transition-base);
+    }
+    .handled-by-card:hover {
+      background: rgba(255,255,255,0.06);
+      border-color: rgba(249,115,22,0.2);
+      transform: translateY(-4px);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.3);
+    }
+    .handled-by-card-inner h4 {
+      color: var(--white);
+      font-size: var(--fs-sm);
+      font-weight: var(--fw-semibold);
+      margin-bottom: var(--space-4);
+      letter-spacing: 0.5px;
+      word-break: break-word;
+    }
+    .handled-by-links {
+      display: flex;
+      justify-content: center;
+      gap: var(--space-3);
+    }
+    .handled-by-links a {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.08);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--gray-300);
+      font-size: 15px;
+      text-decoration: none;
+      transition: all var(--transition-fast);
+    }
+    .handled-by-links a:hover {
+      background: var(--primary);
+      color: var(--white);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(249,115,22,0.3);
+    }
+    @media (max-width: 1024px) {
+      .handled-by-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 640px) {
+      .handled-by-grid { grid-template-columns: 1fr; }
+      .handled-by-card { padding: var(--space-5); }
+    }
+  </style>
+
+  <script src="../js/api.js"></script>
+  <script src="../js/utils.js"></script>
+  <script src="../js/main.js"></script>
+  <script>
+    // Navbar scroll effect + Mobile menu toggle
+    document.addEventListener('DOMContentLoaded', () => {
+      const navbar = document.querySelector('.aiml-navbar');
+      if (navbar) {
+        window.addEventListener('scroll', () => {
+          navbar.classList.toggle('scrolled', window.scrollY > 80);
+        }, { passive: true });
+      }
+      const toggle = document.querySelector('.aiml-navbar-toggle');
+      const menu = document.querySelector('.aiml-navbar-menu');
+      if(toggle&&menu){toggle.addEventListener('click',()=>{const isOpen=menu.classList.toggle('open');toggle.classList.toggle('active');toggle.setAttribute('aria-expanded',isOpen);document.body.style.overflow=isOpen?'hidden':''});menu.querySelectorAll('a').forEach(link=>{link.addEventListener('click',()=>{menu.classList.remove('open');toggle.classList.remove('active');toggle.setAttribute('aria-expanded','false');document.body.style.overflow=''})})}
+    });
+  
+    document.getElementById('contact-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const btn = e.target.querySelector('button[type="submit"]');
+      btn.disabled = true;
+      btn.textContent = 'Sending...';
+      
+      const data = {
+        name: document.getElementById('contact-name').value,
+        email: document.getElementById('contact-email').value,
+        subject: document.getElementById('contact-subject').value,
+        message: document.getElementById('contact-message').value,
+      };
+      
+      try {
+        await API.submitContact(data);
+        Utils.showToast('Message sent successfully!', 'success');
+        e.target.reset();
+      } catch (err) {
+        Utils.showToast(err.message || 'Failed to send message', 'error');
+      }
+      
+      btn.disabled = false;
+      btn.textContent = 'Send Message ✉️';
+    });
+  </script>
+</body>
+</html>

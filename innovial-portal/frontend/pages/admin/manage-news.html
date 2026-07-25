@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Manage News — Innoviyal Admin</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../css/variables.css"><link rel="stylesheet" href="../../css/style.css"><link rel="stylesheet" href="../../css/admin.css"><link rel="stylesheet" href="../../css/components.css">
+</head>
+<body class="admin-body" data-page="news">
+<div class="admin-wrapper">
+  <aside class="admin-sidebar"> <!-- same sidebar as dashboard --> 
+    <div class="admin-sidebar-header"><img src="../../assets/logo/innoviyal-logo.png" alt="" class="logo" onerror="this.style.display='none'"><div><h2>Innoviyal <small>Admin Panel</small></h2></div></div>
+    <nav class="admin-sidebar-nav">
+      <div class="admin-nav-section">Main</div>
+      <a href="dashboard.html" class="admin-nav-item"><span class="nav-icon">📊</span>Dashboard</a>
+      <a href="manage-news.html" class="admin-nav-item active"><span class="nav-icon">📰</span>News</a>
+      <a href="manage-events.html" class="admin-nav-item"><span class="nav-icon">📅</span>Events</a>
+      <a href="manage-people.html" class="admin-nav-item"><span class="nav-icon">👥</span>People</a>
+      <div class="admin-nav-section">Content</div>
+      <a href="manage-gallery.html" class="admin-nav-item"><span class="nav-icon">🖼️</span>Gallery</a>
+      <a href="manage-hero.html" class="admin-nav-item"><span class="nav-icon">🎬</span>Hero Media</a>
+      <a href="manage-testimonials.html" class="admin-nav-item"><span class="nav-icon">💬</span>Testimonials</a>
+      <a href="manage-magazine.html" class="admin-nav-item"><span class="nav-icon">📖</span>Magazine</a>
+      <a href="manage-newsletters.html" class="admin-nav-item"><span class="nav-icon">📬</span>Newsletters</a>
+      <a href="manage-event-winners.html" class="admin-nav-item"><span class="nav-icon">🏅</span>Event Winners</a>
+      <a href="manage-partners.html" class="admin-nav-item"><span class="nav-icon">🤝</span>Partners</a>
+      <div class="admin-nav-section">System</div>
+      <a href="messages.html" class="admin-nav-item"><span class="nav-icon">✉️</span>Messages</a>
+      <a href="../../index.html" class="admin-nav-item"><span class="nav-icon">🏠</span>View Site</a>
+      <a href="#" class="admin-nav-item" onclick="Auth.logout()"><span class="nav-icon">🚪</span>Logout</a>
+    </nav>
+  </aside>
+  <main class="admin-main">
+    <header class="admin-header"><div class="admin-header-left"><button class="admin-menu-toggle">☰</button><h3>Manage News</h3></div></header>
+    <div class="admin-content">
+      <div class="admin-table-wrapper">
+        <div class="admin-table-header"><h3>News Articles</h3><div class="admin-table-actions"><button class="btn btn-primary btn-sm" onclick="window.location.href='manage-news.html?action=create'">+ Add News</button></div></div>
+        <table class="admin-table" id="news-table">
+          <thead><tr><th>ID</th><th>Title</th><th>Published</th><th>Status</th><th>Actions</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+  </main>
+</div>
+<script src="../../js/api.js"></script><script src="../../js/utils.js"></script><script src="../../js/auth.js"></script><script src="../../js/admin.js"></script>
+</body>
+</html>

@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About — CSE (AI & ML) | MCET</title>
+  <meta name="description" content="About the Department of Computer Science & Engineering (Artificial Intelligence & Machine Learning) at Dr. Mahalingam College of Engineering and Technology.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="../css/variables.css">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/glass-card.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <style>
+    .top-info-bar{background:var(--secondary-dark);color:var(--gray-300);font-size:13px;border-bottom:1px solid rgba(255,255,255,0.06);position:relative;z-index:502}
+    .top-info-bar .container{display:flex;align-items:center;justify-content:space-between;height:56px;gap:var(--space-4)}
+    .top-info-bar-left{display:flex;align-items:center;gap:var(--space-4);flex:1;min-width:0}
+    .top-info-bar-left .top-bar-logo{height:46px;width:auto;flex-shrink:0;transition:all var(--transition-base)}
+    .top-info-bar-left .top-bar-logo:hover{transform:scale(1.05)}
+    .top-bar-text{line-height:1.25;min-width:0}
+    .top-bar-text .college-name{font-size:14px;font-weight:var(--fw-bold);color:var(--white);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;letter-spacing:0.3px}
+    .top-bar-text .dept-subtitle{font-size:12px;color:var(--primary-light);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-weight:var(--fw-medium)}
+    .top-info-bar-right{display:flex;align-items:center;gap:var(--space-6);flex-shrink:0}
+    .counselling-code{display:flex;align-items:center;gap:var(--space-1);font-size:12px;color:var(--gray-300);padding:4px 12px;background:rgba(255,255,255,0.05);border-radius:var(--radius-md);border:1px solid rgba(255,255,255,0.06)}
+    .counselling-code .code-label{font-weight:var(--fw-medium);color:var(--gray-400)}
+    .counselling-code .code-value{font-weight:var(--fw-bold);color:var(--primary);letter-spacing:.5px}
+    .top-social-icons{display:flex;align-items:center;gap:8px}
+    .top-social-icons a{display:flex;align-items:center;justify-content:center;width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,0.08);color:var(--gray-300);text-decoration:none;transition:all var(--transition-fast);font-size:14px}
+    .top-social-icons a:hover{background:var(--primary);color:var(--white);transform:translateY(-2px);box-shadow:0 4px 12px rgba(249,115,22,0.3)}
+    .aiml-navbar{position:sticky;top:0;left:0;right:0;z-index:501;background:#0b1120;border-bottom:1px solid rgba(255,255,255,0.06);transition:all var(--transition-base)}
+    .aiml-navbar.scrolled{background:rgba(11,17,32,0.98);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);box-shadow:0 4px 30px rgba(0,0,0,0.3)}
+    .aiml-navbar .container{display:flex;align-items:center;justify-content:space-between;height:64px}
+    .aiml-navbar-brand{font-family:var(--font-heading);font-size:var(--fs-xl);font-weight:var(--fw-bold);color:var(--white);text-decoration:none;display:flex;align-items:center;gap:var(--space-2);flex-shrink:0}
+    .aiml-navbar-brand .brand-accent{color:var(--primary)}
+    .aiml-navbar-menu{display:flex;align-items:center;gap:4px;list-style:none}
+    .aiml-navbar-link{padding:8px 16px;color:rgba(255,255,255,0.75);font-size:13.5px;font-weight:var(--fw-medium);text-decoration:none;border-radius:var(--radius-md);transition:all var(--transition-fast);white-space:nowrap;letter-spacing:.3px;position:relative}
+    .aiml-navbar-link:hover{color:var(--white);background:rgba(255,255,255,0.07)}
+    .aiml-navbar-link::after{content:'';position:absolute;bottom:2px;left:50%;transform:translateX(-50%) scaleX(0);width:20px;height:2px;background:var(--primary);border-radius:var(--radius-full);transition:transform var(--transition-base)}
+    .aiml-navbar-link:hover::after{transform:translateX(-50%) scaleX(1)}
+    .aiml-navbar-link.active{color:var(--primary-light);background:rgba(249,115,22,0.1)}
+    .aiml-navbar-link.active::after{transform:translateX(-50%) scaleX(1)}
+    .aiml-navbar-toggle{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:var(--space-2)}
+    .aiml-navbar-toggle span{display:block;width:22px;height:2px;background:var(--white);border-radius:2px;transition:all var(--transition-base)}
+    .aiml-navbar-toggle.active span:nth-child(1){transform:rotate(45deg) translate(5px,5px)}
+    .aiml-navbar-toggle.active span:nth-child(2){opacity:0}
+    .aiml-navbar-toggle.active span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px)}
+    @media(max-width:768px){.top-info-bar .container{height:auto;flex-wrap:wrap;padding:8px var(--space-4);gap:6px}
+    .top-bar-text .college-name{font-size:12px}
+    .top-bar-text .dept-subtitle{font-size:11px}
+    .top-info-bar-left .top-bar-logo{height:36px}
+    .counselling-code{font-size:10px;padding:2px 8px}
+    .top-social-icons a{width:28px;height:28px;font-size:12px}
+    .aiml-navbar .container{height:56px}
+    .aiml-navbar-menu{display:none}
+    .aiml-navbar-toggle{display:flex}
+    .aiml-navbar-menu.open{display:flex;position:fixed;top:0;right:0;width:280px;height:100vh;background:#0b1120;flex-direction:column;padding:80px var(--space-6) var(--space-6);gap:var(--space-1);box-shadow:-10px 0 30px rgba(0,0,0,0.4);z-index:500}
+    .aiml-navbar-menu.open .aiml-navbar-link{width:100%;padding:12px 16px;font-size:14px}
+    .aiml-navbar-menu.open .aiml-navbar-link::after{display:none}}
+    .aiml-navbar-link.innoviyal-nav-highlight,.aiml-navbar-link.innoviyal-nav-highlight:hover,.aiml-navbar-link.innoviyal-nav-highlight.active{background:rgba(249,115,22,0.1);color:#3B82F6;border-radius:var(--radius-md)}
+  </style>
+</head>
+<body>
+  <!-- ===== TOP INFO BAR ===== -->
+  <div class="top-info-bar"><div class="container">
+    <div class="top-info-bar-left">
+      <img src="../assets/logo/mcet-logo.png" alt="MCET" class="top-bar-logo" onerror="this.style.display='none'">
+      <div class="top-bar-text">
+        <div class="college-name">Dr. Mahalingam College of Engineering and Technology</div>
+        <div class="dept-subtitle">Department of CSE (AI & ML)</div>
+      </div>
+    </div>
+    <div class="top-info-bar-right">
+      <div class="counselling-code"><span class="code-label">TNEA Counselling Code: </span><span class="code-value">2706</span></div>
+      <div class="top-social-icons">
+        <a href="https://facebook.com" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+        <a href="https://instagram.com" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+        <a href="https://linkedin.com" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+        <a href="https://youtube.com" target="_blank" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+      </div>
+    </div>
+  </div></div>
+
+  <!-- ===== MAIN NAVBAR ===== -->
+  <nav class="aiml-navbar" role="navigation">
+    <div class="container">
+      <a href="../index.html" class="aiml-navbar-brand"><span class="brand-accent">AI</span><span style="color:var(--gray-300)">&amp;</span><span style="color:var(--white)">ML</span></a>
+      <button class="aiml-navbar-toggle" aria-label="Toggle menu" aria-expanded="false"><span></span><span></span><span></span></button>
+      <ul class="aiml-navbar-menu">
+        <li><a href="../index.html" class="aiml-navbar-link">Home</a></li>
+        <li class="navbar-dropdown active">
+          <a href="aiml-about.html" class="aiml-navbar-link">About <span class="arrow">▼</span></a>
+          <ul class="navbar-dropdown-menu">
+            <li><a href="aiml-about.html#what-we-offer" class="navbar-dropdown-link"><span class="dd-icon">📚</span><span class="dd-text"><span class="dd-label">What We Offer</span><span class="dd-desc">Four pillars of AIML education</span></span></a></li>
+            <li><a href="aiml-about.html#peos" class="navbar-dropdown-link"><span class="dd-icon">🎯</span><span class="dd-text"><span class="dd-label">Program Educational Objectives</span><span class="dd-desc">Career &amp; professional accomplishments</span></span></a></li>
+            <li><a href="aiml-about.html#psos" class="navbar-dropdown-link"><span class="dd-icon">⚡</span><span class="dd-text"><span class="dd-label">Program Specific Outcomes</span><span class="dd-desc">Specific outcomes for AIML program</span></span></a></li>
+          </ul>
+        </li>
+        <li><a href="team.html" class="aiml-navbar-link">Team</a></li>
+        <li><a href="events.html" class="aiml-navbar-link">Events</a></li>
+        <li><a href="gallery.html" class="aiml-navbar-link">Rank Holders</a></li>
+        <li><a href="placement.html" class="aiml-navbar-link">Placements</a></li>
+        <li><a href="innovial.html" class="aiml-navbar-link innoviyal-nav-highlight">Innoviyal</a></li>
+        <li><a href="contact.html" class="aiml-navbar-link">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Page Hero -->
+  <section class="page-hero">
+    <div class="container">
+      <div class="breadcrumb"><a href="../index.html">Home</a> / <span>About AIML Department</span></div>
+      <h1><span style="color:var(--primary)">Department of CSE (AI & ML)</span></h1>
+      <p>Shaping the next generation of AI professionals through innovation and excellence</p>
+    </div>
+  </section>
+
+  <main>
+    <!-- About the Department -->
+    <section class="section">
+      <div class="container">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:var(--space-8);align-items:center">
+          <div>
+            <h2 style="font-size:var(--fs-3xl);margin-bottom:var(--space-4)">Who <span style="color:var(--primary)">We Are</span></h2>
+            <p style="color:var(--gray-600);line-height:var(--lh-relaxed);margin-bottom:var(--space-4)">
+              The Department of Computer Science & Engineering (Artificial Intelligence & Machine Learning) at MCET serves as a platform for academic excellence, technical innovation, and professional development. Through research-driven initiatives, collaborative projects, and industry engagement, we empower members to explore the transformative potential of Artificial Intelligence and Machine Learning.
+            </p>
+            <p style="color:var(--gray-600);line-height:var(--lh-relaxed);margin-bottom:var(--space-4)">
+              We are a community of passionate learners, dedicated educators, and innovative researchers united by a shared vision — to harness the power of AI and ML for creating meaningful impact in society. Our department is driven by curiosity, collaboration, and a commitment to pushing the boundaries of what intelligent technology can achieve.
+            </p>
+            <p style="color:var(--gray-600);line-height:var(--lh-relaxed);margin-bottom:var(--space-4)">
+              At the heart of our department lies a vibrant ecosystem where students are encouraged to think critically, experiment boldly, and innovate continuously. From freshmen discovering the fundamentals of programming to final-year students publishing research papers and building real-world AI applications, every member of our community contributes to a culture of excellence and lifelong learning.
+            </p>
+            <p style="color:var(--gray-600);line-height:var(--lh-relaxed);margin-bottom:var(--space-6)">
+              Connecting students, innovators, and industry leaders to explore, build, and shape the future of intelligent technology. We are committed to fostering a culture of innovation, continuous learning, and technological excellence — preparing our graduates to become leaders, entrepreneurs, and changemakers in the rapidly evolving landscape of Artificial Intelligence and Machine Learning.
+            </p>
+            <div style="display:flex;gap:var(--space-4);flex-wrap:wrap">
+              <div style="background:var(--primary-bg);padding:var(--space-4);border-radius:var(--radius-lg);text-align:center;flex:1">
+                <div style="font-size:var(--fs-2xl);font-weight:var(--fw-bold);color:var(--primary)">26+</div>
+                <div style="font-size:var(--fs-xs);color:var(--gray-500)">Years of Excellence</div>
+              </div>
+              <div style="background:var(--primary-bg);padding:var(--space-4);border-radius:var(--radius-lg);text-align:center;flex:1">
+                <div style="font-size:var(--fs-2xl);font-weight:var(--fw-bold);color:var(--primary)">650+</div>
+                <div style="font-size:var(--fs-xs);color:var(--gray-500)">Students</div>
+              </div>
+              <div style="background:var(--primary-bg);padding:var(--space-4);border-radius:var(--radius-lg);text-align:center;flex:1">
+                <div style="font-size:var(--fs-2xl);font-weight:var(--fw-bold);color:var(--primary)">28+</div>
+                <div style="font-size:var(--fs-xs);color:var(--gray-500)">Faculty Members</div>
+              </div>
+            </div>
+          </div>
+          <div>
+            <img src="../assets/mcet/MCET%20COLLEGE%20PHOTO.jpg" alt="MCET Campus" style="width:100%;border-radius:var(--radius-2xl);box-shadow:var(--shadow-xl)" loading="lazy">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Vision & Mission -->
+    <section class="section section-gray">
+      <div class="container">
+        <div class="section-header">
+          <h2>Our Vision & Mission</h2>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:var(--space-8)">
+          <div class="premium-card" style="text-align:center">
+            <div class="premium-card-body">
+              <div style="font-size:48px;margin-bottom:var(--space-4)">🎯</div>
+              <h3 style="font-size:var(--fs-2xl);margin-bottom:var(--space-4);color:var(--primary)">Our Vision</h3>
+              <p style="font-size:var(--fs-lg);line-height:var(--lh-relaxed);color:var(--gray-600);max-width:500px;margin:0 auto">
+                To be recognized as a center of excellence that nurtures future leaders, researchers, and innovators capable of addressing global challenges through intelligent technologies.
+              </p>
+            </div>
+          </div>
+          <div class="premium-card" style="text-align:center">
+            <div class="premium-card-body">
+              <div style="font-size:48px;margin-bottom:var(--space-4)">🚀</div>
+              <h3 style="font-size:var(--fs-2xl);margin-bottom:var(--space-4);color:var(--primary)">Our Mission</h3>
+              <p style="font-size:var(--fs-lg);line-height:var(--lh-relaxed);color:var(--gray-600);max-width:500px;margin:0 auto">
+                To cultivate an ecosystem of innovation by promoting technical excellence, ethical AI practices, interdisciplinary collaboration, and continuous learning in Artificial Intelligence and Machine Learning.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- What We Offer -->
+    <section class="section" id="what-we-offer">
+      <div class="container">
+        <div class="section-header">
+          <h2>What We Offer</h2>
+          <p>Four pillars of excellence in AI & ML education</p>
+        </div>
+        <div class="grid grid-4 stagger-children">
+          <div class="glass-card glass-card-dark">
+            <div class="card-icon">📚</div>
+            <h3>Learn</h3>
+            <p>Gain knowledge through expert-led workshops, technical sessions, and certification programs covering cutting-edge AI & ML topics.</p>
+          </div>
+          <div class="glass-card glass-card-dark">
+            <div class="card-icon">🔧</div>
+            <h3>Build</h3>
+            <p>Apply your skills by working on innovative projects, hackathons, and research initiatives that solve real-world problems.</p>
+          </div>
+          <div class="glass-card glass-card-dark">
+            <div class="card-icon">🤝</div>
+            <h3>Collaborate</h3>
+            <p>Network with peers, faculty, industry professionals, and AI enthusiasts through events and collaborative projects.</p>
+          </div>
+          <div class="glass-card glass-card-dark">
+            <div class="card-icon">📈</div>
+            <h3>Grow</h3>
+            <p>Develop leadership, problem-solving, and technical expertise for successful careers in AI and Machine Learning.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Program Educational Objectives (PEOs) -->
+    <section class="section section-gray" id="peos">
+      <div class="container">
+        <div class="section-header">
+          <h2>Program Educational <span style="color:var(--primary)">Objectives</span></h2>
+          <p>PEOs — The career and professional accomplishments that the program is preparing graduates to achieve</p>
+        </div>
+        <div class="grid grid-3 stagger-children">
+          <div class="premium-card" style="text-align:center;padding:var(--space-6)">
+            <div style="font-size:48px;margin-bottom:var(--space-4);color:var(--primary)">🎯</div>
+            <h3 style="margin-bottom:var(--space-3)">PEO 1 — Domain Expertise</h3>
+            <p style="color:var(--gray-600);font-size:var(--fs-sm);line-height:var(--lh-relaxed)">
+              Possess expertise and emerge as key players in IT integrated domains.
+            </p>
+          </div>
+          <div class="premium-card" style="text-align:center;padding:var(--space-6)">
+            <div style="font-size:48px;margin-bottom:var(--space-4);color:var(--primary)">💻</div>
+            <h3 style="margin-bottom:var(--space-3)">PEO 2 — Computing Skills & Ethics</h3>
+            <p style="color:var(--gray-600);font-size:var(--fs-sm);line-height:var(--lh-relaxed)">
+              Employ computing skills to solve societal and environmental issues in an ethical manner.
+            </p>
+          </div>
+          <div class="premium-card" style="text-align:center;padding:var(--space-6)">
+            <div style="font-size:48px;margin-bottom:var(--space-4);color:var(--primary)">📖</div>
+            <h3 style="margin-bottom:var(--space-3)">PEO 3 — Lifelong Learning & Research</h3>
+            <p style="color:var(--gray-600);font-size:var(--fs-sm);line-height:var(--lh-relaxed)">
+              Involve in lifelong learning and research to meet the demands of global technology.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Program Outcomes (POs) -->
+    <section class="section">
+      <div class="container">
+        <div class="section-header">
+          <h2>Program <span style="color:var(--primary)">Outcomes</span></h2>
+          <p>POs — On successful completion of B.E. Computer Science and Engineering programme, graduating students will be able to:</p>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:var(--space-4)">
+          <div class="po-card"><div class="po-number">PO1</div><div><strong>Engineering Knowledge:</strong> Apply the knowledge of mathematics, science, engineering fundamentals, and an engineering specialization to the solution of complex engineering problems.</div></div>
+          <div class="po-card"><div class="po-number">PO2</div><div><strong>Problem Analysis:</strong> Identify, formulate, review research literature, and analyze complex engineering problems reaching substantiated conclusions using first principles of mathematics, natural sciences, and engineering sciences.</div></div>
+          <div class="po-card"><div class="po-number">PO3</div><div><strong>Design/Development of Solutions:</strong> Design solutions for complex engineering problems and design system components or processes that meet the specified needs with appropriate consideration for the public health and safety.</div></div>
+          <div class="po-card"><div class="po-number">PO4</div><div><strong>Conduct Investigations:</strong> Use research-based knowledge and methods to provide valid conclusions for complex engineering problems.</div></div>
+          <div class="po-card"><div class="po-number">PO5</div><div><strong>Modern Tool Usage:</strong> Create, select, and apply appropriate techniques, resources, and modern engineering and IT tools to complex engineering activities.</div></div>
+          <div class="po-card"><div class="po-number">PO6</div><div><strong>Engineer & Society:</strong> Apply reasoning to assess societal, health, safety, legal, and cultural issues relevant to professional engineering practice.</div></div>
+          <div class="po-card"><div class="po-number">PO7</div><div><strong>Environment & Sustainability:</strong> Understand the impact of engineering solutions in societal and environmental contexts and demonstrate knowledge for sustainable development.</div></div>
+          <div class="po-card"><div class="po-number">PO8</div><div><strong>Ethics:</strong> Apply ethical principles and commit to professional ethics and responsibilities in engineering practice.</div></div>
+          <div class="po-card"><div class="po-number">PO9</div><div><strong>Individual & Team Work:</strong> Function effectively as an individual, and as a member or leader in diverse teams and multidisciplinary settings.</div></div>
+          <div class="po-card"><div class="po-number">PO10</div><div><strong>Communication:</strong> Communicate effectively on complex engineering activities with the engineering community and society at large.</div></div>
+          <div class="po-card"><div class="po-number">PO11</div><div><strong>Project Management:</strong> Demonstrate knowledge and understanding of engineering and management principles for project management.</div></div>
+          <div class="po-card"><div class="po-number">PO12</div><div><strong>Lifelong Learning:</strong> Recognize the need for, and have the preparation and ability to engage in independent and lifelong learning.</div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Program Specific Outcomes (PSOs) -->
+    <section class="section section-gray" id="psos">
+      <div class="container">
+        <div class="section-header">
+          <h2>Program Specific <span style="color:var(--primary)">Outcomes</span></h2>
+          <p>PSOs — Specific outcomes for the CSE (AIML) program</p>
+        </div>
+        <div class="grid grid-2 stagger-children" style="max-width:800px;margin:0 auto">
+          <div class="premium-card" style="text-align:center;padding:var(--space-6)">
+            <div style="font-size:48px;margin-bottom:var(--space-4);color:var(--primary)">⚙️</div>
+            <h3 style="margin-bottom:var(--space-3)">PSO 1 — Systems Engineering</h3>
+            <p style="color:var(--gray-600);font-size:var(--fs-sm);line-height:var(--lh-relaxed)">
+              Employ software engineering principles in the design and development of efficient systems.
+            </p>
+          </div>
+          <div class="premium-card" style="text-align:center;padding:var(--space-6)">
+            <div style="font-size:48px;margin-bottom:var(--space-4);color:var(--primary)">📊</div>
+            <h3 style="margin-bottom:var(--space-3)">PSO 2 — Knowledge Engineering</h3>
+            <p style="color:var(--gray-600);font-size:var(--fs-sm);line-height:var(--lh-relaxed)">
+              Apply data analytics techniques for solving real world problems.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Closing Section: Call to Action -->
+    <section class="section" style="background:linear-gradient(135deg, var(--secondary), var(--secondary-dark));color:var(--white);text-align:center;">
+      <div class="container">
+        <div class="section-header">
+          <h2 style="color:var(--white)">Ready to <span style="color:var(--primary)">Join Us?</span></h2>
+          <p style="color:var(--gray-300)">Be part of a community that is shaping the future of Artificial Intelligence</p>
+        </div>
+        <p style="font-size:var(--fs-lg);max-width:700px;margin:0 auto var(--space-8);color:var(--gray-300);line-height:var(--lh-relaxed)">
+          Whether you are a prospective student, a research collaborator, or an industry partner, the Department of CSE (AI & ML) at MCET welcomes you. Our programs are designed to equip you with the skills, knowledge, and mindset needed to excel in the rapidly evolving world of Artificial Intelligence and Machine Learning.
+        </p>
+        <div style="display:flex;gap:var(--space-4);justify-content:center;flex-wrap:wrap">
+          <a href="contact.html" class="btn btn-primary btn-lg">Get in Touch</a>
+          <a href="innovial.html" class="btn btn-secondary btn-lg">Explore Innoviyal</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer style="background:var(--secondary-dark);color:var(--gray-300);padding:var(--space-16) 0 0">
+    <div class="container">
+      <div style="display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:var(--space-8);margin-bottom:var(--space-12)">
+        <div>
+          <div class="flex-center" style="justify-content:flex-start;gap:var(--space-3);margin-bottom:var(--space-4)">
+            <img src="../assets/logo/innoviyal-logo.png" alt="Innoviyal" style="height:40px" onerror="this.style.display='none'">
+            <div>
+              <div style="font-weight:var(--fw-bold);color:var(--white)">CSE (AI & ML)</div>
+              <div style="font-size:var(--fs-xs);color:var(--gray-400)">MCET, Pollachi</div>
+            </div>
+          </div>
+          <p style="font-size:var(--fs-sm);line-height:var(--lh-relaxed)">Department of Computer Science & Engineering (Artificial Intelligence & Machine Learning) at Dr. Mahalingam College of Engineering and Technology.</p>
+        </div>
+        <div>
+          <h4 style="color:var(--white);margin-bottom:var(--space-4);font-size:var(--fs-md)">Quick Links</h4>
+          <ul style="display:flex;flex-direction:column;gap:var(--space-2)">
+            <li><a href="../index.html" style="font-size:var(--fs-sm)">Home</a></li>
+            <li><a href="aiml-about.html" style="font-size:var(--fs-sm)">About</a></li>
+            <li><a href="innovial.html" style="font-size:var(--fs-sm)">Innoviyal</a></li>
+            <li><a href="team.html" style="font-size:var(--fs-sm)">Team</a></li>
+            <li><a href="events.html" style="font-size:var(--fs-sm)">Events</a></li>
+            <li><a href="contact.html" style="font-size:var(--fs-sm)">Contact</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 style="color:var(--white);margin-bottom:var(--space-4);font-size:var(--fs-md)">Resources</h4>
+          <ul style="display:flex;flex-direction:column;gap:var(--space-2)">
+            <li><a href="downloads.html" style="font-size:var(--fs-sm)">Downloads</a></li>
+            <li><a href="magazine.html" style="font-size:var(--fs-sm)">Magazine</a></li>
+            <li><a href="placement.html" style="font-size:var(--fs-sm)">Placement Prep</a></li>
+            <li><a href="gallery.html" style="font-size:var(--fs-sm)">Rank Holders</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 style="color:var(--white);margin-bottom:var(--space-4);font-size:var(--fs-md)">Contact</h4>
+          <ul style="display:flex;flex-direction:column;gap:var(--space-2)">
+            <li style="font-size:var(--fs-sm)">📍 MCET, Pollachi - 642003</li>
+            <li style="font-size:var(--fs-sm)">📧 hodaiml@drmcet.ac.in</li>
+            <li style="font-size:var(--fs-sm)">📞 +91 4259 236 210</li>
+            <li><a href="https://www.drmcet.ac.in" target="_blank" style="font-size:var(--fs-sm);color:var(--primary)">🌐 www.drmcet.ac.in</a></li>
+          </ul>
+        </div>
+      </div>
+      <div style="border-top:1px solid rgba(255,255,255,0.1);padding:var(--space-6) 0;text-align:center">
+        <p style="font-size:var(--fs-sm)">© 2026 CSE (AI & ML) — MCET. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/api.js"></script>
+  <script src="../js/utils.js"></script>
+  <script src="../js/auth.js"></script>
+  <script src="../js/glass-card.js"></script>
+  <script src="../js/main.js"></script>
+  <script>
+    // Navbar scroll effect + Mobile menu toggle
+    document.addEventListener('DOMContentLoaded', () => {
+      const navbar = document.querySelector('.aiml-navbar');
+      if (navbar) {
+        window.addEventListener('scroll', () => {
+          navbar.classList.toggle('scrolled', window.scrollY > 80);
+        }, { passive: true });
+      }
+      const toggle = document.querySelector('.aiml-navbar-toggle');
+      const menu = document.querySelector('.aiml-navbar-menu');
+      if(toggle&&menu){toggle.addEventListener('click',()=>{const isOpen=menu.classList.toggle('open');toggle.classList.toggle('active');toggle.setAttribute('aria-expanded',isOpen);document.body.style.overflow=isOpen?'hidden':''});menu.querySelectorAll('a').forEach(link=>{link.addEventListener('click',()=>{menu.classList.remove('open');toggle.classList.remove('active');toggle.setAttribute('aria-expanded','false');document.body.style.overflow=''})})}
+    });
+    // Student table tab switching
+    function switchStudentTab(tabId, btn) {
+      document.querySelectorAll('.student-tab').forEach(t => t.classList.remove('active'));
+      btn.classList.add('active');
+      document.querySelectorAll('[id^="year-"]').forEach(t => t.style.display = 'none');
+      document.getElementById(tabId).style.display = 'block';
+    }
+
+    // Student table search functionality
+    document.addEventListener('DOMContentLoaded', () => {
+      document.querySelectorAll('.student-search').forEach(input => {
+        input.addEventListener('keyup', function() {
+          const table = this.closest('.student-table-wrapper');
+          if (!table) return;
+          const rows = table.querySelectorAll('tbody tr');
+          const query = this.value.toLowerCase();
+          rows.forEach(row => {
+            row.style.display = row.textContent.toLowerCase().includes(query) ? '' : 'none';
+          });
+        });
+      });
+    });
+  </script>
+</body>
+</html>

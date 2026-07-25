@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Manage People — Innoviyal Admin</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../css/variables.css"><link rel="stylesheet" href="../../css/style.css"><link rel="stylesheet" href="../../css/admin.css"><link rel="stylesheet" href="../../css/components.css">
+</head>
+<body class="admin-body" data-page="people">
+<div class="admin-wrapper">
+  <aside class="admin-sidebar"><div class="admin-sidebar-header"><img src="../../assets/logo/innoviyal-logo.png" alt="" class="logo" onerror="this.style.display='none'"><div><h2>Innoviyal <small>Admin Panel</small></h2></div></div>
+    <nav class="admin-sidebar-nav">
+      <a href="dashboard.html" class="admin-nav-item"><span class="nav-icon">📊</span>Dashboard</a>
+      <a href="manage-news.html" class="admin-nav-item"><span class="nav-icon">📰</span>News</a>
+      <a href="manage-events.html" class="admin-nav-item"><span class="nav-icon">📅</span>Events</a>
+      <a href="manage-people.html" class="admin-nav-item active"><span class="nav-icon">👥</span>People</a>
+      <a href="manage-gallery.html" class="admin-nav-item"><span class="nav-icon">🖼️</span>Gallery</a>
+      <a href="manage-newsletters.html" class="admin-nav-item"><span class="nav-icon">📬</span>Newsletters</a>
+      <a href="manage-event-winners.html" class="admin-nav-item"><span class="nav-icon">🏅</span>Event Winners</a>
+      <a href="messages.html" class="admin-nav-item"><span class="nav-icon">✉️</span>Messages</a>
+      <a href="../../index.html" class="admin-nav-item"><span class="nav-icon">🏠</span>View Site</a>
+      <a href="#" class="admin-nav-item" onclick="Auth.logout()"><span class="nav-icon">🚪</span>Logout</a>
+    </nav>
+  </aside>
+  <main class="admin-main">
+    <header class="admin-header"><div class="admin-header-left"><button class="admin-menu-toggle">☰</button><h3>Manage People</h3></div></header>
+    <div class="admin-content">
+      <div class="admin-table-wrapper">
+        <div class="admin-table-header">
+          <h3>All Members</h3>
+          <div class="admin-table-actions">
+            <select style="padding:var(--space-2) var(--space-3);border:1px solid var(--gray-200);border-radius:var(--radius-md);font-size:var(--fs-sm)">
+              <option value="ALL">All Categories</option>
+              <option value="FACULTY">Faculty</option>
+              <option value="ASSOCIATION_CORE">Core Team</option>
+              <option value="ASSOCIATION_COORDINATOR">Coordinators</option>
+              <option value="YEAR_2">2nd Year</option>
+              <option value="YEAR_3">3rd Year</option>
+              <option value="YEAR_4">4th Year</option>
+            </select>
+            <button class="btn btn-primary btn-sm" onclick="window.location.href='manage-people.html?action=create'">+ Add Person</button>
+          </div>
+        </div>
+        <table class="admin-table" id="people-table"><thead><tr><th>Name</th><th>Category</th><th>Role</th><th>Year</th><th>Actions</th></tr></thead><tbody></tbody></table>
+      </div>
+      <div class="admin-table-wrapper" style="margin-top:var(--space-6)">
+        <div class="admin-table-header"><h3>Bulk Import Students</h3></div>
+        <div style="padding:var(--space-6)">
+          <p style="font-size:var(--fs-sm);color:var(--gray-500);margin-bottom:var(--space-4)">Upload a CSV file with columns: name, roll_no, section, year, email</p>
+          <div style="display:flex;gap:var(--space-3);align-items:center">
+            <input type="file" id="bulk-import-input" accept=".csv" style="padding:var(--space-2);border:1px solid var(--gray-200);border-radius:var(--radius-md);font-size:var(--fs-sm)">
+            <button class="btn btn-primary btn-sm" id="bulk-import-btn">Import CSV</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+<script src="../../js/api.js"></script><script src="../../js/utils.js"></script><script src="../../js/auth.js"></script><script src="../../js/admin.js"></script>
+</body>
+</html>

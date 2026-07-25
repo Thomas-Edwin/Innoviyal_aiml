@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Backup & Restore — Innoviyal Admin</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../css/variables.css"><link rel="stylesheet" href="../../css/style.css"><link rel="stylesheet" href="../../css/admin.css">
+</head>
+<body class="admin-body" data-page="backup">
+<div class="admin-wrapper">
+  <aside class="admin-sidebar"><div class="admin-sidebar-header"><img src="../../assets/logo/innoviyal-logo.png" alt="" class="logo" onerror="this.style.display='none'"><div><h2>Innoviyal <small>Admin Panel</small></h2></div></div>
+    <nav class="admin-sidebar-nav">
+      <a href="dashboard.html" class="admin-nav-item"><span class="nav-icon">📊</span>Dashboard</a>
+      <a href="manage-news.html" class="admin-nav-item"><span class="nav-icon">📰</span>News</a>
+      <a href="messages.html" class="admin-nav-item"><span class="nav-icon">✉️</span>Messages</a>
+      <a href="manage-newsletters.html" class="admin-nav-item"><span class="nav-icon">📬</span>Newsletters</a>
+      <a href="manage-event-winners.html" class="admin-nav-item"><span class="nav-icon">🏅</span>Event Winners</a>
+      <a href="backup.html" class="admin-nav-item active"><span class="nav-icon">💾</span>Backup</a>
+      <a href="../../index.html" class="admin-nav-item"><span class="nav-icon">🏠</span>View Site</a>
+      <a href="#" class="admin-nav-item" onclick="Auth.logout()"><span class="nav-icon">🚪</span>Logout</a>
+    </nav>
+  </aside>
+  <main class="admin-main">
+    <header class="admin-header"><div class="admin-header-left"><button class="admin-menu-toggle">☰</button><h3>Database Backup & Restore</h3></div></header>
+    <div class="admin-content">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:var(--space-8)">
+        <div class="admin-form">
+          <h3 style="margin-bottom:var(--space-6)">Create Backup</h3>
+          <p style="font-size:var(--fs-sm);color:var(--gray-500);margin-bottom:var(--space-6)">Download a complete SQL backup of all database tables including content, users, and settings.</p>
+          <button class="btn btn-primary btn-lg btn-block" id="create-backup-btn">💾 Create Backup</button>
+          <div style="margin-top:var(--space-6)">
+            <h4 style="margin-bottom:var(--space-3)">Recent Backups</h4>
+            <div id="backups-list"><p class="empty-state">No backups yet</p></div>
+          </div>
+        </div>
+        <div class="admin-form">
+          <h3 style="margin-bottom:var(--space-6)">Restore Backup</h3>
+          <p style="font-size:var(--fs-sm);color:var(--gray-500);margin-bottom:var(--space-6)">Upload a previous backup file to restore the database to a previous state. ⚠️ This will overwrite all current data!</p>
+          <div class="file-upload-area" style="margin-bottom:var(--space-4)">
+            <div class="upload-icon">📂</div>
+            <h4>Select backup file</h4>
+            <input type="file" accept=".sql,.gz,.zip" id="restore-backup-input" style="display:none">
+          </div>
+          <button class="btn btn-outline btn-lg btn-block" id="restore-backup-btn" style="color:var(--error);border-color:var(--error)">⚠️ Restore Database</button>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+<script src="../../js/api.js"></script><script src="../../js/utils.js"></script><script src="../../js/auth.js"></script><script src="../../js/admin.js"></script>
+</body>
+</html>

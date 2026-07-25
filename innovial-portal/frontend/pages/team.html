@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Our Team — CSE (AI & ML) | MCET</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="../css/variables.css">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/glass-card.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <style>
+    .top-info-bar{background:var(--secondary-dark);color:var(--gray-300);font-size:13px;border-bottom:1px solid rgba(255,255,255,0.06);position:relative;z-index:502}
+    .top-info-bar .container{display:flex;align-items:center;justify-content:space-between;height:56px;gap:var(--space-4)}
+    .top-info-bar-left{display:flex;align-items:center;gap:var(--space-4);flex:1;min-width:0}
+    .top-info-bar-left .top-bar-logo{height:46px;width:auto;flex-shrink:0;transition:all var(--transition-base)}
+    .top-info-bar-left .top-bar-logo:hover{transform:scale(1.05)}
+    .top-bar-text{line-height:1.25;min-width:0}
+    .top-bar-text .college-name{font-size:14px;font-weight:var(--fw-bold);color:var(--white);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;letter-spacing:0.3px}
+    .top-bar-text .dept-subtitle{font-size:12px;color:var(--primary-light);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-weight:var(--fw-medium)}
+    .top-info-bar-right{display:flex;align-items:center;gap:var(--space-6);flex-shrink:0}
+    .counselling-code{display:flex;align-items:center;gap:var(--space-1);font-size:12px;color:var(--gray-300);padding:4px 12px;background:rgba(255,255,255,0.05);border-radius:var(--radius-md);border:1px solid rgba(255,255,255,0.06)}
+    .counselling-code .code-label{font-weight:var(--fw-medium);color:var(--gray-400)}
+    .counselling-code .code-value{font-weight:var(--fw-bold);color:var(--primary);letter-spacing:.5px}
+    .top-social-icons{display:flex;align-items:center;gap:8px}
+    .top-social-icons a{display:flex;align-items:center;justify-content:center;width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,0.08);color:var(--gray-300);text-decoration:none;transition:all var(--transition-fast);font-size:14px}
+    .top-social-icons a:hover{background:var(--primary);color:var(--white);transform:translateY(-2px);box-shadow:0 4px 12px rgba(249,115,22,0.3)}
+    .aiml-navbar{position:sticky;top:0;left:0;right:0;z-index:501;background:#0b1120;border-bottom:1px solid rgba(255,255,255,0.06);transition:all var(--transition-base)}
+    .aiml-navbar.scrolled{background:rgba(11,17,32,0.98);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);box-shadow:0 4px 30px rgba(0,0,0,0.3)}
+    .aiml-navbar .container{display:flex;align-items:center;justify-content:space-between;height:64px}
+    .aiml-navbar-brand{font-family:var(--font-heading);font-size:var(--fs-xl);font-weight:var(--fw-bold);color:var(--white);text-decoration:none;display:flex;align-items:center;gap:var(--space-2);flex-shrink:0}
+    .aiml-navbar-brand .brand-accent{color:var(--primary)}
+    .aiml-navbar-menu{display:flex;align-items:center;gap:4px;list-style:none}
+    .aiml-navbar-link{padding:8px 16px;color:rgba(255,255,255,0.75);font-size:13.5px;font-weight:var(--fw-medium);text-decoration:none;border-radius:var(--radius-md);transition:all var(--transition-fast);white-space:nowrap;letter-spacing:.3px;position:relative}
+    .aiml-navbar-link:hover{color:var(--white);background:rgba(255,255,255,0.07)}
+    .aiml-navbar-link::after{content:'';position:absolute;bottom:2px;left:50%;transform:translateX(-50%) scaleX(0);width:20px;height:2px;background:var(--primary);border-radius:var(--radius-full);transition:transform var(--transition-base)}
+    .aiml-navbar-link:hover::after{transform:translateX(-50%) scaleX(1)}
+    .aiml-navbar-link.active{color:var(--primary-light);background:rgba(249,115,22,0.1)}
+    .aiml-navbar-link.active::after{transform:translateX(-50%) scaleX(1)}
+    .aiml-navbar-toggle{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:var(--space-2)}
+    .aiml-navbar-toggle span{display:block;width:22px;height:2px;background:var(--white);border-radius:2px;transition:all var(--transition-base)}
+    .aiml-navbar-toggle.active span:nth-child(1){transform:rotate(45deg) translate(5px,5px)}
+    .aiml-navbar-toggle.active span:nth-child(2){opacity:0}
+    .aiml-navbar-toggle.active span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px)}
+    @media(max-width:768px){.top-info-bar .container{height:auto;flex-wrap:wrap;padding:8px var(--space-4);gap:6px}
+    .top-bar-text .college-name{font-size:12px}
+    .top-bar-text .dept-subtitle{font-size:11px}
+    .top-info-bar-left .top-bar-logo{height:36px}
+    .counselling-code{font-size:10px;padding:2px 8px}
+    .top-social-icons a{width:28px;height:28px;font-size:12px}
+    .aiml-navbar .container{height:56px}
+    .aiml-navbar-menu{display:none}
+    .aiml-navbar-toggle{display:flex}
+    .aiml-navbar-menu.open{display:flex;position:fixed;top:0;right:0;width:280px;height:100vh;background:#0b1120;flex-direction:column;padding:80px var(--space-6) var(--space-6);gap:var(--space-1);box-shadow:-10px 0 30px rgba(0,0,0,0.4);z-index:500}
+    .aiml-navbar-menu.open .aiml-navbar-link{width:100%;padding:12px 16px;font-size:14px}
+    .aiml-navbar-menu.open .aiml-navbar-link::after{display:none}}
+    .aiml-navbar-link.innoviyal-nav-highlight,.aiml-navbar-link.innoviyal-nav-highlight:hover,.aiml-navbar-link.innoviyal-nav-highlight.active{background:rgba(249,115,22,0.1);color:#3B82F6;border-radius:var(--radius-md)}
+  </style>
+</head>
+<body>
+  <!-- ===== TOP INFO BAR ===== -->
+  <div class="top-info-bar"><div class="container">
+    <div class="top-info-bar-left">
+      <img src="../assets/logo/mcet-logo.png" alt="MCET" class="top-bar-logo" onerror="this.style.display='none'">
+      <div class="top-bar-text">
+        <div class="college-name">Dr. Mahalingam College of Engineering and Technology</div>
+        <div class="dept-subtitle">Department of CSE (AI & ML)</div>
+      </div>
+    </div>
+    <div class="top-info-bar-right">
+      <div class="counselling-code"><span class="code-label">TNEA Counselling Code: </span><span class="code-value">2706</span></div>
+      <div class="top-social-icons">
+        <a href="https://facebook.com" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+        <a href="https://instagram.com" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+        <a href="https://linkedin.com" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+        <a href="https://youtube.com" target="_blank" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+      </div>
+    </div>
+  </div></div>
+
+  <!-- ===== MAIN NAVBAR ===== -->
+  <nav class="aiml-navbar" role="navigation">
+    <div class="container">
+      <a href="../index.html" class="aiml-navbar-brand"><span class="brand-accent">AI</span><span style="color:var(--gray-300)">&amp;</span><span style="color:var(--white)">ML</span></a>
+      <button class="aiml-navbar-toggle" aria-label="Toggle menu" aria-expanded="false"><span></span><span></span><span></span></button>
+      <ul class="aiml-navbar-menu">
+        <li><a href="../index.html" class="aiml-navbar-link">Home</a></li>
+        <li class="navbar-dropdown">
+          <a href="aiml-about.html" class="aiml-navbar-link">About <span class="arrow">▼</span></a>
+          <ul class="navbar-dropdown-menu">
+            <li><a href="aiml-about.html#what-we-offer" class="navbar-dropdown-link"><span class="dd-icon">📚</span><span class="dd-text"><span class="dd-label">What We Offer</span><span class="dd-desc">Four pillars of AIML education</span></span></a></li>
+            <li><a href="aiml-about.html#peos" class="navbar-dropdown-link"><span class="dd-icon">🎯</span><span class="dd-text"><span class="dd-label">Program Educational Objectives</span><span class="dd-desc">Career &amp; professional accomplishments</span></span></a></li>
+            <li><a href="aiml-about.html#psos" class="navbar-dropdown-link"><span class="dd-icon">⚡</span><span class="dd-text"><span class="dd-label">Program Specific Outcomes</span><span class="dd-desc">Specific outcomes for AIML program</span></span></a></li>
+          </ul>
+        </li>
+        <li><a href="team.html" class="aiml-navbar-link active">Team</a></li>
+        <li><a href="events.html" class="aiml-navbar-link">Events</a></li>
+        <li><a href="gallery.html" class="aiml-navbar-link">Rank Holders</a></li>
+        <li><a href="placement.html" class="aiml-navbar-link">Placements</a></li>
+        <li><a href="innovial.html" class="aiml-navbar-link innoviyal-nav-highlight">Innoviyal</a></li>
+        <li><a href="contact.html" class="aiml-navbar-link">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main>
+    <!-- ========== FACULTY GROUP PHOTO ========== -->
+    <section class="section" style="padding-top:var(--space-12);padding-bottom:var(--space-6);background:linear-gradient(135deg,var(--gray-50),var(--white))">
+      <div class="container">
+        <div class="section-header animate-on-scroll">
+          <h2>Faculty <span style="color:var(--primary)">Group</span></h2>
+          <p>Department of CSE (AI & ML) — Committed to Excellence</p>
+        </div>
+        <div class="glass-card glass-card-dark" style="overflow:hidden;padding:0;border-radius:var(--radius-2xl);max-width:1000px;margin:0 auto">
+          <img src="../assets/faculty/faculty-group-photo.png" alt="Faculty Group Photo" style="width:100%;height:auto;display:block" loading="lazy">
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== HOD SECTION ========== -->
+    <section class="section" style="padding-top:var(--space-8);padding-bottom:var(--space-8);background:linear-gradient(135deg,var(--gray-50),var(--white))">
+      <div class="container">
+        <div class="section-header animate-on-scroll">
+          <h2>Head of <span style="color:var(--primary)">Department</span></h2>
+        </div>
+        <div class="premium-card animate-on-scroll" style="max-width:900px;margin:0 auto;border:1px solid var(--gray-200);overflow:visible">
+          <div class="premium-card-body">
+            <div style="display:flex;gap:var(--space-8);align-items:center;flex-wrap:wrap;justify-content:center">
+              <div style="text-align:center;flex-shrink:0">
+                <div style="position:relative;display:inline-block">
+                  <img src="../assets/hod/hod-photo-vivek.jpeg" alt="Head of Department" 
+                       style="width:180px;height:180px;border-radius:50%;object-fit:cover;border:5px solid var(--primary);box-shadow:0 0 30px rgba(249,115,22,0.3)"
+                       onerror="this.src='../assets/hod/hod-photo.jpeg'">
+  
+                </div>
+                <div style="margin-top:var(--space-3)">
+                  <div style="font-weight:var(--fw-bold);font-size:var(--fs-lg)">Dr. Vivekanandan P</div>
+                  <div style="color:var(--primary);font-weight:var(--fw-semibold);font-size:var(--fs-sm)">PROFESSOR &amp; HOD (I/C)</div>
+                </div>
+              </div>
+              <div style="flex:1;min-width:280px">
+                <p style="font-size:var(--fs-md);font-style:italic;color:var(--gray-600);line-height:var(--lh-relaxed);margin-bottom:var(--space-4)">
+                  Welcome to the Department of Artificial Intelligence and Machine Learning at MCET. Our department is committed to providing quality education 
+                  that blends theoretical foundations with practical applications. Through Innoviyal, our student association, 
+                  we create an ecosystem where innovation thrives.
+                </p>
+                <div style="display:flex;flex-wrap:wrap;gap:var(--space-3)">
+                  <span style="background:var(--primary-bg);padding:var(--space-2) var(--space-4);border-radius:var(--radius-lg);font-size:var(--fs-sm);border:1px solid rgba(249,115,22,0.15)"><strong>Designation:</strong> Professor &amp; HOD (I/C)</span>
+                  <span style="background:var(--primary-bg);padding:var(--space-2) var(--space-4);border-radius:var(--radius-lg);font-size:var(--fs-sm);border:1px solid rgba(249,115,22,0.15)"><strong>Department:</strong> CSE (AI &amp; ML)</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== FACULTY SECTION ========== -->
+    <section class="section" style="padding-top:0">
+      <div class="container">
+        <div class="section-header animate-on-scroll">
+          <h2>Our <span style="color:var(--primary)">Faculty</span></h2>
+          <p>Dedicated educators shaping the future of AI & ML</p>
+        </div>
+        <div class="grid grid-4" id="faculty-grid" style="gap:var(--space-6)">
+        </div>
+        <script>
+          const FACULTY_MEMBERS = [
+            { name: 'Mr. Selvakumar T', role: 'Assistant Professor (SS)', img: '../assets/faculty/Selvakumar T.jpeg' },
+            { name: 'Mr. Kanniyarasu K', role: 'Assistant Professor (SS)', img: '../assets/faculty/KANNIYARASU K.jpeg' },
+            { name: 'Mrs. Uma Maheshwari G', role: 'Assistant Professor (SS)', img: '../assets/faculty/UMA MAHESHWARI G.jpeg' },
+            { name: 'Mr. Sathish Kumar M', role: 'Assistant Professor (SS)', img: '../assets/faculty/SATHISH KUMAR M.jpeg' },
+            { name: 'Mr. Vijayakumar T', role: 'Assistant Professor (SS)', img: '../assets/faculty/Vijayakumar T.jpeg' },
+            { name: 'Mrs. Yamunadevi S', role: 'Assistant Professor', img: '../assets/faculty/YAMUNADEVI S.jpeg' },
+            { name: 'Mrs. Jessie P', role: 'Assistant Professor', img: '../assets/faculty/JESSIE P.jpeg' },
+            { name: 'Ms. Mithuna R', role: 'Assistant Professor', img: '../assets/faculty/Mithuna R.jpeg' },
+            { name: 'Mrs. Nanthini M', role: 'Assistant Professor', img: '../assets/faculty/NANTHINI M.jpeg' },
+          ];
+          const facultyGrid = document.getElementById('faculty-grid');
+          if (facultyGrid) {
+            facultyGrid.innerHTML = FACULTY_MEMBERS.map(f => `
+              <div class="team-card">
+                <img class="team-card-img" src="${f.img}" alt="${f.name}" loading="lazy"
+                     onerror="this.src='../assets/faculty/faculty-01.jpeg'">
+                <div class="team-card-body">
+                  <h4>${f.name}</h4>
+                  <div class="role">${f.role}</div>
+                  <span class="year-badge">Faculty</span>
+                </div>
+              </div>
+            `).join('');
+          }
+        </script>
+      </div>
+    </section>
+
+    <!-- ========== STUDENT NAMELISTS ========== -->
+    <section class="section section-gray">
+      <div class="container">
+        <div class="section-header animate-on-scroll">
+          <h2>Student <span style="color:var(--primary)">Namelists</span></h2>
+          <p>Download the official student rosters for all academic years</p>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:var(--space-6);max-width:1000px;margin:0 auto">
+          <div class="glass-card glass-card-dark" style="text-align:center;padding:var(--space-8)">
+            <div style="font-size:48px;margin-bottom:var(--space-4)">📋</div>
+            <h3>2nd Year Students</h3>
+            <p style="color:var(--gray-400);margin-bottom:var(--space-4)">Academic Year 2025-2026 — Section A &amp; B</p>
+            <a href="../assets/data/2nd-year-student-list.pdf" download class="btn btn-primary">
+              <i class="fas fa-download"></i> Download PDF
+            </a>
+          </div>
+          <div class="glass-card glass-card-dark" style="text-align:center;padding:var(--space-8)">
+            <div style="font-size:48px;margin-bottom:var(--space-4)">📋</div>
+            <h3>3rd Year Students</h3>
+            <p style="color:var(--gray-400);margin-bottom:var(--space-4)">Academic Year 2025-2026 — Section A &amp; B</p>
+            <a href="../assets/data/3rd-year-student-list.pdf" download class="btn btn-primary">
+              <i class="fas fa-download"></i> Download PDF
+            </a>
+          </div>
+          <div class="glass-card glass-card-dark" style="text-align:center;padding:var(--space-8)">
+            <div style="font-size:48px;margin-bottom:var(--space-4)">📋</div>
+            <h3>4th Year Students</h3>
+            <p style="color:var(--gray-400);margin-bottom:var(--space-4)">Academic Year 2025-2026 — Section A &amp; B</p>
+            <a href="../assets/data/4th-year-student-list.pdf" download class="btn btn-primary">
+              <i class="fas fa-download"></i> Download PDF
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Profile Modal -->
+  <div id="profile-modal" style="display:none"></div>
+
+  <footer style="background:var(--secondary-dark);color:var(--gray-300);padding:var(--space-12) 0 var(--space-6)">
+    <div class="container">
+      <div style="border-top:1px solid rgba(255,255,255,0.1);padding-top:var(--space-6);text-align:center">
+        <p>© 2026 CSE (AI & ML) — MCET. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/api.js"></script>
+  <script src="../js/utils.js"></script>
+  <script src="../js/auth.js"></script>
+  <script src="../js/main.js"></script>
+  <script src="../js/team-filter.js"></script>
+  <script src="../js/glass-card.js"></script>
+  <script>
+    // Navbar scroll effect + Mobile menu toggle
+    document.addEventListener('DOMContentLoaded', () => {
+      const navbar = document.querySelector('.aiml-navbar');
+      if (navbar) {
+        window.addEventListener('scroll', () => {
+          navbar.classList.toggle('scrolled', window.scrollY > 80);
+        }, { passive: true });
+      }
+      const toggle = document.querySelector('.aiml-navbar-toggle');
+      const menu = document.querySelector('.aiml-navbar-menu');
+      if(toggle&&menu){toggle.addEventListener('click',()=>{const isOpen=menu.classList.toggle('open');toggle.classList.toggle('active');toggle.setAttribute('aria-expanded',isOpen);document.body.style.overflow=isOpen?'hidden':''});menu.querySelectorAll('a').forEach(link=>{link.addEventListener('click',()=>{menu.classList.remove('open');toggle.classList.remove('active');toggle.setAttribute('aria-expanded','false');document.body.style.overflow=''})})}
+    });
+    // Real association member data from uploaded photos
+    window.INNOVIYAL_TEAM_MEMBERS = [
+      { id: 1, name: 'Thomas Edwin', category: 'ASSOCIATION_CORE', roleTitle: 'President', year: '3rd Year', photoUrl: '../assets/team/Thomas Edwin.jpeg' },
+      { id: 2, name: 'VIBHUVARSHAN', category: 'ASSOCIATION_CORE', roleTitle: 'Vice President', year: '3rd Year', photoUrl: '../assets/team/VIBHUVARSHAN.png' },
+      { id: 3, name: 'SUBASH', category: 'ASSOCIATION_CORE', roleTitle: 'Secretary', year: '3rd Year', photoUrl: '../assets/team/SUBASH.jpeg' },
+      { id: 4, name: 'SANJAI', category: 'ASSOCIATION_CORE', roleTitle: 'Joint Secretary', year: '3rd Year', photoUrl: '../assets/team/SANJAI.jpeg' },
+      { id: 5, name: 'DHARANIDHARAN', category: 'ASSOCIATION_CORE', roleTitle: 'Treasurer', year: '3rd Year', photoUrl: '../assets/team/DHARANIDHARAN.png' },
+      { id: 6, name: 'HARI RAM', category: 'ASSOCIATION_CORE', roleTitle: 'Tech Lead', year: '3rd Year', photoUrl: '../assets/team/HARI RAM.jpeg' },
+      { id: 7, name: 'Rishi Karthick', category: 'ASSOCIATION_CORE', roleTitle: 'PR Lead', year: '3rd Year', photoUrl: '../assets/team/Rishi Karthick.jpeg' },
+      { id: 8, name: 'MANOJ', category: 'ASSOCIATION_CORE', roleTitle: 'Event Coordinator', year: '3rd Year', photoUrl: '../assets/team/MANOJ.jpeg' },
+      { id: 9, name: 'Fareed Ahamed', category: 'ASSOCIATION_CORE', roleTitle: 'Design Lead', year: '3rd Year', photoUrl: '../assets/team/Fareed Ahamed.jpg.jpeg' },
+      { id: 10, name: 'KAPISH', category: 'ASSOCIATION_CORE', roleTitle: 'Cultural Lead', year: '3rd Year', photoUrl: '../assets/team/KAPISH.jpeg' },
+      { id: 11, name: 'ABHITHA', category: 'ASSOCIATION_COORDINATOR', roleTitle: 'Coordinator', year: '2nd Year', photoUrl: '../assets/team/ABHITHA.jpeg' },
+      { id: 12, name: 'Adhithya', category: 'ASSOCIATION_COORDINATOR', roleTitle: 'Coordinator', year: '2nd Year', photoUrl: '../assets/team/Adhithya.jpeg' },
+      { id: 13, name: 'BHAVATHARINI', category: 'ASSOCIATION_COORDINATOR', roleTitle: 'Coordinator', year: '2nd Year', photoUrl: '../assets/team/BHAVATHARINI.jpeg?v=2' },
+      { id: 14, name: 'DHARSHINI', category: 'ASSOCIATION_COORDINATOR', roleTitle: 'Coordinator', year: '2nd Year', photoUrl: '../assets/team/DHARSHINI.jpeg' },
+      { id: 15, name: 'Devasri', category: 'ASSOCIATION_COORDINATOR', roleTitle: 'Coordinator', year: '2nd Year', photoUrl: '../assets/team/Devasri.jpeg' },
+      { id: 16, name: 'Dhanvanth', category: 'ASSOCIATION_COORDINATOR', roleTitle: 'Coordinator', year: '2nd Year', photoUrl: '../assets/team/Dhanvanth U.jpeg' },
+      { id: 17, name: 'HARI PRASATH', category: 'ASSOCIATION_COORDINATOR', roleTitle: 'Coordinator', year: '2nd Year', photoUrl: '../assets/team/HARI PRASATH 16.jpeg' },
+      { id: 18, name: 'HARINIMITHRA', category: 'ASSOCIATION_COORDINATOR', roleTitle: 'Coordinator', year: '2nd Year', photoUrl: '../assets/team/HARINIMITHRA.jpg.jpeg' },
+      { id: 19, name: 'HARIPRASATH', category: 'ASSOCIATION_COORDINATOR', roleTitle: 'Coordinator', year: '2nd Year', photoUrl: '../assets/team/HARIPRASATH 21.jpeg' },
+      { id: 20, name: 'Harikaran', category: 'ASSOCIATION_COORDINATOR', roleTitle: 'Coordinator', year: '2nd Year', photoUrl: '../assets/team/Harikaran.jpeg' },
+      { id: 21, name: 'Logeshwaran', category: 'ASSOCIATION_COORDINATOR', roleTitle: 'Coordinator', year: '2nd Year', photoUrl: '../assets/team/Logeshwaran.png' },
+      { id: 22, name: 'MOHIN', category: 'ASSOCIATION_COORDINATOR', roleTitle: 'Coordinator', year: '2nd Year', photoUrl: '../assets/team/MOHIN.jpeg' },
+      { id: 23, name: 'Nawya', category: 'ASSOCIATION_COORDINATOR', roleTitle: 'Coordinator', year: '2nd Year', photoUrl: '../assets/team/Nawya.jpg.jpeg' },
+      { id: 24, name: 'PRAVEENA', category: 'ASSOCIATION_COORDINATOR', roleTitle: 'Coordinator', year: '2nd Year', photoUrl: '../assets/team/PRAVEENA.jpeg' },
+      { id: 25, name: 'Ramya', category: 'ASSOCIATION_COORDINATOR', roleTitle: 'Coordinator', year: '2nd Year', photoUrl: '../assets/team/Ramya.jpeg' },
+      { id: 26, name: 'SANTHOSH', category: 'ASSOCIATION_COORDINATOR', roleTitle: 'Coordinator', year: '2nd Year', photoUrl: '../assets/team/SANTHOSH.jpeg' },
+      { id: 27, name: 'SATHYA', category: 'ASSOCIATION_COORDINATOR', roleTitle: 'Coordinator', year: '2nd Year', photoUrl: '../assets/team/SATHYA.jpg.jpeg' },
+      { id: 28, name: 'SUDARMATHI', category: 'ASSOCIATION_COORDINATOR', roleTitle: 'Coordinator', year: '2nd Year', photoUrl: '../assets/team/SUDARMATHI.jpeg' },
+      { id: 29, name: 'Sahanasri', category: 'ASSOCIATION_COORDINATOR', roleTitle: 'Coordinator', year: '2nd Year', photoUrl: '../assets/team/Sahanasri.jpeg' },
+      { id: 30, name: 'Sakthi Sri', category: 'ASSOCIATION_COORDINATOR', roleTitle: 'Coordinator', year: '2nd Year', photoUrl: '../assets/team/Sakthi Sri.jpg.jpeg' },
+      { id: 31, name: 'Saravana Kumar', category: 'ASSOCIATION_COORDINATOR', roleTitle: 'Coordinator', year: '2nd Year', photoUrl: '../assets/team/Saravana Kumar.png' },
+      { id: 32, name: 'Selvdharshini', category: 'ASSOCIATION_COORDINATOR', roleTitle: 'Coordinator', year: '2nd Year', photoUrl: '../assets/team/Selvdharshini.jpeg' },
+    ];
+  </script>
+</body>
+</html>

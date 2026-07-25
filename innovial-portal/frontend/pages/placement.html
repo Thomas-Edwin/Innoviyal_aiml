@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Placement Prep — CSE (AI & ML) | MCET</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="../css/variables.css"><link rel="stylesheet" href="../css/style.css"><link rel="stylesheet" href="../css/glass-card.css"><link rel="stylesheet" href="../css/components.css">
+<style>
+.top-info-bar{background:var(--secondary-dark);color:var(--gray-300);font-size:13px;border-bottom:1px solid rgba(255,255,255,0.06);position:relative;z-index:502}
+.top-info-bar .container{display:flex;align-items:center;justify-content:space-between;height:56px;gap:var(--space-4)}
+.top-info-bar-left{display:flex;align-items:center;gap:var(--space-4);flex:1;min-width:0}
+.top-info-bar-left .top-bar-logo{height:46px;width:auto;flex-shrink:0;transition:all var(--transition-base)}
+.top-info-bar-left .top-bar-logo:hover{transform:scale(1.05)}
+.top-bar-text{line-height:1.25;min-width:0}
+.top-bar-text .college-name{font-size:14px;font-weight:var(--fw-bold);color:var(--white);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;letter-spacing:0.3px}
+.top-bar-text .dept-subtitle{font-size:12px;color:var(--primary-light);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-weight:var(--fw-medium)}
+.top-info-bar-right{display:flex;align-items:center;gap:var(--space-6);flex-shrink:0}
+.counselling-code{display:flex;align-items:center;gap:var(--space-1);font-size:12px;color:var(--gray-300);padding:4px 12px;background:rgba(255,255,255,0.05);border-radius:var(--radius-md);border:1px solid rgba(255,255,255,0.06)}
+.counselling-code .code-label{font-weight:var(--fw-medium);color:var(--gray-400)}
+.counselling-code .code-value{font-weight:var(--fw-bold);color:var(--primary);letter-spacing:.5px}
+.top-social-icons{display:flex;align-items:center;gap:8px}
+.top-social-icons a{display:flex;align-items:center;justify-content:center;width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,0.08);color:var(--gray-300);text-decoration:none;transition:all var(--transition-fast);font-size:14px}
+.top-social-icons a:hover{background:var(--primary);color:var(--white);transform:translateY(-2px);box-shadow:0 4px 12px rgba(249,115,22,0.3)}
+.aiml-navbar{position:sticky;top:0;left:0;right:0;z-index:501;background:#0b1120;border-bottom:1px solid rgba(255,255,255,0.06);transition:all var(--transition-base)}
+.aiml-navbar.scrolled{background:rgba(11,17,32,0.98);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);box-shadow:0 4px 30px rgba(0,0,0,0.3)}
+.aiml-navbar .container{display:flex;align-items:center;justify-content:space-between;height:64px}
+.aiml-navbar-brand{font-family:var(--font-heading);font-size:var(--fs-xl);font-weight:var(--fw-bold);color:var(--white);text-decoration:none;display:flex;align-items:center;gap:var(--space-2);flex-shrink:0}
+.aiml-navbar-brand .brand-accent{color:var(--primary)}
+.aiml-navbar-menu{display:flex;align-items:center;gap:4px;list-style:none}
+.aiml-navbar-link{padding:8px 16px;color:rgba(255,255,255,0.75);font-size:13.5px;font-weight:var(--fw-medium);text-decoration:none;border-radius:var(--radius-md);transition:all var(--transition-fast);white-space:nowrap;letter-spacing:.3px;position:relative}
+.aiml-navbar-link:hover{color:var(--white);background:rgba(255,255,255,0.07)}
+.aiml-navbar-link::after{content:'';position:absolute;bottom:2px;left:50%;transform:translateX(-50%) scaleX(0);width:20px;height:2px;background:var(--primary);border-radius:var(--radius-full);transition:transform var(--transition-base)}
+.aiml-navbar-link:hover::after{transform:translateX(-50%) scaleX(1)}
+.aiml-navbar-link.active{color:var(--primary-light);background:rgba(249,115,22,0.1)}
+.aiml-navbar-link.active::after{transform:translateX(-50%) scaleX(1)}
+.aiml-navbar-toggle{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:var(--space-2)}
+.aiml-navbar-toggle span{display:block;width:22px;height:2px;background:var(--white);border-radius:2px;transition:all var(--transition-base)}
+.aiml-navbar-toggle.active span:nth-child(1){transform:rotate(45deg) translate(5px,5px)}
+.aiml-navbar-toggle.active span:nth-child(2){opacity:0}
+.aiml-navbar-toggle.active span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px)}
+@media(max-width:768px){.top-info-bar .container{height:auto;flex-wrap:wrap;padding:8px var(--space-4);gap:6px}
+.top-bar-text .college-name{font-size:12px}
+.top-bar-text .dept-subtitle{font-size:11px}
+.top-info-bar-left .top-bar-logo{height:36px}
+.counselling-code{font-size:10px;padding:2px 8px}
+.top-social-icons a{width:28px;height:28px;font-size:12px}
+.aiml-navbar .container{height:56px}
+.aiml-navbar-menu{display:none}
+.aiml-navbar-toggle{display:flex}
+.aiml-navbar-menu.open{display:flex;position:fixed;top:0;right:0;width:280px;height:100vh;background:#0b1120;flex-direction:column;padding:80px var(--space-6) var(--space-6);gap:var(--space-1);box-shadow:-10px 0 30px rgba(0,0,0,0.4);z-index:500}
+.aiml-navbar-menu.open .aiml-navbar-link{width:100%;padding:12px 16px;font-size:14px}
+.aiml-navbar-menu.open .aiml-navbar-link::after{display:none}}
+  @keyframes placementFloat {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+    }
+    @keyframes placementPulse {
+      0%, 100% { transform: scale(1); box-shadow: 0 0 20px rgba(249,115,22,0.3); }
+      50% { transform: scale(1.05); box-shadow: 0 0 40px rgba(249,115,22,0.5); }
+    }
+    .aiml-navbar-link.innoviyal-nav-highlight,.aiml-navbar-link.innoviyal-nav-highlight:hover,.aiml-navbar-link.innoviyal-nav-highlight.active{background:rgba(249,115,22,0.1);color:#3B82F6;border-radius:var(--radius-md)}
+</style>
+</head>
+<body>
+  <!-- ===== TOP INFO BAR ===== -->
+  <div class="top-info-bar"><div class="container">
+    <div class="top-info-bar-left">
+      <img src="../assets/logo/mcet-logo.png" alt="MCET" class="top-bar-logo" onerror="this.style.display='none'">
+      <div class="top-bar-text">
+        <div class="college-name">Dr. Mahalingam College of Engineering and Technology</div>
+        <div class="dept-subtitle">Department of CSE (AI & ML)</div>
+      </div>
+    </div>
+    <div class="top-info-bar-right">
+      <div class="counselling-code"><span class="code-label">TNEA Counselling Code: </span><span class="code-value">2706</span></div>
+      <div class="top-social-icons">
+        <a href="https://facebook.com" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+        <a href="https://instagram.com" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+        <a href="https://linkedin.com" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+        <a href="https://youtube.com" target="_blank" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+      </div>
+    </div>
+  </div></div>
+
+  <!-- ===== MAIN NAVBAR ===== -->
+  <nav class="aiml-navbar" role="navigation">
+    <div class="container">
+      <a href="../index.html" class="aiml-navbar-brand"><span class="brand-accent">AI</span><span style="color:var(--gray-300)">&amp;</span><span style="color:var(--white)">ML</span></a>
+      <button class="aiml-navbar-toggle" aria-label="Toggle menu" aria-expanded="false"><span></span><span></span><span></span></button>
+      <ul class="aiml-navbar-menu">
+        <li><a href="../index.html" class="aiml-navbar-link">Home</a></li>
+        <li class="navbar-dropdown">
+          <a href="aiml-about.html" class="aiml-navbar-link">About <span class="arrow">▼</span></a>
+          <ul class="navbar-dropdown-menu">
+            <li><a href="aiml-about.html#what-we-offer" class="navbar-dropdown-link"><span class="dd-icon">📚</span><span class="dd-text"><span class="dd-label">What We Offer</span><span class="dd-desc">Four pillars of AIML education</span></span></a></li>
+            <li><a href="aiml-about.html#peos" class="navbar-dropdown-link"><span class="dd-icon">🎯</span><span class="dd-text"><span class="dd-label">Program Educational Objectives</span><span class="dd-desc">Career &amp; professional accomplishments</span></span></a></li>
+            <li><a href="aiml-about.html#psos" class="navbar-dropdown-link"><span class="dd-icon">⚡</span><span class="dd-text"><span class="dd-label">Program Specific Outcomes</span><span class="dd-desc">Specific outcomes for AIML program</span></span></a></li>
+          </ul>
+        </li>
+        <li><a href="team.html" class="aiml-navbar-link">Team</a></li>
+        <li><a href="events.html" class="aiml-navbar-link">Events</a></li>
+        <li><a href="gallery.html" class="aiml-navbar-link">Gallery</a></li>
+        <li><a href="placement.html" class="aiml-navbar-link active">Placements</a></li>
+        <li><a href="innovial.html" class="aiml-navbar-link innoviyal-nav-highlight">Innoviyal</a></li>
+        <li><a href="contact.html" class="aiml-navbar-link">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <section class="page-hero"><div class="container">
+    <div class="breadcrumb"><a href="../index.html">Home</a> / <span>Placement Prep</span></div>
+    <h1><span style="color:var(--primary)">Placement &amp; Interview Preparation</span></h1>
+    <p>Placement records, company-wise details, and curated resources for interview prep — CSE (AI &amp; ML)</p>
+  </div></section>
+
+  <main class="section">
+    <div class="container">
+      <!-- Placement Stats -->
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:var(--space-6);margin-bottom:var(--space-6)">
+        <div class="premium-card" style="text-align:center;padding:var(--space-6);border:2px solid var(--primary-bg)">
+          <div style="font-size:var(--fs-3xl);font-weight:var(--fw-extrabold);color:var(--primary)">13 LPA</div>
+          <div style="font-size:var(--fs-sm);color:var(--gray-500);font-weight:var(--fw-medium)">Highest Package</div>
+          <div style="margin-top:var(--space-2);font-size:var(--fs-xs);color:var(--gray-400)">AIML Department</div>
+        </div>
+        <div class="premium-card" style="text-align:center;padding:var(--space-6);border:2px solid var(--primary-bg)">
+          <div style="font-size:var(--fs-3xl);font-weight:var(--fw-extrabold);color:var(--primary)">4.2 LPA</div>
+          <div style="font-size:var(--fs-sm);color:var(--gray-500);font-weight:var(--fw-medium)">Average Package</div>
+          <div style="margin-top:var(--space-2);font-size:var(--fs-xs);color:var(--gray-400)">AIML Department</div>
+        </div>
+        <div class="premium-card" style="text-align:center;padding:var(--space-6);border:2px solid var(--primary-bg)">
+          <div style="font-size:var(--fs-3xl);font-weight:var(--fw-extrabold);color:var(--primary)">25</div>
+          <div style="font-size:var(--fs-sm);color:var(--gray-500);font-weight:var(--fw-medium)">Students Placed</div>
+          <div style="margin-top:var(--space-2);font-size:var(--fs-xs);color:var(--gray-400)">4+ LPA Packages</div>
+        </div>
+        <div class="premium-card" style="text-align:center;padding:var(--space-6);border:2px solid var(--primary-bg)">
+          <div style="font-size:var(--fs-3xl);font-weight:var(--fw-extrabold);color:var(--primary)">6+</div>
+          <div style="font-size:var(--fs-sm);color:var(--gray-500);font-weight:var(--fw-medium)">Top Recruiters</div>
+          <div style="margin-top:var(--space-2);font-size:var(--fs-xs);color:var(--gray-400)">Industry Leaders</div>
+        </div>
+      </div>
+
+      <!-- ========== FEATURED STUDENT (HIGHEST PACKAGE) ========== -->
+      <section style="background:linear-gradient(135deg,var(--secondary),var(--secondary-dark));border-radius:var(--radius-2xl);padding:var(--space-10);margin-bottom:var(--space-8);position:relative;overflow:hidden">
+        <div style="position:absolute;top:-30%;right:-10%;width:50%;height:70%;background:radial-gradient(circle,rgba(249,115,22,0.12),transparent 70%);pointer-events:none"></div>
+        <div class="section-header animate-on-scroll" style="margin-bottom:var(--space-8)">
+          <h2 style="color:var(--white)">Top <span style="color:var(--primary)">Placement Achiever</span></h2>
+          <p style="color:var(--gray-300)">Best Outgoing Student with the Highest Salary Package</p>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:var(--space-10);align-items:center;position:relative;z-index:1">
+          <div style="text-align:center">
+            <div style="width:280px;height:280px;margin:0 auto;border-radius:var(--radius-2xl);overflow:hidden;border:4px solid var(--primary);box-shadow:0 0 40px rgba(249,115,22,0.3);animation:placementFloat 4s ease-in-out infinite">
+              <img src="../assets/placement/guru.png" alt="Gurudharshan" style="width:100%;height:100%;object-fit:cover">
+            </div>
+          </div>
+          <div>
+            <div class="hero-badge" style="margin-bottom:var(--space-4);color:var(--primary)">🏆 Best Outgoing Student</div>
+            <h2 style="font-size:var(--fs-4xl);color:var(--white);margin-bottom:var(--space-2);line-height:1.2">GURUDHARSHAN</h2>
+            <div style="display:flex;gap:var(--space-4);align-items:center;margin-bottom:var(--space-6);flex-wrap:wrap">
+              <div class="glass-card" style="padding:var(--space-3) var(--space-5);text-align:center;flex:1;min-width:120px">
+                <div style="font-size:var(--fs-2xl);font-weight:var(--fw-extrabold);color:var(--primary)">10 LPA</div>
+                <div style="font-size:var(--fs-xs);color:var(--gray-400)">Highest Package</div>
+              </div>
+              <div class="glass-card" style="padding:var(--space-3) var(--space-5);text-align:center;flex:1;min-width:120px">
+                <div style="font-size:var(--fs-xl);font-weight:var(--fw-bold);color:var(--primary)">ACCORIAN</div>
+                <div style="font-size:var(--fs-xs);color:var(--gray-400)">Company</div>
+              </div>
+            </div>
+            <p style="color:var(--gray-300);font-size:var(--fs-sm);line-height:var(--lh-relaxed)">
+              Gurudharshan has been recognized as the Best Outgoing Student with an outstanding placement achievement. 
+              His dedication, technical expertise, and relentless pursuit of excellence have earned him the highest 
+              salary package of 10 LPA from Accorian.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ========== SECOND ROW: TWO CARDS ========== -->
+      <div class="section-header animate-on-scroll">
+        <h2>More <span style="color:var(--primary)">Placement Achievers</span></h2>
+        <p>Outstanding students with exceptional placement packages</p>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:var(--space-6);margin-bottom:var(--space-6)">
+        <!-- Left Card: SARANYA MJ -->
+        <div class="glass-card glass-card-dark" style="text-align:center;padding:var(--space-8);animation:placementFloat 4s ease-in-out infinite">
+          <div style="width:180px;height:180px;margin:0 auto var(--space-5);border-radius:50%;overflow:hidden;border:4px solid var(--primary);box-shadow:0 0 30px rgba(249,115,22,0.2)">
+            <img src="../assets/placement/Saranya M J .png" alt="Saranya MJ" style="width:100%;height:100%;object-fit:cover">
+          </div>
+          <h3 style="font-size:var(--fs-2xl);margin-bottom:var(--space-2)">SARANYA MJ</h3>
+          <div style="display:flex;gap:var(--space-4);justify-content:center;align-items:center;flex-wrap:wrap">
+            <div style="background:var(--primary-bg);padding:var(--space-2) var(--space-5);border-radius:var(--radius-lg);text-align:center">
+              <div style="font-size:var(--fs-xl);font-weight:var(--fw-bold);color:var(--primary)">8.5 LPA</div>
+              <div style="font-size:var(--fs-xs);color:var(--gray-500)">Package</div>
+            </div>
+            <div style="background:var(--primary-bg);padding:var(--space-2) var(--space-5);border-radius:var(--radius-lg);text-align:center">
+              <div style="font-size:var(--fs-md);font-weight:var(--fw-bold);color:var(--primary)">EPAM</div>
+              <div style="font-size:var(--fs-xs);color:var(--gray-500)">Company</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Card: SHWETHA -->
+        <div class="glass-card glass-card-dark" style="text-align:center;padding:var(--space-8);animation:placementFloat 4s ease-in-out infinite;animation-delay:0.5s">
+          <div style="width:180px;height:180px;margin:0 auto var(--space-5);border-radius:50%;overflow:hidden;border:4px solid var(--primary);box-shadow:0 0 30px rgba(249,115,22,0.2)">
+            <img src="../assets/placement/shwetha1.png" alt="Shwetha" style="width:100%;height:100%;object-fit:cover">
+          </div>
+          <h3 style="font-size:var(--fs-2xl);margin-bottom:var(--space-2)">SHWETHA</h3>
+          <div style="display:flex;gap:var(--space-4);justify-content:center;align-items:center;flex-wrap:wrap">
+            <div style="background:var(--primary-bg);padding:var(--space-2) var(--space-5);border-radius:var(--radius-lg);text-align:center">
+              <div style="font-size:var(--fs-xl);font-weight:var(--fw-bold);color:var(--primary)">6.5 LPA</div>
+              <div style="font-size:var(--fs-xs);color:var(--gray-500)">Package</div>
+            </div>
+            <div style="background:var(--primary-bg);padding:var(--space-2) var(--space-5);border-radius:var(--radius-lg);text-align:center">
+              <div style="font-size:var(--fs-md);font-weight:var(--fw-bold);color:var(--primary)">EMBEDUR SYSTEMS</div>
+              <div style="font-size:var(--fs-xs);color:var(--gray-500)">Company</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ========== THIRD ROW: TWO CARDS ========== -->
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:var(--space-6);margin-bottom:var(--space-8)">
+        <!-- Left Card: BIBEK BARIK -->
+        <div class="glass-card glass-card-dark" style="text-align:center;padding:var(--space-8);animation:placementFloat 4s ease-in-out infinite;animation-delay:1s">
+          <div style="width:160px;height:160px;margin:0 auto var(--space-5);border-radius:50%;overflow:hidden;border:4px solid var(--primary);box-shadow:0 0 30px rgba(249,115,22,0.2)">
+            <img src="../assets/placement/Bibek Barik.jpg.jpeg" alt="Bibek Barik" style="width:100%;height:100%;object-fit:cover">
+          </div>
+          <h3 style="font-size:var(--fs-xl);margin-bottom:var(--space-2)">BIBEK BARIK</h3>
+          <div style="display:flex;gap:var(--space-4);justify-content:center;align-items:center;flex-wrap:wrap">
+            <div style="background:var(--primary-bg);padding:var(--space-2) var(--space-5);border-radius:var(--radius-lg);text-align:center">
+              <div style="font-size:var(--fs-lg);font-weight:var(--fw-bold);color:var(--primary)">6 LPA</div>
+              <div style="font-size:var(--fs-xs);color:var(--gray-500)">Package</div>
+            </div>
+            <div style="background:var(--primary-bg);padding:var(--space-2) var(--space-5);border-radius:var(--radius-lg);text-align:center">
+              <div style="font-size:var(--fs-md);font-weight:var(--fw-bold);color:var(--primary)">QUADRA SYSTEMS</div>
+              <div style="font-size:var(--fs-xs);color:var(--gray-500)">Company</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Card: CHANDIRA PRAKASH M -->
+        <div class="glass-card glass-card-dark" style="text-align:center;padding:var(--space-8);animation:placementFloat 4s ease-in-out infinite;animation-delay:1.5s">
+          <div style="width:160px;height:160px;margin:0 auto var(--space-5);border-radius:50%;overflow:hidden;border:4px solid var(--primary);box-shadow:0 0 30px rgba(249,115,22,0.2)">
+            <img src="../assets/placement/Chandira Prakash.jpg.jpeg" alt="Chandira Prakash M" style="width:100%;height:100%;object-fit:cover">
+          </div>
+          <h3 style="font-size:var(--fs-xl);margin-bottom:var(--space-2)">CHANDIRA PRAKASH M</h3>
+          <div style="display:flex;gap:var(--space-4);justify-content:center;align-items:center;flex-wrap:wrap">
+            <div style="background:var(--primary-bg);padding:var(--space-2) var(--space-5);border-radius:var(--radius-lg);text-align:center">
+              <div style="font-size:var(--fs-lg);font-weight:var(--fw-bold);color:var(--primary)">5.5 LPA</div>
+              <div style="font-size:var(--fs-xs);color:var(--gray-500)">Package</div>
+            </div>
+            <div style="background:var(--primary-bg);padding:var(--space-2) var(--space-5);border-radius:var(--radius-lg);text-align:center">
+              <div style="font-size:var(--fs-md);font-weight:var(--fw-bold);color:var(--primary)">EY</div>
+              <div style="font-size:var(--fs-xs);color:var(--gray-500)">Company</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ========== AND MORE... ========== -->
+      <div style="text-align:center;padding:var(--space-8);margin-bottom:var(--space-6);position:relative">
+        <div style="position:absolute;top:50%;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--primary),transparent);pointer-events:none"></div>
+        <span style="display:inline-block;background:var(--primary);color:var(--white);padding:var(--space-3) var(--space-8);border-radius:var(--radius-full);font-size:var(--fs-xl);font-weight:var(--fw-bold);position:relative;z-index:1;box-shadow:0 0 30px rgba(249,115,22,0.4);animation:placementPulse 2s ease-in-out infinite">
+          AND MORE...
+        </span>
+      </div>
+
+      <!-- ========== PRE-FINAL YEAR INTERNS HEADING ========== -->
+      <div class="section-header animate-on-scroll" style="margin-bottom:var(--space-8)">
+        <h2 style="color:var(--primary)">Pre-Final Year Interns</h2>
+      </div>
+
+      <!-- ========== STUDENTS WITH INTERNSHIPS ========== -->
+      <section style="background:linear-gradient(135deg,var(--gray-50),var(--white));border-radius:var(--radius-2xl);padding:var(--space-10);margin-bottom:var(--space-8)">
+        <div class="section-header animate-on-scroll">
+          <h2 style="color:var(--primary)">Students with Internships</h2>
+          <p>Exceptional students who secured prestigious internship opportunities</p>
+        </div>
+
+        <!-- Featured Internship Students -->
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:var(--space-6);margin-bottom:var(--space-8)">
+          <div class="glass-card glass-card-dark" style="text-align:center;padding:var(--space-6);animation:placementFloat 4s ease-in-out infinite">
+            <div style="width:64px;height:64px;margin:0 auto var(--space-4);border-radius:50%;background:var(--primary-bg);display:flex;align-items:center;justify-content:center;font-size:28px">🎓</div>
+            <h3 style="font-size:var(--fs-lg);margin-bottom:var(--space-1)">Harisiddarth</h3>
+            <div style="color:var(--primary);font-weight:var(--fw-semibold);font-size:var(--fs-sm);margin-bottom:var(--space-2)">Data Conquest Search Hub</div>
+            <div style="background:var(--primary-bg);padding:var(--space-1) var(--space-4);border-radius:var(--radius-full);display:inline-block;font-size:var(--fs-sm);font-weight:var(--fw-bold);color:var(--primary)">₹20,000</div>
+          </div>
+          <div class="glass-card glass-card-dark" style="text-align:center;padding:var(--space-6);animation:placementFloat 4s ease-in-out infinite;animation-delay:0.3s">
+            <div style="width:64px;height:64px;margin:0 auto var(--space-4);border-radius:50%;background:var(--primary-bg);display:flex;align-items:center;justify-content:center;font-size:28px">🎓</div>
+            <h3 style="font-size:var(--fs-lg);margin-bottom:var(--space-1)">Sachin M</h3>
+            <div style="color:var(--primary);font-weight:var(--fw-semibold);font-size:var(--fs-sm);margin-bottom:var(--space-2)">Data Conquest Search Hub</div>
+            <div style="background:var(--primary-bg);padding:var(--space-1) var(--space-4);border-radius:var(--radius-full);display:inline-block;font-size:var(--fs-sm);font-weight:var(--fw-bold);color:var(--primary)">₹20,000</div>
+          </div>
+          <div class="glass-card glass-card-dark" style="text-align:center;padding:var(--space-6);animation:placementFloat 4s ease-in-out infinite;animation-delay:0.6s">
+            <div style="width:64px;height:64px;margin:0 auto var(--space-4);border-radius:50%;background:var(--primary-bg);display:flex;align-items:center;justify-content:center;font-size:28px">🎓</div>
+            <h3 style="font-size:var(--fs-lg);margin-bottom:var(--space-1)">Harini S</h3>
+            <div style="color:var(--primary);font-weight:var(--fw-semibold);font-size:var(--fs-sm);margin-bottom:var(--space-2)">Renault Nissan</div>
+            <div style="background:var(--primary-bg);padding:var(--space-1) var(--space-4);border-radius:var(--radius-full);display:inline-block;font-size:var(--fs-sm);font-weight:var(--fw-bold);color:var(--primary)">₹20,000</div>
+          </div>
+          <div class="glass-card glass-card-dark" style="text-align:center;padding:var(--space-6);animation:placementFloat 4s ease-in-out infinite;animation-delay:0.9s">
+            <div style="width:64px;height:64px;margin:0 auto var(--space-4);border-radius:50%;background:var(--primary-bg);display:flex;align-items:center;justify-content:center;font-size:28px">🎓</div>
+            <h3 style="font-size:var(--fs-lg);margin-bottom:var(--space-1)">Mouna SK</h3>
+            <div style="color:var(--primary);font-weight:var(--fw-semibold);font-size:var(--fs-sm);margin-bottom:var(--space-2)">Renault Nissan</div>
+            <div style="background:var(--primary-bg);padding:var(--space-1) var(--space-4);border-radius:var(--radius-full);display:inline-block;font-size:var(--fs-sm);font-weight:var(--fw-bold);color:var(--primary)">₹20,000</div>
+          </div>
+        </div>
+
+        <!-- Other Internship Achievers -->
+        <div class="section-header animate-on-scroll" style="margin-bottom:var(--space-6)">
+          <h3 style="font-size:var(--fs-2xl)">Other Internship <span style="color:var(--primary)">Achievers</span></h3>
+          <p>More students who secured valuable industry internships</p>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:var(--space-4)">
+          <div class="glass-card glass-card-dark" style="text-align:center;padding:var(--space-4)"><h4 style="font-size:var(--fs-sm);margin-bottom:var(--space-1)">Shenbaga Devi</h4><div style="color:var(--primary);font-size:var(--fs-xs);font-weight:var(--fw-medium)">Tridox</div></div>
+          <div class="glass-card glass-card-dark" style="text-align:center;padding:var(--space-4)"><h4 style="font-size:var(--fs-sm);margin-bottom:var(--space-1)">Subassree</h4><div style="color:var(--primary);font-size:var(--fs-xs);font-weight:var(--fw-medium)">Tridox</div></div>
+          <div class="glass-card glass-card-dark" style="text-align:center;padding:var(--space-4)"><h4 style="font-size:var(--fs-sm);margin-bottom:var(--space-1)">Vibin Jethro</h4><div style="color:var(--primary);font-size:var(--fs-xs);font-weight:var(--fw-medium)">RITS Consulting Technology</div></div>
+          <div class="glass-card glass-card-dark" style="text-align:center;padding:var(--space-4)"><h4 style="font-size:var(--fs-sm);margin-bottom:var(--space-1)">Madhumitha K</h4><div style="color:var(--primary);font-size:var(--fs-xs);font-weight:var(--fw-medium)">Appxcess Technologies</div></div>
+          <div class="glass-card glass-card-dark" style="text-align:center;padding:var(--space-4)"><h4 style="font-size:var(--fs-sm);margin-bottom:var(--space-1)">Madhumitha C</h4><div style="color:var(--primary);font-size:var(--fs-xs);font-weight:var(--fw-medium)">Appxcess Technologies</div></div>
+          <div class="glass-card glass-card-dark" style="text-align:center;padding:var(--space-4)"><h4 style="font-size:var(--fs-sm);margin-bottom:var(--space-1)">Sri Vathsav</h4><div style="color:var(--primary);font-size:var(--fs-xs);font-weight:var(--fw-medium)">Shri AI</div></div>
+          <div class="glass-card glass-card-dark" style="text-align:center;padding:var(--space-4)"><h4 style="font-size:var(--fs-sm);margin-bottom:var(--space-1)">Sri Minalini</h4><div style="color:var(--primary);font-size:var(--fs-xs);font-weight:var(--fw-medium)">Shri AI</div></div>
+          <div class="glass-card glass-card-dark" style="text-align:center;padding:var(--space-4)"><h4 style="font-size:var(--fs-sm);margin-bottom:var(--space-1)">Anand Jyothish G</h4><div style="color:var(--primary);font-size:var(--fs-xs);font-weight:var(--fw-medium)">Shri AI</div></div>
+          <div class="glass-card glass-card-dark" style="text-align:center;padding:var(--space-4)"><h4 style="font-size:var(--fs-sm);margin-bottom:var(--space-1)">Vimal Prasath A</h4><div style="color:var(--primary);font-size:var(--fs-xs);font-weight:var(--fw-medium)">Shri AI</div></div>
+          <div class="glass-card glass-card-dark" style="text-align:center;padding:var(--space-4)"><h4 style="font-size:var(--fs-sm);margin-bottom:var(--space-1)">Thulasi V</h4><div style="color:var(--primary);font-size:var(--fs-xs);font-weight:var(--fw-medium)">Shri AI</div></div>
+          <div class="glass-card glass-card-dark" style="text-align:center;padding:var(--space-4)"><h4 style="font-size:var(--fs-sm);margin-bottom:var(--space-1)">Umayaraj Kumar</h4><div style="color:var(--primary);font-size:var(--fs-xs);font-weight:var(--fw-medium)">Kambaa Incorporation</div></div>
+          <div class="glass-card glass-card-dark" style="text-align:center;padding:var(--space-4)"><h4 style="font-size:var(--fs-sm);margin-bottom:var(--space-1)">Aswin Christo</h4><div style="color:var(--primary);font-size:var(--fs-xs);font-weight:var(--fw-medium)">Kambaa Incorporation</div></div>
+          <div class="glass-card glass-card-dark" style="text-align:center;padding:var(--space-4)"><h4 style="font-size:var(--fs-sm);margin-bottom:var(--space-1)">Dhinesh</h4><div style="color:var(--primary);font-size:var(--fs-xs);font-weight:var(--fw-medium)">Zequin Technology</div></div>
+          <div class="glass-card glass-card-dark" style="text-align:center;padding:var(--space-4)"><h4 style="font-size:var(--fs-sm);margin-bottom:var(--space-1)">Nikkin</h4><div style="color:var(--primary);font-size:var(--fs-xs);font-weight:var(--fw-medium)">Zequin Technology</div></div>
+          <div class="glass-card glass-card-dark" style="text-align:center;padding:var(--space-4)"><h4 style="font-size:var(--fs-sm);margin-bottom:var(--space-1)">Jothimani</h4><div style="color:var(--primary);font-size:var(--fs-xs);font-weight:var(--fw-medium)">Fusionpact</div></div>
+          <div class="glass-card glass-card-dark" style="text-align:center;padding:var(--space-4)"><h4 style="font-size:var(--fs-sm);margin-bottom:var(--space-1)">Mahalakshmi</h4><div style="color:var(--primary);font-size:var(--fs-xs);font-weight:var(--fw-medium)">Pranavesh Intelligence Solutions</div></div>
+          <div class="glass-card glass-card-dark" style="text-align:center;padding:var(--space-4)"><h4 style="font-size:var(--fs-sm);margin-bottom:var(--space-1)">Harikrishna</h4><div style="color:var(--primary);font-size:var(--fs-xs);font-weight:var(--fw-medium)">BridgeCurve Technologies</div></div>
+          <div class="glass-card glass-card-dark" style="text-align:center;padding:var(--space-4)"><h4 style="font-size:var(--fs-sm);margin-bottom:var(--space-1)">Nikirtha</h4><div style="color:var(--primary);font-size:var(--fs-xs);font-weight:var(--fw-medium)">Pranavesh Intelligence Solutions</div></div>
+        </div>
+      </section>
+
+      <!-- GitHub Repos for Question Banks -->
+      <div class="section-header"><h2>Question Bank <span style="color:var(--primary)">Repositories</span></h2><p>GitHub repositories with curated question banks and preparation resources</p></div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:var(--space-6);margin-bottom:var(--space-12)">
+        <div class="glass-card glass-card-dark">
+          <div class="card-icon">💻</div>
+          <h3>DSA Question Bank</h3>
+          <p>Comprehensive data structures and algorithms question bank with solutions in C++ and Java.</p>
+          <a href="https://github.com/" target="_blank" class="btn btn-sm btn-outline mt-4">View Repository →</a>
+        </div>
+        <div class="glass-card glass-card-dark">
+          <div class="card-icon">🤖</div>
+          <h3>ML Interview Prep</h3>
+          <p>Machine learning interview questions covering algorithms, statistics, and system design.</p>
+          <a href="https://github.com/" target="_blank" class="btn btn-sm btn-outline mt-4">View Repository →</a>
+        </div>
+        <div class="glass-card glass-card-dark">
+          <div class="card-icon">🐍</div>
+          <h3>Python Coding Problems</h3>
+          <p>Python programming challenges covering arrays, strings, recursion, and dynamic programming.</p>
+          <a href="https://github.com/" target="_blank" class="btn btn-sm btn-outline mt-4">View Repository →</a>
+        </div>
+        <div class="glass-card glass-card-dark">
+          <div class="card-icon">🗣️</div>
+          <h3>System Design Primer</h3>
+          <p>System design concepts, case studies, and interview preparation for senior roles.</p>
+          <a href="https://github.com/donnemartin/system-design-primer" target="_blank" class="btn btn-sm btn-outline mt-4">View Repository →</a>
+        </div>
+      </div>
+
+      <!-- Recommended Resources -->
+      <div class="section-header"><h2>Recommended <span style="color:var(--primary)">Resources</span></h2><p>Curated platforms and tools to boost your interview preparation</p></div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:var(--space-6)">
+        <div class="glass-card glass-card-dark"><div class="card-icon">💻</div><h3>LeetCode</h3><p>Practice coding problems and prepare for technical interviews.</p><a href="https://leetcode.com" target="_blank" class="btn btn-sm btn-outline mt-4">Start Practicing →</a></div>
+        <div class="glass-card glass-card-dark"><div class="card-icon">📊</div><h3>GeeksforGeeks</h3><p>Comprehensive DSA tutorials and interview experiences.</p><a href="https://geeksforgeeks.org" target="_blank" class="btn btn-sm btn-outline mt-4">Explore →</a></div>
+        <div class="glass-card glass-card-dark"><div class="card-icon">🤖</div><h3>Kaggle</h3><p>ML/AI competitions and datasets for data science practice.</p><a href="https://kaggle.com" target="_blank" class="btn btn-sm btn-outline mt-4">Join →</a></div>
+        <div class="glass-card glass-card-dark"><div class="card-icon">🎯</div><h3>Aptitude Preparation</h3><p>Quantitative aptitude and logical reasoning practice.</p><a href="https://www.indiabix.com" target="_blank" class="btn btn-sm btn-outline mt-4">Practice →</a></div>
+        <div class="glass-card glass-card-dark"><div class="card-icon">📘</div><h3>Core CS Fundamentals</h3><p>OS, DBMS, Networks, OOPs concepts for interviews.</p><a href="https://www.geeksforgeeks.org/computer-science-subjects/" target="_blank" class="btn btn-sm btn-outline mt-4">Study →</a></div>
+        <div class="glass-card glass-card-dark"><div class="card-icon">🚀</div><h3>System Design</h3><p>Learn system design for senior-level interviews.</p><a href="https://github.com/donnemartin/system-design-primer" target="_blank" class="btn btn-sm btn-outline mt-4">Read →</a></div>
+      </div>
+    </div>
+  </main>
+
+  <footer style="background:var(--secondary-dark);color:var(--gray-300);padding:var(--space-8) 0"><div class="container text-center"><p>© 2026 CSE (AI & ML) — MCET. All rights reserved.</p></div></footer>
+
+  <script src="../js/api.js"></script><script src="../js/glass-card.js"></script><script src="../js/utils.js"></script><script src="../js/main.js"></script>
+  <script>
+    // Navbar scroll effect + Mobile menu toggle
+    document.addEventListener('DOMContentLoaded', () => {
+      const navbar = document.querySelector('.aiml-navbar');
+      if (navbar) {
+        window.addEventListener('scroll', () => {
+          navbar.classList.toggle('scrolled', window.scrollY > 80);
+        }, { passive: true });
+      }
+      const toggle = document.querySelector('.aiml-navbar-toggle');
+      const menu = document.querySelector('.aiml-navbar-menu');
+      if(toggle&&menu){toggle.addEventListener('click',()=>{const isOpen=menu.classList.toggle('open');toggle.classList.toggle('active');toggle.setAttribute('aria-expanded',isOpen);document.body.style.overflow=isOpen?'hidden':''});menu.querySelectorAll('a').forEach(link=>{link.addEventListener('click',()=>{menu.classList.remove('open');toggle.classList.remove('active');toggle.setAttribute('aria-expanded','false');document.body.style.overflow=''})})}
+    });
+  </script>
+</body>
+</html>

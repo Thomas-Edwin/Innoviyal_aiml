@@ -1,0 +1,1649 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Innoviyal — CSE (AI & ML) | MCET</title>
+  <meta name="description" content="Innoviyal — The AI & ML Association at Dr. Mahalingam College of Engineering and Technology.">
+
+  <!-- Preconnect -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <!-- Quakiez Display font (self-hosted) -->
+  <style>
+    @font-face {
+      font-family: 'Quakiez Display';
+      src: url('../assets/fonts/Quakiez.otf') format('opentype'),
+           url('../assets/fonts/Quakiez.ttf') format('truetype');
+      font-weight: normal;
+      font-style: normal;
+      font-display: block;
+    }
+  </style>
+
+  <!-- Locomotive Scroll -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/locomotive-scroll@4.1.4/dist/locomotive-scroll.min.css">
+  <link rel="stylesheet" href="../css/variables.css">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/glass-card.css">
+  <link rel="stylesheet" href="../css/components.css">
+
+  <!-- =============================================
+     PAGE-SCOPED STYLES — Innoviyal Premium Redesign
+     ============================================= -->
+  <style>
+    /* ---- Reduced Motion ---- */
+    @media (prefers-reduced-motion: reduce) {
+      #innoviyal-loader { display: none; }
+      #innoviyal-content { display: block; opacity: 1; }
+      .loader-letter { transform: none !important; opacity: 1 !important; }
+      .innoviyal-float-nav { opacity: 1; transform: none; }
+      .innoviyal-menu-toggle { opacity: 1; }
+    }
+
+    /* ---- Reset / Base ---- */
+    html {
+      scroll-behavior: auto !important;
+    }
+    html.has-scroll-smooth {
+      overflow: hidden;
+    }
+
+
+    /* ---- Locomotive Scrollbar — match dark theme ---- */
+    .c-scrollbar {
+      z-index: 99999 !important;
+    }
+    .c-scrollbar_thumb {
+      background: rgba(255,255,255,0.2) !important;
+    }
+
+    /* ---- Who We Are — Editorial Letter Reveal ---- */
+    #about-innovial {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+    #about-innovial .section-header {
+      opacity: 1 !important;
+      transform: none !important;
+    }
+    .who-we-are-title {
+      font-size: clamp(3.5rem, 7vw, 6.5rem) !important;
+      font-weight: 700;
+      line-height: 1.1;
+      margin-bottom: 0.4em;
+      letter-spacing: -0.03em;
+    }
+    .who-we-are-subtitle {
+      font-size: clamp(1rem, 1.8vw, 1.4rem);
+      color: var(--innoviyal-text-secondary);
+      letter-spacing: 0.06em;
+      font-weight: 400;
+      text-transform: uppercase;
+    }
+    .reveal-wrapper {
+      display: inline-block;
+      overflow: hidden;
+      vertical-align: bottom;
+      line-height: 1.1;
+    }
+    .reveal-letter {
+      display: inline-block;
+      transform: translateY(100%);
+      will-change: transform;
+    }
+    .who-we-are-subtitle .reveal-wrapper {
+      line-height: 1.6;
+    }
+    .who-we-are-subtitle .reveal-letter {
+      transform: translateY(100%);
+    }
+
+    /* ---- Background Image ---- */
+    #innoviyal-bg-image {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 0;
+      pointer-events: none;
+      background-image: url('../assets/bg-innoviyal.png');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      filter: blur(14px);
+      opacity: 0.88;
+      will-change: transform;
+      transform: translateZ(0);
+    }
+
+    #innoviyal-page > *:not(#innoviyal-loader):not(#innoviyal-content):not(#innoviyalFloatNav):not(#innoviyalMenuToggle):not(#innoviyal-bg-image) {
+      position: relative;
+      z-index: 2;
+    }
+
+    /* ---- Loading Screen ---- */
+    #innoviyal-loader {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: #522888;
+      z-index: 99999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      pointer-events: all;
+      will-change: transform;
+    }
+    #innoviyal-loader.loaded {
+      pointer-events: none;
+    }
+
+    #innoviyal-sticker {
+      position: relative;
+      z-index: 2;
+      width: 90vw;
+      max-width: 800px;
+      height: auto;
+      object-fit: contain;
+      will-change: transform, opacity;
+      transform-origin: center center;
+    }
+
+    /* ---- Page Content (initially hidden) ---- */
+    #innoviyal-content {
+      display: none;
+      opacity: 0;
+    }
+    #innoviyal-content.revealed {
+      display: block;
+      opacity: 1;
+    }
+
+    /* ---- Floating Editorial Navigation ---- */
+    .innoviyal-float-nav {
+      position: fixed;
+      top: 32px;
+      right: 40px;
+      z-index: 99998;
+      display: flex;
+      gap: 4px;
+      pointer-events: all;
+      opacity: 0;
+      transform: translateY(-12px);
+      transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1), transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .innoviyal-float-nav.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .innoviyal-float-nav a {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      font-size: 13px;
+      font-weight: 500;
+      color: rgba(255, 255, 255, 0.8);
+      text-decoration: none;
+      padding: 6px 14px;
+      border-radius: 6px;
+      letter-spacing: 0.02em;
+      transition: background 0.3s ease, color 0.3s ease;
+      position: relative;
+      white-space: nowrap;
+    }
+    .innoviyal-float-nav a:hover {
+      background: #ffffff;
+      color: #000000;
+    }
+    .innoviyal-float-nav a.active {
+      color: #ffffff;
+      background: rgba(82, 40, 136, 0.5);
+    }
+    .innoviyal-float-nav a.active:hover {
+      background: #ffffff;
+      color: #000000;
+    }
+
+    /* ---- Mobile Toggle for Floating Nav ---- */
+    .innoviyal-menu-toggle {
+      display: none;
+      position: fixed;
+      top: 28px;
+      right: 28px;
+      z-index: 99998;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 8px;
+      opacity: 0;
+      transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .innoviyal-menu-toggle.visible {
+      opacity: 1;
+    }
+    .innoviyal-menu-toggle span {
+      display: block;
+      width: 22px;
+      height: 2px;
+      background: #ffffff;
+      border-radius: 2px;
+      margin: 5px 0;
+      transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+    .innoviyal-menu-toggle.active span:nth-child(1) {
+      transform: rotate(45deg) translate(5px, 5px);
+    }
+    .innoviyal-menu-toggle.active span:nth-child(2) {
+      opacity: 0;
+    }
+    .innoviyal-menu-toggle.active span:nth-child(3) {
+      transform: rotate(-45deg) translate(5px, -5px);
+    }
+
+    /* Hide original top-info-bar and navbar */
+    #innoviyal-page .top-info-bar,
+    #innoviyal-page .aiml-navbar,
+    #innoviyal-page #innoviyal-bloom,
+    #innoviyal-page #innoviyal-star-field,
+    #innoviyal-page #innoviyal-fade-overlay {
+      display: none !important;
+    }
+
+    /* ---- Page-scoped custom properties ---- */
+    #innoviyal-page {
+      --innoviyal-bg: #050505;
+      --innoviyal-surface: #0a0a0a;
+      --innoviyal-surface-2: #111;
+      --innoviyal-text: #F5F5F5;
+      --innoviyal-text-secondary: #a0a0a0;
+      --innoviyal-text-muted: #777;
+      --innoviyal-border: rgba(255,255,255,0.06);
+      --innoviyal-border-2: rgba(255,255,255,0.1);
+
+      --white: #0a0a0a;
+      --gray-50: #0a0a0a;
+      --gray-100: #111;
+      --gray-200: #1a1a1a;
+      --gray-300: #a0a0a0;
+      --gray-400: #888;
+      --gray-500: #777;
+      --gray-600: #a0a0a0;
+      --gray-700: #ccc;
+      --gray-800: #e0e0e0;
+      --gray-900: #F5F5F5;
+      --secondary: #F5F5F5;
+      --secondary-light: #e0e0e0;
+      --secondary-dark: #0a0a0a;
+
+      --font-primary: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      --font-heading: 'Playfair Display', Georgia, 'Times New Roman', serif;
+
+      --shadow-card: 0 2px 8px rgba(0,0,0,0.4), 0 1px 2px rgba(0,0,0,0.3);
+      --shadow-hover: 0 10px 30px rgba(0,0,0,0.5), 0 4px 8px rgba(0,0,0,0.3);
+      --shadow-xl: 0 20px 25px -5px rgba(0,0,0,0.5), 0 8px 10px -6px rgba(0,0,0,0.3);
+      --shadow-2xl: 0 25px 50px -12px rgba(0,0,0,0.6);
+
+      background-color: var(--innoviyal-bg);
+      color: var(--innoviyal-text);
+    }
+
+    /* ---- Editorial Heading System ---- */
+    #innoviyal-page h1,
+    #innoviyal-page h2,
+    #innoviyal-page h3,
+    #innoviyal-page h4,
+    #innoviyal-page h5,
+    #innoviyal-page h6 {
+      font-family: var(--font-heading);
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      font-weight: 700;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    #innoviyal-page h1 { font-size: clamp(3rem, 6vw, 5.8rem); }
+    #innoviyal-page h2 { font-size: clamp(2rem, 4vw, 3.8rem); }
+    #innoviyal-page h3 { font-size: clamp(1.35rem, 2.5vw, 2rem); }
+    #innoviyal-page h4 { font-size: clamp(1.1rem, 1.8vw, 1.5rem); }
+
+    /* ---- Premium Card ---- */
+    #innoviyal-page .premium-card {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-top: 1px solid rgba(255, 255, 255, 0.2);
+      border-left: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 20px;
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+      transition: border-color 0.4s ease, box-shadow 0.4s ease, transform 0.4s ease;
+    }
+    #innoviyal-page .premium-card:hover {
+      border-color: rgba(255,255,255,0.25);
+      box-shadow: 0 20px 50px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    }
+    #innoviyal-page .premium-card-body h3 { color: var(--primary) !important; }
+    #innoviyal-page .premium-card-body p { color: var(--innoviyal-text-secondary) !important; }
+
+    /* ---- Glass Cards ---- */
+    #innoviyal-page .glass-card {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.06);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-radius: 20px;
+      transition: background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+    }
+    #innoviyal-page .glass-card:hover {
+      background: rgba(255,255,255,0.05);
+      border-color: rgba(255,255,255,0.12);
+      transform: translateY(-2px);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.4);
+    }
+    #innoviyal-page .glass-card h3 { color: var(--innoviyal-text); font-family: var(--font-heading); }
+    #innoviyal-page .glass-card p { color: var(--innoviyal-text-secondary); }
+    #innoviyal-page .glass-card .card-icon { font-size: 2.2rem; margin-bottom: 1rem; }
+
+    /* ---- Inauguration Cards ---- */
+    #innoviyal-page .inauguration-card {
+      background: var(--innoviyal-surface);
+      border: 1px solid var(--innoviyal-border-2);
+      border-radius: 20px;
+      overflow: hidden;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+    }
+    #innoviyal-page .inauguration-card:hover {
+      border-color: rgba(255,255,255,0.15);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.4);
+      transform: translateY(-3px);
+    }
+    #innoviyal-page .inauguration-card-body h4 { color: var(--innoviyal-text); }
+    #innoviyal-page .inauguration-card-body p { color: var(--innoviyal-text-secondary); }
+
+    /* ---- Coordinator Card ---- */
+    #innoviyal-page .coordinator-card {
+      background: var(--innoviyal-surface);
+      border: 1px solid var(--innoviyal-border-2);
+      border-radius: 24px;
+      box-shadow: 0 4px 30px rgba(0,0,0,0.4);
+      transition: border-color 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    #innoviyal-page .coordinator-card:hover {
+      box-shadow: 0 20px 40px rgba(249,115,22,0.15), 0 8px 30px rgba(0,0,0,0.4);
+      border-color: rgba(249,115,22,0.2);
+    }
+    #innoviyal-page .coordinator-card-info .coord-name { color: var(--innoviyal-text); }
+    #innoviyal-page .coordinator-card-info .coord-detail { color: var(--innoviyal-text-secondary); border-bottom-color: rgba(255,255,255,0.06); }
+    #innoviyal-page .coordinator-card-info .coord-label { color: var(--innoviyal-text); }
+    #innoviyal-page .coordinator-card-info .coord-value { color: var(--innoviyal-text-secondary); }
+    #innoviyal-page .coordinator-badge { background: rgba(249,115,22,0.12); border-color: rgba(249,115,22,0.2); color: var(--primary); }
+
+    /* ---- Team Cards (Kononenko Group Grid) ---- */
+    #innoviyal-page .team-grid-container {
+      display: grid;
+      row-gap: 40px;
+      column-gap: 20px;
+      margin-bottom: var(--space-6);
+    }
+    @media (min-width: 1025px) {
+      #innoviyal-page .team-grid-container {
+        grid-template-columns: repeat(8, 1fr);
+      }
+      #innoviyal-page .team-card {
+        grid-column: span 2;
+      }
+      /* Center the 2nd row (Items 5, 6, 7) and force Item 8 to the 3rd row */
+      #innoviyal-page .team-card:nth-child(5) {
+        grid-column: 2 / span 2;
+      }
+    }
+    @media (max-width: 1024px) {
+      #innoviyal-page .team-grid-container { grid-template-columns: repeat(3, 1fr); }
+    }
+    @media (max-width: 768px) {
+      #innoviyal-page .team-grid-container { grid-template-columns: repeat(2, 1fr); }
+    }
+    #innoviyal-page .team-card {
+      /* Reset any existing styles that might interfere */
+      background: transparent;
+      border: none;
+      border-radius: 0;
+      box-shadow: none;
+      padding: 0;
+      overflow: visible;
+      opacity: 0; /* Managed by GSAP */
+      visibility: hidden; /* Prevent flash of unstyled content */
+    }
+    #innoviyal-page .team-card:hover {
+      background: transparent;
+      border-color: transparent;
+      box-shadow: none;
+    }
+    #innoviyal-page .team-image-wrapper {
+      aspect-ratio: 9 / 16;
+      width: 100%;
+      overflow: hidden;
+      border-radius: 12px;
+      margin-bottom: 16px;
+      /* Ensure clipping for hover zoom */
+      -webkit-mask-image: -webkit-radial-gradient(white, black);
+    }
+    #innoviyal-page .team-image-wrapper img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+      transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+      will-change: transform;
+    }
+    #innoviyal-page .team-card:hover .team-image-wrapper img {
+      transform: scale(1.05);
+    }
+    #innoviyal-page .team-content {
+      text-align: left;
+    }
+    #innoviyal-page .team-content h3 {
+      font-family: var(--font-heading);
+      font-size: var(--fs-md);
+      color: var(--innoviyal-text);
+      margin-bottom: 4px;
+      font-weight: 600;
+    }
+    #innoviyal-page .team-content p {
+      font-family: var(--font-body);
+      font-size: var(--fs-sm);
+      color: var(--primary);
+      margin: 0;
+    }
+
+    /* ---- Event Cards ---- */
+    #innoviyal-page .event-card {
+      background: var(--innoviyal-surface);
+      border: 1px solid var(--innoviyal-border);
+      border-radius: 20px;
+      overflow: hidden;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+    }
+    #innoviyal-page .event-card:hover {
+      border-color: rgba(255,255,255,0.15);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.4);
+      transform: translateY(-3px);
+    }
+    #innoviyal-page .event-card-body h4 { color: var(--innoviyal-text); }
+    #innoviyal-page .event-card-body p { color: var(--innoviyal-text-secondary); }
+    #innoviyal-page .event-meta { color: var(--innoviyal-text-muted); }
+    #innoviyal-page .badge-innovial { background: rgba(249,115,22,0.12); border-color: rgba(249,115,22,0.2); color: var(--primary); }
+
+    /* ---- Section Styles ---- */
+    #innoviyal-page .section-gray { background: var(--innoviyal-surface); }
+    #innoviyal-page .section-header p { color: var(--innoviyal-text-muted); }
+    #innoviyal-page .innovial-intro { color: var(--innoviyal-text-secondary); }
+
+    /* ---- Stats Section ---- */
+    #innoviyal-page .stats-section {
+      background: linear-gradient(135deg, rgba(249,115,22,0.15), rgba(234,88,12,0.25)) !important;
+      border-top: 1px solid rgba(249,115,22,0.15);
+      border-bottom: 1px solid rgba(249,115,22,0.15);
+    }
+    #innoviyal-page .stats-section .stat-counter { color: var(--innoviyal-text); }
+
+    /* ---- Buttons ---- */
+    #innoviyal-page .btn-outline { border-color: rgba(249,115,22,0.4); color: var(--primary); }
+    #innoviyal-page .btn-outline:hover { background: var(--primary); color: #fff; border-color: var(--primary); }
+    #innoviyal-page .btn-primary:hover { box-shadow: 0 4px 20px rgba(249,115,22,0.35); }
+
+    /* ---- Footer ---- */
+    #innoviyal-page footer {
+      background: #0a0a0a !important;
+      border-top: 1px solid var(--innoviyal-border);
+    }
+    #innoviyal-page footer div[style*="text-align:center"] > div[style*="font-size"] {
+      color: var(--innoviyal-text) !important;
+    }
+
+    /* ---- Team Grid ---- */
+    .team-grid-4 { display:grid; grid-template-columns:repeat(4,1fr); gap:var(--space-6); margin-bottom:var(--space-6); }
+    .team-grid-3 { display:grid; grid-template-columns:repeat(3,1fr); gap:var(--space-6); margin-bottom:var(--space-6); }
+    .team-grid-2 { display:grid; grid-template-columns:repeat(2,1fr); gap:var(--space-6); margin-bottom:var(--space-6); }
+    @media (max-width: 1024px) {
+      .team-grid-4 { grid-template-columns:repeat(2,1fr); }
+      .team-grid-3 { grid-template-columns:repeat(2,1fr); }
+    }
+    @media (max-width: 768px) {
+      .team-grid-4, .team-grid-3, .team-grid-2 { grid-template-columns:1fr; }
+    }
+
+    /* ---- Scroll-Triggered Animation Base States ---- */
+    .gsap-reveal {
+      opacity: 0;
+      transform: translateY(60px);
+    }
+    .gsap-reveal-fade {
+      opacity: 0;
+    }
+
+    /* ---- Mobile Responsive ---- */
+    @media (max-width: 768px) {
+      .innoviyal-float-nav {
+        display: none;
+      }
+      .innoviyal-float-nav.mobile-open {
+        display: flex;
+        flex-direction: column;
+        position: fixed;
+        top: 0;
+        right: 0;
+        width: 260px;
+        height: 100vh;
+        background: rgba(5,5,5,0.98);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        padding: 80px 24px 24px;
+        gap: 4px;
+        box-shadow: -10px 0 30px rgba(0,0,0,0.4);
+        z-index: 99997;
+        align-items: flex-start;
+        opacity: 1 !important;
+        transform: none !important;
+      }
+      .innoviyal-float-nav.mobile-open a {
+        width: 100%;
+        padding: 12px 16px;
+        font-size: 15px;
+      }
+      .innoviyal-menu-toggle {
+        display: flex;
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body id="innoviyal-page">
+
+  <!-- =============================================
+       LOADING SCREEN
+       ============================================= -->
+  <div id="innoviyal-loader">
+    <img id="innoviyal-sticker" src="../assets/images/innoviyal_sticker.png" alt="Innoviyal Sticker" />
+  </div>
+
+  <!-- =============================================
+       BACKGROUND IMAGE (blurred, static)
+       ============================================= -->
+  <div id="innoviyal-bg-image" aria-hidden="true"></div>
+
+  <!-- =============================================
+       FLOATING EDITORIAL NAVIGATION
+       ============================================= -->
+  <nav class="innoviyal-float-nav" id="innoviyalFloatNav" aria-label="Navigation">
+    <a href="../index.html">Home</a>
+    <a href="aiml-about.html">About</a>
+    <a href="team.html">Team</a>
+    <a href="events.html">Events</a>
+    <a href="gallery.html">Rank Holders</a>
+    <a href="placement.html">Placements</a>
+    <a href="innovial.html" class="active">Innoviyal</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+  <button class="innoviyal-menu-toggle" id="innoviyalMenuToggle" aria-label="Toggle menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+
+  <!-- =============================================
+       PAGE CONTENT
+       ============================================= -->
+  <div id="innoviyal-content" data-scroll-container>
+
+    <main class="innovial-page">
+      <!-- Who We Are -->
+      <section class="section" id="about-innovial">
+        <div class="container">
+          <div class="section-header">
+            <h2 class="who-we-are-title">
+              <span class="reveal-wrapper"><span class="reveal-letter">W</span></span>
+              <span class="reveal-wrapper"><span class="reveal-letter">h</span></span>
+              <span class="reveal-wrapper"><span class="reveal-letter">o</span></span>
+              <span class="reveal-wrapper" style="width:0.3em">&nbsp;</span>
+              <span class="reveal-wrapper"><span class="reveal-letter">W</span></span>
+              <span class="reveal-wrapper"><span class="reveal-letter">e</span></span>
+              <span class="reveal-wrapper" style="width:0.3em">&nbsp;</span>
+              <span class="reveal-wrapper"><span class="reveal-letter">A</span></span>
+              <span class="reveal-wrapper"><span class="reveal-letter">r</span></span>
+              <span class="reveal-wrapper"><span class="reveal-letter">e</span></span>
+            </h2>
+            <p class="who-we-are-subtitle">
+              <span class="reveal-wrapper"><span class="reveal-letter">T</span></span>
+              <span class="reveal-wrapper"><span class="reveal-letter">h</span></span>
+              <span class="reveal-wrapper"><span class="reveal-letter">e</span></span>
+              <span class="reveal-wrapper" style="width:0.25em">&nbsp;</span>
+              <span class="reveal-wrapper"><span class="reveal-letter">A</span></span>
+              <span class="reveal-wrapper"><span class="reveal-letter">I</span></span>
+              <span class="reveal-wrapper" style="width:0.25em">&nbsp;</span>
+              <span class="reveal-wrapper"><span class="reveal-letter">&amp;</span></span>
+              <span class="reveal-wrapper" style="width:0.25em">&nbsp;</span>
+              <span class="reveal-wrapper"><span class="reveal-letter">M</span></span>
+              <span class="reveal-wrapper"><span class="reveal-letter">L</span></span>
+              <span class="reveal-wrapper" style="width:0.25em">&nbsp;</span>
+              <span class="reveal-wrapper"><span class="reveal-letter">A</span></span>
+              <span class="reveal-wrapper"><span class="reveal-letter">s</span></span>
+              <span class="reveal-wrapper"><span class="reveal-letter">s</span></span>
+              <span class="reveal-wrapper"><span class="reveal-letter">o</span></span>
+              <span class="reveal-wrapper"><span class="reveal-letter">c</span></span>
+              <span class="reveal-wrapper"><span class="reveal-letter">i</span></span>
+              <span class="reveal-wrapper"><span class="reveal-letter">a</span></span>
+              <span class="reveal-wrapper"><span class="reveal-letter">t</span></span>
+              <span class="reveal-wrapper"><span class="reveal-letter">i</span></span>
+              <span class="reveal-wrapper"><span class="reveal-letter">o</span></span>
+              <span class="reveal-wrapper"><span class="reveal-letter">n</span></span>
+              <span class="reveal-wrapper" style="width:0.25em">&nbsp;</span>
+              <span class="reveal-wrapper"><span class="reveal-letter">p</span></span>
+              <span class="reveal-wrapper"><span class="reveal-letter">o</span></span>
+              <span class="reveal-wrapper"><span class="reveal-letter">w</span></span>
+              <span class="reveal-wrapper"><span class="reveal-letter">e</span></span>
+              <span class="reveal-wrapper"><span class="reveal-letter">r</span></span>
+              <span class="reveal-wrapper"><span class="reveal-letter">e</span></span>
+              <span class="reveal-wrapper"><span class="reveal-letter">d</span></span>
+              <span class="reveal-wrapper" style="width:0.25em">&nbsp;</span>
+              <span class="reveal-wrapper"><span class="reveal-letter">b</span></span>
+              <span class="reveal-wrapper"><span class="reveal-letter">y</span></span>
+              <span class="reveal-wrapper" style="width:0.25em">&nbsp;</span>
+              <span class="reveal-wrapper"><span class="reveal-letter">I</span></span>
+              <span class="reveal-wrapper"><span class="reveal-letter">n</span></span>
+              <span class="reveal-wrapper"><span class="reveal-letter">n</span></span>
+              <span class="reveal-wrapper"><span class="reveal-letter">o</span></span>
+              <span class="reveal-wrapper"><span class="reveal-letter">v</span></span>
+              <span class="reveal-wrapper"><span class="reveal-letter">i</span></span>
+              <span class="reveal-wrapper"><span class="reveal-letter">y</span></span>
+              <span class="reveal-wrapper"><span class="reveal-letter">a</span></span>
+              <span class="reveal-wrapper"><span class="reveal-letter">l</span></span>
+            </p>
+          </div>
+          <p class="innovial-intro gsap-reveal">
+            The AI & ML Association is committed to fostering a culture of innovation, continuous learning, 
+            and technological excellence. We provide students with opportunities to develop practical skills, 
+            collaborate on real-world projects, and stay at the forefront of Artificial Intelligence and 
+            Machine Learning.
+          </p>
+          <div class="grid grid-2" style="margin-top:var(--space-8)">
+            <div class="premium-card mission-vision-reveal">
+              <div class="premium-card-body" style="text-align:center">
+                <h3 style="color:var(--primary);margin-bottom:var(--space-3)">Our Vision</h3>
+                <p style="color:var(--gray-600);font-size:var(--fs-lg);line-height:var(--lh-relaxed)">
+                  To become a leading platform that inspires future innovators, promotes cutting-edge research, 
+                  and drives meaningful advancements in Artificial Intelligence and Machine Learning.
+                </p>
+              </div>
+            </div>
+            <div class="premium-card mission-vision-reveal">
+              <div class="premium-card-body" style="text-align:center">
+                <h3 style="color:var(--primary);margin-bottom:var(--space-3)">Our Mission</h3>
+                <p style="color:var(--gray-600);font-size:var(--fs-lg);line-height:var(--lh-relaxed)">
+                  To cultivate a vibrant community that empowers aspiring AI professionals through education, 
+                  collaboration, innovation, and ethical technological development.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- What We Offer -->
+      <section class="section section-gray">
+        <div class="container">
+          <div class="section-header gsap-reveal">
+            <h2>What We Offer</h2>
+            <p>Building Tomorrow's AI Leaders Today</p>
+          </div>
+          <div class="grid grid-4 stagger-children">
+            <div class="glass-card glass-card-dark gsap-reveal">
+              <div class="card-icon">📚</div>
+              <h3>Learn</h3>
+              <p>Gain knowledge through expert-led workshops, technical sessions, and certification programs.</p>
+            </div>
+            <div class="glass-card glass-card-dark gsap-reveal">
+              <div class="card-icon">🔧</div>
+              <h3>Build</h3>
+              <p>Apply your skills by working on innovative projects, hackathons, and research initiatives.</p>
+            </div>
+            <div class="glass-card glass-card-dark gsap-reveal">
+              <div class="card-icon">🤝</div>
+              <h3>Collaborate</h3>
+              <p>Network with peers, faculty, industry professionals, and AI enthusiasts.</p>
+            </div>
+            <div class="glass-card glass-card-dark gsap-reveal">
+              <div class="card-icon">📈</div>
+              <h3>Grow</h3>
+              <p>Develop leadership, problem-solving, and technical expertise for successful careers in AI.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Core Values -->
+      <section class="section">
+        <div class="container">
+          <div class="section-header gsap-reveal">
+            <h2 style="color:var(--secondary)">Our Core Values</h2>
+          </div>
+          <div class="grid grid-4 stagger-children">
+            <div class="glass-card glass-card-dark gsap-reveal"><div class="card-icon">💡</div><h3>Innovation</h3><p>Encouraging creative thinking and novel approaches to AI challenges.</p></div>
+            <div class="glass-card glass-card-dark gsap-reveal"><div class="card-icon">⭐</div><h3>Excellence</h3><p>Striving for the highest standards in everything we do.</p></div>
+            <div class="glass-card glass-card-dark gsap-reveal"><div class="card-icon">🤝</div><h3>Collaboration</h3><p>Working together across disciplines to achieve more.</p></div>
+            <div class="glass-card glass-card-dark gsap-reveal"><div class="card-icon">🛡️</div><h3>Integrity</h3><p>Upholding ethical principles in AI development.</p></div>
+            <div class="glass-card glass-card-dark gsap-reveal"><div class="card-icon">📖</div><h3>Continuous Learning</h3><p>Embracing lifelong learning and growth.</p></div>
+            <div class="glass-card glass-card-dark gsap-reveal"><div class="card-icon">🤖</div><h3>Ethical AI</h3><p>Promoting responsible AI development and use.</p></div>
+            <div class="glass-card glass-card-dark gsap-reveal"><div class="card-icon">🔬</div><h3>Research-Driven</h3><p>Grounding all work in cutting-edge research.</p></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Inauguration Timeline -->
+      <section class="section" id="inauguration">
+        <div class="container">
+          <div class="section-header gsap-reveal">
+            <h2>Our Journey</h2>
+            <p>From inception to innovation — key milestones</p>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:var(--space-8);max-width:900px;margin:0 auto">
+            <div class="inauguration-card gsap-reveal">
+              <div style="position:relative">
+                <video controls preload="metadata" style="width:100%;aspect-ratio:16/9;object-fit:cover;display:block;background:#0b1120">
+                  <source src="../assets/videos/1st-inauguration.mp4" type="video/mp4">
+                  Your browser does not support the video tag.
+                </video>
+                <div style="position:absolute;top:var(--space-3);left:var(--space-3);background:var(--primary);color:white;padding:var(--space-1) var(--space-3);border-radius:var(--radius-md);font-size:var(--fs-xs);font-weight:var(--fw-bold)">1st Inauguration</div>
+              </div>
+              <div class="inauguration-card-body">
+                <h4>Innoviyal — The Beginning</h4>
+                <p>The inaugural ceremony marked the beginning of a journey toward AI excellence.</p>
+              </div>
+            </div>
+            <div class="inauguration-card gsap-reveal">
+              <div style="position:relative">
+                <video controls preload="metadata" style="width:100%;aspect-ratio:16/9;object-fit:cover;display:block;background:#0b1120">
+                  <source src="../assets/videos/2nd-inauguration.mp4" type="video/mp4">
+                  Your browser does not support the video tag.
+                </video>
+                <div style="position:absolute;top:var(--space-3);left:var(--space-3);background:var(--primary);color:white;padding:var(--space-1) var(--space-3);border-radius:var(--radius-md);font-size:var(--fs-xs);font-weight:var(--fw-bold)">2nd Inauguration</div>
+              </div>
+              <div class="inauguration-card-body">
+                <h4>Innoviyal 2.0 — Scaling New Heights</h4>
+                <p>Celebrating growth with expanded team and new initiatives.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Association Coordinator -->
+      <section class="section section-gray" id="association-coordinator">
+        <div class="container">
+          <div class="section-header gsap-reveal">
+            <h2>Association <span style="color:var(--primary)">Coordinator</span></h2>
+            <p>Guiding Innoviyal with vision and dedication</p>
+          </div>
+          <style>
+            #association-coordinator .coordinator-card {
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              gap: 40px;
+              max-width: 700px;
+              margin: 0 auto;
+              padding: 40px;
+              background: rgba(255, 255, 255, 0.03);
+              border: 1px solid rgba(255, 255, 255, 0.08);
+              box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+              border-radius: 20px;
+            }
+            #association-coordinator .coordinator-card-photo {
+              width: 180px;
+              aspect-ratio: 9/16;
+              object-fit: cover;
+              border-radius: 16px;
+              flex-shrink: 0;
+              margin-bottom: 0 !important;
+            }
+            #association-coordinator .coordinator-card-info {
+              text-align: left;
+              flex: 1;
+              padding: 0;
+            }
+            #association-coordinator .coordinator-badge {
+              font-family: 'Inter', sans-serif;
+              font-size: 1rem;
+              font-weight: 700;
+              color: var(--primary);
+              background: rgba(82, 40, 136, 0.15);
+              padding: 6px 12px;
+              border-radius: 20px;
+              display: inline-block;
+              margin-bottom: 12px;
+              border: 1px solid rgba(82, 40, 136, 0.3);
+            }
+            #association-coordinator .coord-name {
+              font-family: 'Quakiez Display', serif;
+              font-size: 2.2rem;
+              color: var(--white);
+              margin-bottom: 12px;
+              letter-spacing: 0.02em;
+            }
+            #association-coordinator .coord-detail {
+              font-size: 1.1rem;
+              margin-bottom: 8px;
+            }
+            #association-coordinator .coord-label {
+              font-weight: 600;
+              color: var(--gray-400);
+            }
+            #association-coordinator .coord-value {
+              font-weight: 500;
+              color: var(--gray-200);
+            }
+            #association-coordinator .role-highlight {
+              color: var(--primary-light);
+              font-weight: 700;
+              font-size: 1.15rem;
+            }
+            @media (max-width: 767px) {
+              #association-coordinator .coordinator-card {
+                flex-direction: column;
+                gap: 20px;
+                padding: 24px;
+                text-align: center;
+              }
+              #association-coordinator .coordinator-card-info {
+                width: 100%;
+                text-align: center;
+              }
+            }
+          </style>
+          <div class="coordinator-card-wrapper gsap-reveal">
+            <div class="coordinator-card">
+              <img src="../assets/faculty/Vijayakumar%20T.jpeg" alt="Mr. Vijayakumar T" class="coordinator-card-photo"
+                   onerror="this.src='https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&q=80'">
+              <div class="coordinator-card-info">
+                <div class="coordinator-badge">🏅 Faculty Coordinator</div>
+                <div class="coord-name">Mr. Vijayakumar T</div>
+                <div class="coord-detail">
+                  <span class="coord-label">Designation</span>
+                  <span class="coord-value">Assistant Professor (SS)</span>
+                </div>
+                <div class="coord-detail">
+                  <span class="coord-label">Role</span>
+                  <span class="coord-value role-highlight">Association Coordinator</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Core Team -->
+      <section class="section" id="core-team">
+        <div class="container">
+          <div class="section-header gsap-reveal">
+            <h2>Our <span style="color:var(--primary)">Core Team</span></h2>
+            <p>Meet the dedicated members driving Innoviyal forward</p>
+          </div>
+          <div id="innoviyal-team-container"></div>
+        </div>
+      </section>
+
+      <!-- Events Conducted -->
+      <section class="section section-gray" id="events-conducted">
+        <div class="container">
+          <div class="section-header gsap-reveal">
+            <h2>Events <span style="color:var(--primary)">Conducted</span></h2>
+            <p>Highlighting the key events organized by Innoviyal</p>
+          </div>
+          <div class="grid grid-3" style="gap:var(--space-6)">
+            <div class="event-card gsap-reveal">
+              <div class="event-card-banner">
+                <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&q=80" alt="">
+                <div class="event-card-date"><span class="day">15</span>Mar</div>
+              </div>
+              <div class="event-card-body">
+                <h4>AI Symposium 2026</h4>
+                <div class="event-meta"><span>📍 Main Auditorium</span><span>✅ Completed</span></div>
+                <p>Annual symposium featuring paper presentations, project expo, and keynote by industry experts.</p>
+                <span class="badge badge-innovial">✨ Innoviyal Event</span>
+              </div>
+            </div>
+            <div class="event-card gsap-reveal">
+              <div class="event-card-banner">
+                <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=800&q=80" alt="">
+                <div class="event-card-date"><span class="day">10</span>Feb</div>
+              </div>
+              <div class="event-card-body">
+                <h4>Python Bootcamp</h4>
+                <div class="event-meta"><span>📍 AI Lab</span><span>✅ Completed</span></div>
+                <p>5-day intensive bootcamp on Python for AI/ML with hands-on projects and certifications.</p>
+                <span class="badge badge-innovial">✨ Innoviyal Event</span>
+              </div>
+            </div>
+            <div class="event-card gsap-reveal">
+              <div class="event-card-banner">
+                <img src="https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=800&q=80" alt="">
+                <div class="event-card-date"><span class="day">25</span>Jan</div>
+              </div>
+              <div class="event-card-body">
+                <h4>Workshop on Generative AI</h4>
+                <div class="event-meta"><span>📍 Seminar Hall</span><span>✅ Completed</span></div>
+                <p>Hands-on workshop covering LLMs, prompt engineering, and building AI applications.</p>
+                <span class="badge badge-innovial">✨ Innoviyal Event</span>
+              </div>
+            </div>
+          </div>
+          <div class="text-center mt-8 gsap-reveal">
+            <a href="events.html" class="btn btn-outline btn-lg">View All Events →</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- Full Cover Footer Section -->
+      <style>
+        .bottom-glass-panel {
+          position: relative;
+          z-index: 2;
+          text-align: center;
+          background: rgba(20, 20, 20, 0.4); /* Semi-transparent dark overlay */
+          border: 1px solid rgba(255, 255, 255, 0.1); /* Thin translucent border */
+          border-top: 1px solid rgba(255, 255, 255, 0.25); /* Elegant depth highlight */
+          border-left: 1px solid rgba(255, 255, 255, 0.15);
+          border-radius: 40px;
+          padding: 10vh 4vw; /* Comfortable vertical padding */
+          backdrop-filter: blur(70px); /* 70% blur Apple-style */
+          -webkit-backdrop-filter: blur(70px);
+          box-shadow: 0 40px 80px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255, 255, 255, 0.15); /* Soft ambient shadow */
+          width: 90%;
+          max-width: 1400px;
+        }
+        .banner-title {
+          font-family: 'Quakiez Display', serif;
+          /* Maximized font size to the absolute limit that fits cleanly */
+          font-size: clamp(6rem, 18vw, 22rem); 
+          color: #ffffff; /* Pure white */
+          line-height: 1;
+          margin: 0;
+          letter-spacing: 0.04em; /* Tighter tracking to allow massive letters to fit */
+          text-shadow: 0 15px 40px rgba(0,0,0,0.4);
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+        .banner-letter {
+          display: inline-block;
+          will-change: transform, opacity;
+          opacity: 0;
+          transform: translate3d(0, 160px, 0); /* GPU accelerated transform */
+        }
+      </style>
+      <!-- Increased banner height moderately (95vh) for visual balance -->
+      <section class="section" id="bottom-banner-section" style="position: relative; height: 95vh; background: url('../assets/images/innoviyal_cover.jpg') center/cover no-repeat; display: flex; align-items: center; justify-content: center; overflow: hidden;">
+        <!-- Removed full black overlay so glass panel can blur the raw background -->
+        <div class="bottom-glass-panel">
+          <h2 class="banner-title">
+            <span class="banner-letter">I</span>
+            <span class="banner-letter">N</span>
+            <span class="banner-letter">N</span>
+            <span class="banner-letter">O</span>
+            <span class="banner-letter">V</span>
+            <span class="banner-letter">I</span>
+            <span class="banner-letter">Y</span>
+            <span class="banner-letter">A</span>
+            <span class="banner-letter">L</span>
+          </h2>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer style="background:var(--secondary-dark);color:var(--gray-300);padding:var(--space-16) 0 0">
+      <div class="container">
+        <div style="text-align:center;margin-bottom:var(--space-8)">
+          <div style="font-size:var(--fs-2xl);font-weight:var(--fw-bold);color:var(--white);margin-bottom:var(--space-2)">CSE (AI & ML)</div>
+          <p style="font-style:italic;color:var(--gray-400)">"Innovate. Learn. Lead. — Building Tomorrow's AI Leaders Today."</p>
+          <p style="color:var(--gray-500);font-size:var(--fs-sm);margin-top:var(--space-2)">Department of Computer Science & Engineering (AI & ML) • MCET</p>
+        </div>
+        <div style="border-top:1px solid rgba(255,255,255,0.1);padding:var(--space-6) 0;text-align:center">
+          <p style="font-size:var(--fs-sm)">© 2026 CSE (AI & ML) — Dr. Mahalingam College of Engineering and Technology. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- ========== HANDLED BY ========== -->
+    <section class="handled-by" style="background:#0a0a0a;padding:var(--space-12) 0 var(--space-8);border-top:1px solid rgba(255,255,255,0.06)">
+      <div class="container">
+        <div class="section-header" style="margin-bottom:var(--space-10)">
+          <h2 style="color:var(--innoviyal-text)">Handled <span style="color:var(--primary)">By</span></h2>
+          <p style="color:var(--innoviyal-text-muted)">Built with passion by the Innoviyal Technical Team</p>
+        </div>
+      <div class="handled-by-grid">
+        <div class="handled-by-card">
+          <div class="handled-by-card-inner">
+            <h4>THOMAS EDWIN R</h4>
+            <div class="handled-by-links">
+              <a href="https://github.com/Thomas-Edwin" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
+              <a href="https://www.linkedin.com/in/thomas-edwin/" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+              <a href="mailto:thomasedwinrte@gmail.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
+            </div>
+          </div>
+        </div>
+        <div class="handled-by-card">
+          <div class="handled-by-card-inner">
+            <h4>RISHI KARTHICK KS</h4>
+            <div class="handled-by-links">
+              <a href="https://github.com/ksrishi31-git" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
+              <a href="https://www.linkedin.com/in/rishi-karthick-ks" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+              <a href="mailto:ksrishi31@gmail.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
+            </div>
+          </div>
+        </div>
+        <div class="handled-by-card">
+          <div class="handled-by-card-inner">
+            <h4>DHANVANTH U</h4>
+            <div class="handled-by-links">
+              <a href="https://github.com/dhanvanthulags-ai" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
+              <a href="https://www.linkedin.com/in/dhanvanthu/" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+              <a href="mailto:dhanvanthulags@gmail.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
+            </div>
+          </div>
+        </div>
+        <div class="handled-by-card">
+          <div class="handled-by-card-inner">
+            <h4>DHARANI DHARAN P</h4>
+            <div class="handled-by-links">
+              <a href="https://github.com/DharaniDharan2709" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
+              <a href="https://www.linkedin.com/in/dharani-dharan-b57119397/" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+              <a href="mailto:dharanidharan2709d@gmail.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+    </section>
+
+    <style>
+      .handled-by-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: var(--space-6);
+        max-width: 1000px;
+        margin: 0 auto;
+      }
+      .handled-by-card {
+        background: rgba(255,255,255,0.03);
+        border: 1px solid rgba(255,255,255,0.08);
+        border-radius: 20px;
+        padding: var(--space-6);
+        text-align: center;
+        transition: all 0.3s ease;
+      }
+      .handled-by-card:hover {
+        background: rgba(255,255,255,0.06);
+        border-color: rgba(249,115,22,0.2);
+        transform: translateY(-4px);
+        box-shadow: 0 12px 30px rgba(0,0,0,0.3);
+      }
+      .handled-by-card-inner h4 {
+        color: var(--innoviyal-text);
+        font-family: var(--font-heading);
+        font-size: var(--fs-sm);
+        font-weight: 600;
+        margin-bottom: var(--space-4);
+        letter-spacing: 0.5px;
+        word-break: break-word;
+        white-space: nowrap;
+      }
+      .handled-by-links {
+        display: flex;
+        justify-content: center;
+        gap: var(--space-3);
+      }
+      .handled-by-links a {
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        background: rgba(255,255,255,0.08);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--innoviyal-text-secondary);
+        font-size: 15px;
+        text-decoration: none;
+        transition: all 0.15s ease;
+      }
+      .handled-by-links a:hover {
+        background: var(--primary);
+        color: #fff;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(249,115,22,0.3);
+      }
+      @media (max-width: 1024px) {
+        .handled-by-grid { grid-template-columns: repeat(2, 1fr); }
+      }
+      @media (max-width: 640px) {
+        .handled-by-grid { grid-template-columns: 1fr; }
+        .handled-by-card { padding: var(--space-5); }
+      }
+    </style>
+  </div>
+
+  <!-- =============================================
+       SCRIPTS
+       ============================================= -->
+  <!-- Shared libraries -->
+  <script src="../js/api.js"></script>
+  <script src="../js/utils.js"></script>
+  <script src="../js/main.js"></script>
+  <script src="../js/glass-card.js"></script>
+
+  <!-- Locomotive Scroll -->
+  <script src="https://cdn.jsdelivr.net/npm/locomotive-scroll@4.1.4/dist/locomotive-scroll.min.js"></script>
+  <!-- GSAP + ScrollTrigger -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+  <script>
+    (function() {
+      'use strict';
+
+      // ========================================
+      // 1. LOADING SCREEN ANIMATION (~5 seconds total)
+      // ========================================
+      const loader = document.getElementById('innoviyal-loader');
+      const letters = document.querySelectorAll('.loader-letter');
+      const content = document.getElementById('innoviyal-content');
+      const floatNav = document.getElementById('innoviyalFloatNav');
+      const menuToggle = document.getElementById('innoviyalMenuToggle');
+
+      // Ensure page starts at top
+      window.scrollTo(0, 0);
+
+      // Check for reduced motion
+      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      if (prefersReducedMotion || typeof gsap === 'undefined') {
+        // Skip animations: show content immediately
+        loader.style.display = 'none';
+        content.style.display = 'block';
+        content.classList.add('revealed');
+        floatNav.classList.add('visible');
+        menuToggle.classList.add('visible');
+        // Show all gsap-reveal elements instantly (skip ScrollTrigger)
+        document.querySelectorAll('.gsap-reveal').forEach(function(el) {
+          el.style.opacity = '1';
+          el.style.transform = 'none';
+        });
+        // Also reveal Who We Are title/subtitle letters
+        document.querySelectorAll('.reveal-letter').forEach(function(el) {
+          el.style.transform = 'translateY(0%)';
+        });
+        initStatsCounters();
+        initMobileMenu();
+        return;
+      }
+
+      // Vertical stretch factor
+      const stretchScale = 1.5;
+
+      // ========================================
+      // PREMIUM ENTRANCE — After Effects quality
+      // ========================================
+      // Each letter starts 0.2s after the previous one, creating fluid overlap
+      // Expo.out provides the signature AE deceleration curve:
+      //   fast start → graceful deceleration → imperceptible settle
+      // Scale from 0.97 → 1.0 for a micro-expansion that feels organic
+      // Opacity is synchronized with movement (same curve) for seamless fade-in
+      const sticker = document.getElementById('innoviyal-sticker');
+      if (sticker) {
+        gsap.to(sticker, {
+          opacity: 1,
+          scale: 1,
+          duration: 1.5,
+          ease: 'expo.out',
+          overwrite: 'auto'
+        });
+      }
+
+      // ========================================
+      // PREMIUM EXIT — weightless curtain glide
+      // ========================================
+      // Sine.inOut gives a gentle float-up feel:
+      //   starts slowly → smooth cruise → decelerates to stop
+      // Total timeline: 2.3s entrance + 1.9s pause + 0.9s exit = ~5.1s
+      gsap.to(loader, {
+        y: '-100%',
+        duration: 1.2,
+        delay: 3.5,
+        ease: 'power3.inOut',
+        onStart: function() {
+          loader.classList.add('loaded');
+        },
+        onComplete: function() {
+          // Show the page content
+          content.style.display = 'block';
+          content.classList.add('revealed');
+
+          // Show floating nav with fade-in
+          floatNav.classList.add('visible');
+          menuToggle.classList.add('visible');
+
+          // Remove loader from DOM after transition
+          setTimeout(function() {
+            loader.style.display = 'none';
+          }, 100);
+
+          // Init Locomotive Scroll
+          var loco = initLocomotive();
+          // Init GSAP ScrollTrigger animations
+          initScrollAnimations(loco);
+          // Init stats counters
+          initStatsCounters();
+          // Init mobile menu
+          initMobileMenu();
+        }
+      });
+
+      // ========================================
+      // 2. LOCOMOTIVE SCROLL + GSAP INTEGRATION
+      // ========================================
+      var scrollContainer; // shared reference
+
+      function initLocomotive() {
+        scrollContainer = document.querySelector('#innoviyal-content');
+        if (!scrollContainer) return null;
+
+        var loco = new LocomotiveScroll({
+          el: scrollContainer,
+          smooth: true,
+          lerp: 0.08,
+          multiplier: 0.8,
+          smartphone: { smooth: true, lerp: 0.08 },
+          tablet: { smooth: true, lerp: 0.08 },
+        });
+
+        // Update ScrollTrigger on Locomotive scroll
+        loco.on('scroll', function() {
+          ScrollTrigger.update();
+        });
+
+        // Tell ScrollTrigger to use Locomotive's virtual scroll
+        ScrollTrigger.scrollerProxy(scrollContainer, {
+          scrollTop: function(value) {
+            if (arguments.length) {
+              loco.scrollTo(value, { duration: 0, disableLerp: true });
+            }
+            return loco.scroll.instance.scroll.y;
+          },
+          scrollLeft: function(value) {
+            if (arguments.length) {
+              loco.scrollTo(value, { duration: 0, disableLerp: true });
+            }
+            return loco.scroll.instance.scroll.x;
+          },
+          getBoundingClientRect: function() {
+            return {
+              top: 0,
+              left: 0,
+              width: window.innerWidth,
+              height: window.innerHeight
+            };
+          },
+          pinType: scrollContainer.style.transform ? 'transform' : 'fixed'
+        });
+
+        // Keep Locomotive in sync with ScrollTrigger refreshes
+        ScrollTrigger.addEventListener('refresh', function() {
+          loco.update();
+        });
+
+        // Refresh to pick up all triggers
+        ScrollTrigger.refresh();
+
+        return loco;
+      }
+
+      // ========================================
+      // 3. GSAP SCROLLTRIGGER ANIMATIONS
+      // ========================================
+      function initScrollAnimations(loco) {
+        if (!loco || !scrollContainer) return;
+
+        // ---- WHO WE ARE — scroll-driven letter reveal ----
+        var titleLetters = document.querySelectorAll('.who-we-are-title .reveal-letter');
+        var subtitleLetters = document.querySelectorAll('.who-we-are-subtitle .reveal-letter');
+        var section = document.querySelector('#about-innovial');
+
+        if (titleLetters.length && section) {
+          // Title reveal: letters rise from below, scroll-driven
+          gsap.fromTo(titleLetters, {
+            y: '100%'
+          }, {
+            y: '0%',
+            duration: 1.5,
+            stagger: 0.06,
+            ease: 'power4.out',
+            scrollTrigger: {
+              trigger: section,
+              scroller: scrollContainer,
+              start: 'top 75%',
+              end: 'top 40%',
+              scrub: 1.2,
+              toggleActions: 'play none none none',
+            }
+          });
+
+          // Subtitle reveal: identical animation, starts after title is done
+          if (subtitleLetters.length) {
+            gsap.fromTo(subtitleLetters, {
+              y: '100%'
+            }, {
+              y: '0%',
+              duration: 1.2,
+              stagger: 0.03,
+              ease: 'power4.out',
+              scrollTrigger: {
+                trigger: section,
+                scroller: scrollContainer,
+                start: 'top 35%',
+                end: 'top 10%',
+                scrub: 1.0,
+                toggleActions: 'play none none none',
+              }
+            });
+          }
+        }
+
+        // ---- Premium Mission/Vision Reveal ----
+        var missionVisionElements = document.querySelectorAll('.mission-vision-reveal');
+        missionVisionElements.forEach(function(el) {
+          gsap.fromTo(el,
+            { y: 80, opacity: 0 },
+            {
+              y: 0,
+              opacity: 1,
+              duration: 2,
+              ease: 'power3.out',
+              scrollTrigger: {
+                trigger: el,
+                scroller: scrollContainer,
+                start: 'top 85%',
+                toggleActions: 'play none none none',
+              }
+            }
+          );
+        });
+
+        // ---- Premium Banner Animation (After Effects Style) ----
+        var bannerLetters = document.querySelectorAll('.banner-letter');
+        if (bannerLetters.length) {
+          gsap.to(bannerLetters, {
+            y: 0,
+            opacity: 1,
+            duration: 2.5, /* Approximately 2.5 seconds total duration */
+            stagger: 0.075, /* Stagger between 60-90ms */
+            ease: 'expo.out', /* Fast start, gradual slow, gentle settle (Apple style) */
+            scrollTrigger: {
+              trigger: '#bottom-banner-section',
+              scroller: scrollContainer,
+              start: 'top 75%',
+              toggleActions: 'play none none none'
+            }
+          });
+        }
+
+        // ---- Existing gsap-reveal animations (sections after Who We Are) ----
+        var revealElements = document.querySelectorAll('.gsap-reveal');
+        revealElements.forEach(function(el) {
+          gsap.fromTo(el, 
+            { y: 80, opacity: 0 },
+            {
+              y: 0,
+              opacity: 1,
+              duration: 1,
+              delay: 0.1,
+              ease: 'power3.out',
+              scrollTrigger: {
+                trigger: el,
+                scroller: scrollContainer,
+                start: 'top 85%',
+                toggleActions: 'play none none none',
+              }
+            }
+          );
+        });
+
+        // Stagger children within .stagger-children
+        document.querySelectorAll('.stagger-children').forEach(function(container) {
+          var children = container.querySelectorAll('.gsap-reveal');
+          if (children.length) {
+            gsap.fromTo(children,
+              { y: 60, opacity: 0 },
+              {
+                y: 0,
+                opacity: 1,
+                duration: 0.8,
+                stagger: 0.15,
+                ease: 'power3.out',
+                scrollTrigger: {
+                  trigger: container,
+                  scroller: scrollContainer,
+                  start: 'top 80%',
+                  toggleActions: 'play none none none',
+                }
+              }
+            );
+          }
+        });
+
+        // Refresh ScrollTrigger after all animations are registered
+        ScrollTrigger.refresh();
+      }
+
+      // ========================================
+      // 4. STATS COUNTER ANIMATION
+      // ========================================
+      function initStatsCounters() {
+        const counters = document.querySelectorAll('.stat-counter');
+        counters.forEach(function(counter) {
+          const target = parseInt(counter.getAttribute('data-target')) || 0;
+          const suffix = counter.getAttribute('data-suffix') || '';
+          
+          gsap.fromTo(counter,
+            { textContent: '0' },
+            {
+              textContent: target,
+              duration: 2,
+              ease: 'power2.out',
+              snap: { textContent: 1 },
+              scrollTrigger: {
+                trigger: counter.closest('section') || counter.parentElement,
+                start: 'top 80%',
+                toggleActions: 'play none none none',
+              },
+              onUpdate: function() {
+                // Keep suffix
+                if (suffix) {
+                  counter.textContent = Math.round(parseFloat(counter.textContent)) + suffix;
+                }
+              }
+            }
+          );
+        });
+      }
+
+      // ========================================
+      // 5. FLOATING NAV HOVER EFFECTS
+      // ========================================
+      // The hover effects are handled by CSS transitions on .innoviyal-float-nav a
+
+      // ========================================
+      // 7. MOBILE MENU TOGGLE
+      // ========================================
+      function initMobileMenu() {
+        const toggle = document.getElementById('innoviyalMenuToggle');
+        const nav = document.getElementById('innoviyalFloatNav');
+        
+        if (!toggle || !nav) return;
+
+        toggle.addEventListener('click', function() {
+          const isOpen = nav.classList.toggle('mobile-open');
+          toggle.classList.toggle('active');
+          toggle.setAttribute('aria-expanded', isOpen);
+          document.body.style.overflow = isOpen ? 'hidden' : '';
+        });
+
+        // Close menu on link click
+        nav.querySelectorAll('a').forEach(function(link) {
+          link.addEventListener('click', function() {
+            nav.classList.remove('mobile-open');
+            toggle.classList.remove('active');
+            toggle.setAttribute('aria-expanded', 'false');
+            document.body.style.overflow = '';
+          });
+        });
+      }
+
+      // ========================================
+      // 7. CORE TEAM RENDERING (preserved from original)
+      // ========================================
+      document.addEventListener('DOMContentLoaded', function() {
+        const teamContainer = document.getElementById('innoviyal-team-container');
+        if (teamContainer) {
+          const placeholder = 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&q=80';
+          
+          const photoMap = {
+            'Vibhuvarsan S': '../assets/team/VIBHUVARSHAN.png',
+            'Srijaa U': '../assets/team/Srijaa U.jpeg',
+            'Logeshwaran C': '../assets/team/Logeshwaran.png',
+            'Saravana Kumar U': '../assets/team/Saravana Kumar.png',
+            'Subash S': '../assets/team/SUBASH.jpeg',
+            'Mohin Surya R.M': '../assets/team/MOHIN.jpeg',
+            'Suvetha S': '../assets/team/Suvetha.png',
+            'Thomas Edwin R': '../assets/team/Thomas Edwin.jpeg',
+            'Rishi Karthick K.S': '../assets/team/Rishi Karthick.jpeg',
+            'Dhanvanth U': '../assets/team/Dhanvanth U.jpeg',
+            'Dharani Dharan P': '../assets/team/DHARANI_NEW.jpeg',
+            'Fareed Ahamed B': '../assets/team/Fareed Ahamed.jpg.jpeg',
+            'Ajaykumar R': '../assets/team/Ajaykumar.jpeg',
+            'Harini Mithra M': '../assets/team/HARINIMITHRA.jpg.jpeg',
+            'Praveena R': '../assets/team/PRAVEENA_NEW.jpeg',
+            'Kapish S': '../assets/team/KAPISH.jpeg',
+            'Dharshini L': '../assets/team/DHARSHINI.jpeg',
+            'Ramyadharshini M': '../assets/team/Ramya.jpeg',
+            'Adhithya A': '../assets/team/Adhithya.jpeg',
+            'Hariprasath P': '../assets/team/HARI PRASATH 16.jpeg',
+            'Manoj J.V': '../assets/team/MANOJ.jpeg',
+            'Sanjai P': '../assets/team/SANJAI.jpeg',
+            'Sahana Sri P': '../assets/team/Sahanasri.jpeg',
+            'Sudarmathi E': '../assets/team/SUDARMATHI.jpeg',
+            'Sakthi Sri R.K': '../assets/team/Sakthi Sri.jpg.jpeg',
+            'Sathya T.M': '../assets/team/SATHYA_NEW.jpeg',
+            'Bhavatarini M': '../assets/team/BHAVATHARINI.jpeg?v=2',
+            'Abhitha D': '../assets/team/ABHITHA.jpeg',
+            'Nawya V': '../assets/team/Nawya.jpg.jpeg',
+            'Hari Ram K': '../assets/team/HARI RAM.jpeg',
+            'Harikaran R': '../assets/team/Harikaran.jpeg',
+            'Santhosh M': '../assets/team/SANTHOSH.jpeg',
+            'Devasri S': '../assets/team/Devasri.jpeg',
+            'Selva Dharshini B': '../assets/team/Selvdharshini.jpeg',
+            'Hari Prasath P': '../assets/team/HARIPRASATH 21.jpeg',
+          };
+
+          const membersList = [
+            { name: 'Vibhuvarsan S', role: 'President' },
+            { name: 'Srijaa U', role: 'Vice President' },
+            { name: 'Logeshwaran C', role: 'Secretary' },
+            { name: 'Saravana Kumar U', role: 'Treasurer' },
+            { name: 'Subash S', role: 'Events Director' },
+            { name: 'Mohin Surya R.M', role: 'Joint Secretary' },
+            { name: 'Suvetha S', role: 'Joint Treasurer' },
+            { name: 'Thomas Edwin R', role: 'Web Designers' },
+            { name: 'Rishi Karthick K.S', role: 'Web Designers' },
+            { name: 'Dhanvanth U', role: 'Web Designers' },
+            { name: 'Dharani Dharan P', role: 'Web Designers' },
+            { name: 'Fareed Ahamed B', role: 'Documentation' },
+            { name: 'Ajaykumar R', role: 'Documentation' },
+            { name: 'Harini Mithra M', role: 'Documentation' },
+            { name: 'Praveena R', role: 'Documentation' },
+            { name: 'Kapish S', role: 'Editing and Social Media' },
+            { name: 'Dharshini L', role: 'Editing and Social Media' },
+            { name: 'Ramyadharshini M', role: 'Editing and Social Media' },
+            { name: 'Adhithya A', role: 'Editing and Social Media' },
+            { name: 'Hariprasath P', role: 'Editing and Social Media' },
+            { name: 'Manoj J.V', role: 'Event Coordinator' },
+            { name: 'Sanjai P', role: 'Event Coordinator' },
+            { name: 'Sahana Sri P', role: 'Event Coordinator' },
+            { name: 'Sudarmathi E', role: 'Event Coordinator' },
+            { name: 'Sakthi Sri R.K', role: 'Event Coordinator' },
+            { name: 'Sathya T.M', role: 'Co-curricular Coordinator' },
+            { name: 'Bhavatarini M', role: 'Co-curricular Coordinator' },
+            { name: 'Abhitha D', role: 'Co-curricular Coordinator' },
+            { name: 'Nawya V', role: 'R & D' },
+            { name: 'Hari Ram K', role: 'R & D' },
+            { name: 'Harikaran R', role: 'R & D' },
+            { name: 'Santhosh M', role: 'Industry Relations Coordinators' },
+            { name: 'Devasri S', role: 'Industry Relations Coordinators' },
+            { name: 'Selva Dharshini B', role: 'Industry Relations Coordinators' },
+            { name: 'Hari Prasath P', role: 'Industry Relations Coordinators' }
+          ];
+
+          var html = '<div class="team-grid-container">';
+          
+          membersList.forEach(function(member) {
+            var imgSrc = photoMap[member.name] || placeholder;
+            var imgStyle = '';
+            // Frame adjustment for Ajaykumar whose subject is on the left
+            if (member.name === 'Ajaykumar R') {
+              imgStyle = ' style="object-position: left center;"';
+            }
+            html += '<article class="team-card kononenko-team-anim">' +
+                      '<div class="team-image-wrapper">' +
+                        '<img src="' + imgSrc + '" alt="' + member.name + '" loading="lazy" onerror="this.src=\'' + placeholder + '\'"' + imgStyle + '>' +
+                      '</div>' +
+                      '<div class="team-content">' +
+                        '<h3>' + member.name + '</h3>' +
+                        '<p>' + member.role + '</p>' +
+                      '</div>' +
+                    '</article>';
+          });
+          
+          html += '</div>';
+          teamContainer.innerHTML = html;
+
+          // Kononenko custom staggered GSAP animation
+          if (typeof gsap !== 'undefined') {
+            gsap.set('.kononenko-team-anim', { autoAlpha: 0, y: 40 });
+            ScrollTrigger.batch('.kononenko-team-anim', {
+              start: 'top 85%',
+              onEnter: batch => gsap.to(batch, {
+                autoAlpha: 1,
+                y: 0,
+                duration: 0.8,
+                ease: 'power3.out',
+                stagger: 0.08,
+                overwrite: true
+              })
+            });
+            ScrollTrigger.refresh();
+          }
+        }
+      });
+    })();
+  </script>
+</body>
+</html>

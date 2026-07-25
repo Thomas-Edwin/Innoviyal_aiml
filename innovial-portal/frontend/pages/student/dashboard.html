@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Student Dashboard — Innoviyal | MCET</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../css/variables.css"><link rel="stylesheet" href="../../css/style.css"><link rel="stylesheet" href="../../css/components.css">
+</head>
+<body>
+  <nav class="navbar scrolled">
+    <div class="container flex-between" style="height:var(--navbar-height)">
+      <a href="../../index.html" class="navbar-brand flex-center" style="gap:var(--space-3)"><img src="../../assets/logo/innoviyal-logo.png" alt="" style="height:36px" onerror="this.style.display='none'"><span style="font-weight:var(--fw-bold);color:var(--white)">Innoviyal</span></a>
+      <ul class="navbar-menu">
+        <li><a href="dashboard.html" class="navbar-link active">Dashboard</a></li>
+        <li><a href="materials.html" class="navbar-link">Materials</a></li>
+        <li><a href="timetable.html" class="navbar-link">Timetable</a></li>
+        <li><a href="#" class="navbar-link" onclick="Auth.logout()">Logout</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main style="padding-top:calc(var(--navbar-height) + var(--space-8));padding-bottom:var(--space-8)">
+    <div class="container">
+      <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;margin-bottom:var(--space-8)">
+        <div>
+          <h1 style="font-size:var(--fs-2xl)">Welcome back, <span id="student-name" data-auth="user-name">Student</span>! 👋</h1>
+          <p style="color:var(--gray-500)">Here's your quick overview</p>
+        </div>
+        <button class="btn btn-outline btn-sm" onclick="Auth.logout()">Logout →</button>
+      </div>
+
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:var(--space-6);margin-bottom:var(--space-8)">
+        <div class="glass-card glass-card-dark"><div class="card-icon">📚</div><h3 style="font-size:var(--fs-md)">Study Materials</h3><p>Access course notes, references, and question banks by semester.</p><a href="materials.html" class="btn btn-sm btn-outline mt-4">Browse →</a></div>
+        <div class="glass-card glass-card-dark"><div class="card-icon">⏰</div><h3 style="font-size:var(--fs-md)">Timetable</h3><p>View your class schedule and exam timetable.</p><a href="timetable.html" class="btn btn-sm btn-outline mt-4">View →</a></div>
+        <div class="glass-card glass-card-dark"><div class="card-icon">📝</div><h3 style="font-size:var(--fs-md)">Syllabus</h3><p>Download semester-wise syllabus and course outcomes.</p><a href="../downloads.html" class="btn btn-sm btn-outline mt-4">Download →</a></div>
+        <div class="glass-card glass-card-dark"><div class="card-icon">📅</div><h3 style="font-size:var(--fs-md)">Exam Dates</h3><p>Check internal and semester exam schedules.</p><a href="../downloads.html" class="btn btn-sm btn-outline mt-4">View →</a></div>
+      </div>
+
+      <div style="background:var(--white);border-radius:var(--radius-xl);padding:var(--space-6);box-shadow:var(--shadow-card)">
+        <h3 style="margin-bottom:var(--space-4)">📢 Recent Announcements</h3>
+        <div style="display:flex;flex-direction:column;gap:var(--space-3)">
+          <div style="padding:var(--space-3) var(--space-4);background:var(--primary-bg);border-radius:var(--radius-md);border-left:3px solid var(--primary)">
+            <span style="font-weight:var(--fw-medium)">Symposium 2026 Registrations Now Open!</span>
+            <span style="display:block;font-size:var(--fs-xs);color:var(--gray-500);margin-top:var(--space-1)">2 days ago</span>
+          </div>
+          <div style="padding:var(--space-3) var(--space-4);background:var(--gray-50);border-radius:var(--radius-md)">
+            <span style="font-weight:var(--fw-medium)">Semester Exam Schedule Published</span>
+            <span style="display:block;font-size:var(--fs-xs);color:var(--gray-500);margin-top:var(--space-1)">1 week ago</span>
+          </div>
+          <div style="padding:var(--space-3) var(--space-4);background:var(--gray-50);border-radius:var(--radius-md)">
+            <span style="font-weight:var(--fw-medium)">Internship Opportunities at TCS</span>
+            <span style="display:block;font-size:var(--fs-xs);color:var(--gray-500);margin-top:var(--space-1)">2 weeks ago</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script src="../../js/api.js"></script>
+  <script src="../../js/utils.js"></script>
+  <script src="../../js/auth.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      if (!Auth.isLoggedIn()) {
+        window.location.href = 'login.html';
+        return;
+      }
+      const user = Auth.getUser();
+      if (user && user.name) {
+        document.getElementById('student-name').textContent = user.name;
+      }
+    });
+  </script>
+</body>
+</html>
